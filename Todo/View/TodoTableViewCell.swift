@@ -59,8 +59,15 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate {
     }
     
     func uiUpdate(todo: Todo) {
+        animationLayer.removeFromSuperlayer()
+        checkBoxButton.animationLayer.removeFromSuperlayer()
         self.todo = todo
         todoLabel.text = todo.title
+        isComplete = todo.isCompleted
+        checkBoxButton.isCheck = isComplete
+        self.layoutIfNeeded()
+        checkBoxButton.noAnimate()
+        noanimate()
     }
     
     @objc func checkButtonClick() {
@@ -73,6 +80,18 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate {
             animate()
         }
         delegate?.switchUpdate(todo: todo)
+    }
+    
+    func noanimate() {
+        if isComplete {
+            let path = UIBezierPath(arcCenter: .zero, radius: self.frame.width, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+            let calayer = CAShapeLayer()
+            calayer.path = path.cgPath
+            calayer.fillColor = UIColor.mainColor.withAlphaComponent(0.5).cgColor
+            calayer.position = contentView.center
+            animationLayer = calayer
+            contentView.layer.insertSublayer(calayer, at: 0)
+        }
     }
     
     func animate() {
@@ -89,7 +108,6 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate {
         if isComplete {
             animation.fromValue = 1
             animation.toValue = 30
-            animation.delegate = self
             calayer.add(animation, forKey: "CompleteAnimation")
         } else {
             animation.fromValue = 30
@@ -100,12 +118,25 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate {
         animationLayer = calayer
         contentView.layer.insertSublayer(calayer, at: 0)
     }
+    
+    func checkAnimation() -> CABasicAnimation {
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        if isComplete {
+            animation.fromValue = 1
+            animation.toValue = 30
+        } else {
+            animation.fromValue = 30
+            animation.toValue = 1
+            animation.delegate = self
+        }
+        return animation
+    }
 
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if !flag && animationLayer.animation(forKey: "notCompleteAnimation") == anim {
             animationLayer.removeFromSuperlayer()
-            return
-        } else if animationLayer.animation(forKey: "CompleteAnimation") == anim {
             return
         }
         animationLayer.removeFromSuperlayer()
