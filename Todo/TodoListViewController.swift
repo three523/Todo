@@ -8,7 +8,7 @@
 import UIKit
 
 protocol UpdateTodoDelegate: AnyObject {
-    func switchUpdate(todo: Todo?)
+    func update(todo: Todo?)
 }
 
 class TodoListViewController: UIViewController {
@@ -58,7 +58,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource, Up
         return cell
     }
     
-    func switchUpdate(todo: Todo?) {
+    func update(todo: Todo?) {
         guard let todo else { return }
         todoManager?.update(todo: todo)
     }

@@ -79,7 +79,7 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate {
         } else {
             animate()
         }
-        delegate?.switchUpdate(todo: todo)
+        delegate?.update(todo: todo)
     }
     
     func noanimate() {
@@ -117,21 +117,6 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate {
         }
         animationLayer = calayer
         contentView.layer.insertSublayer(calayer, at: 0)
-    }
-    
-    func checkAnimation() -> CABasicAnimation {
-        let animation = CABasicAnimation(keyPath: "transform.scale")
-        animation.fillMode = .forwards
-        animation.isRemovedOnCompletion = false
-        if isComplete {
-            animation.fromValue = 1
-            animation.toValue = 30
-        } else {
-            animation.fromValue = 30
-            animation.toValue = 1
-            animation.delegate = self
-        }
-        return animation
     }
 
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
