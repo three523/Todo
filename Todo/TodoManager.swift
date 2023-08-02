@@ -37,10 +37,9 @@ class TodoManager {
     }
     
     func update(todo: Todo) {
-        print("todo: \(todo)")
         guard let index = TodoManager.todoList.firstIndex(where: {$0.id == todo.id}) else { return }
         TodoManager.todoList[index] = todo
-        viewUpdate()
+//        viewUpdate()
     }
     
     func remove(todo: Todo) {

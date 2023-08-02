@@ -20,3 +20,7 @@ extension String {
         return attributeString
     }
 }
+
+extension UIColor {
+    static var mainColor: UIColor = UIColor(red: 109/255, green: 209/255, blue: 213/255, alpha: 1.0)
+}

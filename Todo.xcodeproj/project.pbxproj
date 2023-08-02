@@ -19,6 +19,7 @@
 		18BE8BF62A77B076000A1407 /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF52A77B076000A1407 /* TodoManager.swift */; };
 		18BE8BF82A77B091000A1407 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF72A77B091000A1407 /* Todo.swift */; };
 		18BE8BFA2A77C150000A1407 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF92A77C150000A1407 /* Extension.swift */; };
+		18C034682A79CEAB002B6368 /* CheckBoxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C034672A79CEAB002B6368 /* CheckBoxButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		18BE8BF52A77B076000A1407 /* TodoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
 		18BE8BF72A77B091000A1407 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		18BE8BF92A77C150000A1407 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		18C034672A79CEAB002B6368 /* CheckBoxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				18BE8BF22A77A3B9000A1407 /* TodoTableViewCell.swift */,
+				18C034672A79CEAB002B6368 /* CheckBoxButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 				18BE8BF82A77B091000A1407 /* Todo.swift in Sources */,
 				18BE8BF32A77A3B9000A1407 /* TodoTableViewCell.swift in Sources */,
 				18BE8BCD2A777B84000A1407 /* AppDelegate.swift in Sources */,
+				18C034682A79CEAB002B6368 /* CheckBoxButton.swift in Sources */,
 				18BE8BFA2A77C150000A1407 /* Extension.swift in Sources */,
 				18BE8BCF2A777B84000A1407 /* SceneDelegate.swift in Sources */,
 				18BE8BF62A77B076000A1407 /* TodoManager.swift in Sources */,
@@ -335,6 +339,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -363,6 +368,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
