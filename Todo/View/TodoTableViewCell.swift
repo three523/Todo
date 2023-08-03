@@ -120,8 +120,7 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate {
     }
 
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        if !flag && animationLayer.animation(forKey: "notCompleteAnimation") == anim {
-            animationLayer.removeFromSuperlayer()
+        if !flag, anim != animationLayer.animation(forKey: "notCompleteAnimation") {
             return
         }
         animationLayer.removeFromSuperlayer()
