@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol Task {
     var id: UUID { get }
@@ -29,17 +30,20 @@ struct Todo: Task {
 }
 
 struct CountTodo: Task {
+    func todoCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
     var id: UUID = UUID()
     var createTime: Date = Date()
     var updateTime: Date = Date()
     var title: String
     var count: Int
     var goal: Int
-    var isCompleted: Bool
+    var isCompleted: Bool = false
     
-    init(title: String, goal: Int, count: Int = 0, isCompleted: Bool = false) {
+    init(title: String, goal: Int, count: Int = 0) {
         self.title = title
-        self.isCompleted = isCompleted
         self.goal = goal
         self.count = count
     }

@@ -7,60 +7,44 @@
 
 import UIKit
 
-class CheckBoxButton: UIButton, CAAnimationDelegate {
+class CheckBoxButton: UIButton, CAAnimationDelegate, Animation {
     
+    var isCompleted: Bool = false
     var animationLayer: CAShapeLayer = CAShapeLayer()
     var animationCompleted: ()->Void = {}
-        
-    var isCheck: Bool = false
     
-    func noAnimate() {
-        if isCheck {
-            let path = UIBezierPath(arcCenter: .zero, radius: self.frame.height + 10, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-            let calayer = CAShapeLayer()
-            calayer.path = path.cgPath
-            calayer.fillColor = UIColor.mainColor.cgColor
-            calayer.strokeColor = UIColor.mainColor.cgColor
-            calayer.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
-            animationLayer = calayer
-            self.layer.insertSublayer(calayer, at: 0)
-        }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
-
-    func animate() {
-        animationLayer.removeFromSuperlayer()
-        let path = UIBezierPath(arcCenter: .zero, radius: 3, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
-        let calayer = CAShapeLayer()
-        calayer.path = path.cgPath
-        calayer.fillColor = UIColor.mainColor.cgColor
-        calayer.strokeColor = UIColor.mainColor.cgColor
-        calayer.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
-        
-        animationLayer = calayer
-        
-        let animation = CABasicAnimation(keyPath: "transform.scale")
-        animation.fillMode = .forwards
-        animation.isRemovedOnCompletion = false
-        animation.delegate = self
-        if isCheck {
-            animation.fromValue = 1
-            animation.toValue = 8
-            calayer.add(animation, forKey: "CompleteAnimation")
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func animation(animationRadius: CGFloat, center: CGPoint) {
+        var fromValue = 1.0
+        var toValue = 1.0
+        var forkey: String?
+        if isCompleted {
+            fromValue = 1
+            toValue = 8
+            forkey = "CompleteAnimation"
         } else {
-            animation.fromValue = 8
-            animation.toValue = 1
-            calayer.add(animation, forKey: "notCompleteAnimation")
+            fromValue = 8
+            toValue = 1
+            forkey = "notCompleteAnimation"
         }
-        self.layer.insertSublayer(calayer, at: 0)
+        animationLayer = animateLayer(animationRadius: animationRadius, center: center, color: UIColor.mainColor, fromValue: fromValue, toValue: toValue, forKey: forkey)
+        self.layer.insertSublayer(animationLayer, at: 0)
     }
-    
+        
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        print(anim == animationLayer.animation(forKey: "CompleteAnimation"), flag)
         if animationLayer.animation(forKey: "notCompleteAnimation") == anim {
             animationLayer.removeFromSuperlayer()
-        } else if flag && animationLayer.animation(forKey: "CompleteAnimation") == anim {
+        } else if animationLayer.animation(forKey: "CompleteAnimation") == anim {
             animationCompleted()
             return
         }
     }
-
 }

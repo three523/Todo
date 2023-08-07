@@ -52,7 +52,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource, Up
             return UITableViewCell()
         }
         let todo = todoManager.todo(at: indexPath.row)
-        cell.animationLayer.removeFromSuperlayer()
+        cell.selectionStyle = .none
         cell.uiUpdate(todo: todo)
         cell.delegate = self
         return cell
