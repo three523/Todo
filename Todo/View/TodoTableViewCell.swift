@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodoTableViewCell: UITableViewCell {
+class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
     
     static let identifier: String = "\(TodoTableViewCell.self)"
     var todo: Todo?
@@ -18,17 +18,30 @@ class TodoTableViewCell: UITableViewCell {
         lb.text = "투두"
         return lb
     }()
-    let todoSwitch: UISwitch = {
-        let sw = UISwitch()
-        return sw
+    let checkBoxButton: CheckBoxButton = {
+        let btn = CheckBoxButton()
+        btn.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        btn.layer.borderWidth = 1
+        btn.layer.borderColor = UIColor(red: 106/255, green: 209/255, blue: 213/255, alpha: 1.0).cgColor
+        btn.layer.masksToBounds = true
+        btn.layer.cornerRadius = 5
+        return btn
     }()
+    var animationLayer: CAShapeLayer = CAShapeLayer()
+    var previewAnimationLayer: CAShapeLayer = CAShapeLayer()
+    var isCompleted: Bool = false
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(todoLabel)
-        contentView.addSubview(todoSwitch)
-        todoSwitch.addTarget(self, action: #selector(switchToggle), for: .valueChanged)
+        contentView.addSubview(checkBoxButton)
+        contentView.layer.masksToBounds = true
+        checkBoxButton.addTarget(self, action: #selector(checkButtonClick), for: .touchUpInside)
         autoLayoutSetting()
+        layoutIfNeeded()
+        checkBoxButton.animationCompleted = {
+            self.animation(animationRadius: self.checkBoxButton.frame.height, center: self.checkBoxButton.center)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -39,29 +52,74 @@ class TodoTableViewCell: UITableViewCell {
         todoLabel.translatesAutoresizingMaskIntoConstraints = false
         todoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18).isActive = true
         todoLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        todoLabel.trailingAnchor.constraint(greaterThanOrEqualTo: todoSwitch.leadingAnchor, constant:-18).isActive = true
+        todoLabel.trailingAnchor.constraint(greaterThanOrEqualTo: checkBoxButton.leadingAnchor, constant:-18).isActive = true
         
-        todoSwitch.translatesAutoresizingMaskIntoConstraints = false
-        todoSwitch.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
-        todoSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18).isActive = true
-        todoSwitch.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
+        checkBoxButton.translatesAutoresizingMaskIntoConstraints = false
+        checkBoxButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
+        checkBoxButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18).isActive = true
+        checkBoxButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
+        let checkButtonHeight = checkBoxButton.heightAnchor.constraint(equalToConstant: 30)
+        checkButtonHeight.priority = UILayoutPriority(999)
+        checkButtonHeight.isActive = true
+        checkBoxButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     func uiUpdate(todo: Todo) {
         self.todo = todo
         todoLabel.text = todo.title
-        todoSwitch.isOn = todo.isCompleted
-        strikeThroughLable()
+        isCompleted = todo.isCompleted
+        checkBoxButton.isSelected = isSelected
+        animationLayer.removeFromSuperlayer()
+        checkBoxButton.animationLayer.removeFromSuperlayer()
+        if isCompleted {
+            checkBoxButton.backgroundColor = .mainColor
+            contentView.backgroundColor = .mainColor.withAlphaComponent(0.5)
+        }
     }
     
-    @objc func switchToggle(toggle: UISwitch) {
-        todo?.isCompleted = toggle.isOn
-        strikeThroughLable()
-        delegate?.switchUpdate(todo: todo)
+    @objc func checkButtonClick() {
+        contentView.backgroundColor = .clear
+        checkBoxButton.backgroundColor = .clear
+        isCompleted = !isCompleted
+        todo?.isCompleted = isCompleted
+        delegate?.update(todo: todo)
+        checkBoxButton.isCompleted = isCompleted
+        let radius = checkBoxButton.frame.size.width
+        let position = CGPoint(x: checkBoxButton.frame.size.width/2, y: checkBoxButton.frame.size.width/2)
+        isCompleted ? checkBoxButton.animation(animationRadius: radius/10, center: position) : animation(animationRadius: radius/2, center: checkBoxButton.center)
     }
     
-    func strikeThroughLable() {
-        todoLabel.attributedText = todoSwitch.isOn ? todoLabel.text?.strikeThrough() : todoLabel.text?.normal()
+    func animation(animationRadius: CGFloat, center: CGPoint) {
+        var fromValue = 1.0
+        var toValue = 1.0
+        var forkey: String?
+        if isCompleted {
+            fromValue = 1
+            toValue = 30
+            forkey = "CompleteAnimation"
+        } else {
+            fromValue = 30
+            toValue = 1
+            forkey = "notCompleteAnimation"
+        }
+        previewAnimationLayer = animationLayer
+        animationLayer = animateLayer(animationRadius: animationRadius, center: center, color: UIColor.mainColor.withAlphaComponent(0.5), fromValue: fromValue, toValue: toValue, forKey: forkey)
+        contentView.layer.insertSublayer(animationLayer, at: 0)
     }
 
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        if anim == animationLayer.animation(forKey: "CompleteAnimation") && flag {
+            return
+        } else if anim == animationLayer.animation(forKey: "CompleteAnimation") && !flag {
+            animationLayer.removeFromSuperlayer()
+            return
+        } else if !flag && anim == previewAnimationLayer.animation(forKey: "notCompleteAnimation") {
+            previewAnimationLayer.removeFromSuperlayer()
+            return
+        } else if !flag && anim == animationLayer.animation(forKey: "notCompleteAnimation") {
+            return
+        }
+        animationLayer.removeFromSuperlayer()
+        checkBoxButton.animation(animationRadius: checkBoxButton.frame.width/10, center: CGPoint(x: checkBoxButton.frame.width/2, y: checkBoxButton.frame.width/2))
+    }
 }

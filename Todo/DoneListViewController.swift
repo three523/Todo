@@ -36,7 +36,7 @@ extension DoneListViewController: UITableViewDelegate, UITableViewDataSource, Up
         return cell
     }
     
-    func switchUpdate(todo: Todo?) {
+    func update(todo: Todo?) {
         guard let todoManager,
             let todo else { return }
         todoManager.update(todo: todo)
