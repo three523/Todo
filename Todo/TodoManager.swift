@@ -8,12 +8,7 @@
 import Foundation
 
 class TodoManager {
-    static var todoList: [Todo] = []
-    var viewUpdate: ()->() = {}
-    
-    init(viewUpdate: @escaping () -> Void) {
-        self.viewUpdate = viewUpdate
-    }
+    static var todoList: [Task] = []
     
     func todoAllCount() -> Int {
         return TodoManager.todoList.count
@@ -23,27 +18,24 @@ class TodoManager {
         return TodoManager.todoList.filter{ $0.isCompleted }.count
     }
     
-    func todo(at index: Int) -> Todo {
+    func todo(at index: Int) -> Task {
         return TodoManager.todoList[index]
     }
     
-    func completeTodo(at index: Int) -> Todo {
+    func completeTodo(at index: Int) -> Task {
         return TodoManager.todoList.filter{ $0.isCompleted }[index]
     }
     
-    func add(todo: Todo) {
+    func add(todo: Task) {
         TodoManager.todoList.append(todo)
-        viewUpdate()
     }
     
-    func update(todo: Todo) {
+    func update(todo: Task) {
         guard let index = TodoManager.todoList.firstIndex(where: {$0.id == todo.id}) else { return }
         TodoManager.todoList[index] = todo
-//        viewUpdate()
     }
     
-    func remove(todo: Todo) {
-        TodoManager.todoList.removeAll(where: {$0.id == todo.id})
-        viewUpdate()
+    func remove(at index: Int) {
+        TodoManager.todoList.remove(at: index)
     }
 }

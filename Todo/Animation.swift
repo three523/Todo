@@ -10,7 +10,7 @@ import UIKit
 
 protocol Animation {
     // 애니메이션을 적용시킬 layer
-    var animationLayer: CAShapeLayer { get set }
+    var animationLayer: CALayer { get set }
     func animation(animationRadius: CGFloat, center: CGPoint)
 }
 

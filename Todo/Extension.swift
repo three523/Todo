@@ -21,6 +21,35 @@ extension String {
     }
 }
 
+extension Date {
+    func dateTimeString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일 hh:mm"
+        return dateFormatter.string(from: self)
+    }
+}
+
 extension UIColor {
     static var mainColor: UIColor = UIColor(red: 109/255, green: 209/255, blue: 213/255, alpha: 1.0)
+}
+
+protocol ReusableCell {
+    static var resuableIdentifier: String { get }
+}
+
+extension UITableViewCell: ReusableCell {
+    static var resuableIdentifier: String {
+        return "\(self)"
+    }
+}
+
+extension UITableView {
+    func dequeueReusableCell<T: UITableViewCell>(for indexPath: IndexPath) -> T? {
+        guard let cell = dequeueReusableCell(withIdentifier: T.resuableIdentifier, for: indexPath) as? T else {
+            print("Unable to Dequeue Reusable Table View Cell")
+            return nil
+        }
+
+        return cell
+    }
 }

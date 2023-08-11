@@ -16,27 +16,33 @@ class DoneListViewController: UIViewController {
         super.viewDidLoad()
         doneTodoTableView.delegate = self
         doneTodoTableView.dataSource = self
-        doneTodoTableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.identifier)
-        todoManager = TodoManager(viewUpdate: doneTodoTableView.reloadData)
+        doneTodoTableView.estimatedRowHeight = UITableView.automaticDimension
+        doneTodoTableView.register(DoneTableViewCell.self, forCellReuseIdentifier: DoneTableViewCell.resuableIdentifier)
+        todoManager = TodoManager()
     }
 }
 
 extension DoneListViewController: UITableViewDelegate, UITableViewDataSource, UpdateTodoDelegate {
+    func update(todo: Task?) {
+        guard let todo else { return }
+        todoManager?.update(todo: todo)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let todoManager else { return 0 }
         return todoManager.todoCompleteCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TodoTableViewCell.identifier, for: indexPath) as? TodoTableViewCell,
-              let todoManager else { return UITableViewCell() }
-        let todo = todoManager.completeTodo(at: indexPath.row)
+        guard let todoManager,
+              let cell = tableView.dequeueReusableCell(withIdentifier: DoneTableViewCell.resuableIdentifier, for: indexPath) as? DoneTableViewCell else { return UITableViewCell() }
+        let todo = todoManager.todo(at: indexPath.row)
         cell.uiUpdate(todo: todo)
-        cell.delegate = self
+        cell.selectionStyle = .none
         return cell
     }
     
-    func update(todo: Todo?) {
+    func update(todo: CheckTodo?) {
         guard let todoManager,
             let todo else { return }
         todoManager.update(todo: todo)
