@@ -96,7 +96,8 @@ class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         countButton.setTitle("\(todo.count)", for: .normal)
         animationLayer.removeFromSuperlayer()
         countButton.animationLayer.removeFromSuperlayer()
-        countButton.noAnimation(height: 31, count: CGFloat(todo.count), goal: CGFloat(todo.goal))
+        let count = todo.count > todo.goal ? todo.goal : todo.count
+        countButton.noAnimation(height: 31, count: CGFloat(count), goal: CGFloat(todo.goal))
         if isCompleted {
             contentView.backgroundColor = .mainColor.withAlphaComponent(0.5)
         }
@@ -115,6 +116,7 @@ class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
             fromValue = 30
             toValue = 1
             forkey = "notCompleteAnimation"
+            contentView.backgroundColor = .white
         } else {
             countButton.countAnimation(count: CGFloat(todo.count), goal: CGFloat(todo.goal), isIncrease: false)
             return
@@ -127,7 +129,9 @@ class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         self.todo?.count += 1
         guard let todo else { return }
         isCompleted = todo.count >= todo.goal
-        self.todo?.isCompleted = isCompleted
+        if todo.isCompleted != isCompleted {
+            self.todo?.isCompleted = isCompleted
+        }
         let count = isCompleted ? todo.goal : todo.count
         countButton.isCompleted = isCompleted
         if todo.count <= todo.goal {
@@ -143,7 +147,9 @@ class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         let todoCount = todo.count - 1
         self.todo?.count = todoCount
         isCompleted = todoCount >= todo.goal
-        self.todo?.isCompleted = isCompleted
+        if todo.isCompleted != isCompleted {
+            self.todo?.isCompleted = isCompleted
+        }
         countButton.isCompleted = isCompleted
         
         if !isCompleted { animation(animationRadius: self.countButton.frame.height, center: self.countButton.center) }

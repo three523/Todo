@@ -24,7 +24,11 @@ struct CheckTodo: Task {
     var createTime: Date = Date()
     var doneTime: Date? = nil
     var title: String
-    var isCompleted: Bool
+    var isCompleted: Bool {
+        didSet {
+            if isCompleted { doneTime = Date() }
+        }
+    }
     var type: TodoType = .check
     
     init(title: String, isCompleted: Bool) {
@@ -49,7 +53,11 @@ struct CountTodo: Task {
     var title: String
     var count: Int
     var goal: Int
-    var isCompleted: Bool = false
+    var isCompleted: Bool = false {
+        didSet {
+            if isCompleted { doneTime = Date() }
+        }
+    }
     var type: TodoType = .count
     
     init(title: String, goal: Int, count: Int = 0) {

@@ -128,7 +128,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="pDm-zk-vK4">
-                                <rect key="frame" x="24" y="71" width="382" height="273"/>
+                                <rect key="frame" x="24" y="71" width="382" height="108"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="rR2-OQ-OMU">
                                         <rect key="frame" x="0.0" y="0.0" width="358.33333333333331" height="36"/>
@@ -146,73 +146,8 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="cMl-TS-kMC">
-                                        <rect key="frame" x="0.0" y="72" width="287.33333333333331" height="50"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="알람" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ak-w4-bF8">
-                                                <rect key="frame" x="0.0" y="11.999999999999998" width="38.333333333333336" height="26.333333333333329"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="pdI-kg-IWg">
-                                                <rect key="frame" x="54.333333333333314" y="0.0" width="168" height="50"/>
-                                            </datePicker>
-                                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" preferredStyle="sliding" translatesAutoresizingMaskIntoConstraints="NO" id="nKl-r5-Pn3">
-                                                <rect key="frame" x="238.33333333333331" y="9.6666666666666572" width="51" height="31"/>
-                                                <connections>
-                                                    <action selector="datePickerDisable:" destination="hFs-hs-xDo" eventType="valueChanged" id="tcK-aW-pq6"/>
-                                                </connections>
-                                            </switch>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="klj-HI-NBi">
-                                        <rect key="frame" x="0.0" y="159" width="382" height="34.333333333333343"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="타입" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTb-DJ-8W5">
-                                                <rect key="frame" x="0.0" y="3.9999999999999982" width="38.333333333333336" height="26.333333333333329"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhv-OI-EFU">
-                                                <rect key="frame" x="102.66666666666669" y="0.0" width="75" height="34.333333333333336"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="75" id="61U-G0-tsd"/>
-                                                </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="체크">
-                                                    <backgroundConfiguration key="background">
-                                                        <color key="backgroundColor" red="0.4823529412" green="0.7725490196" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    </backgroundConfiguration>
-                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </buttonConfiguration>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeq-qz-PEi">
-                                                <rect key="frame" x="223.66666666666663" y="0.0" width="75" height="34.333333333333336"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="75" id="O7x-rd-H4t"/>
-                                                </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="카운트">
-                                                    <backgroundConfiguration key="background">
-                                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                                    </backgroundConfiguration>
-                                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </buttonConfiguration>
-                                            </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJW-3U-7Lq">
-                                                <rect key="frame" x="382" y="17" width="0.0" height="0.0"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" id="9Gy-wM-yaY"/>
-                                                    <constraint firstAttribute="width" id="GHs-MB-sLp"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="VaS-1v-ev8">
-                                        <rect key="frame" x="0.0" y="237" width="382" height="36"/>
+                                        <rect key="frame" x="0.0" y="72" width="382" height="36"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="목표 횟수" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tni-cr-R0H">
                                                 <rect key="frame" x="0.0" y="4.9999999999999982" width="100" height="26.333333333333329"/>
@@ -233,7 +168,6 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="VaS-1v-ev8" firstAttribute="leading" secondItem="pDm-zk-vK4" secondAttribute="leading" id="Spn-yz-gCv"/>
-                                    <constraint firstAttribute="trailing" secondItem="klj-HI-NBi" secondAttribute="trailing" id="Vz2-XD-haN"/>
                                     <constraint firstAttribute="trailing" secondItem="VaS-1v-ev8" secondAttribute="trailing" id="nii-DU-O2H"/>
                                     <constraint firstItem="VaS-1v-ev8" firstAttribute="leading" secondItem="pDm-zk-vK4" secondAttribute="leading" id="qCf-b2-bSz"/>
                                 </constraints>
@@ -255,8 +189,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="alramSwitch" destination="nKl-r5-Pn3" id="Oh2-Ik-bmB"/>
-                        <outlet property="datePicker" destination="pdI-kg-IWg" id="M8M-pq-DOp"/>
                         <outlet property="goalStackView" destination="VaS-1v-ev8" id="NrB-X7-U05"/>
                         <outlet property="goalTextField" destination="KDy-vl-wVg" id="K6i-Ng-yem"/>
                         <outlet property="titleTextField" destination="S7g-N6-oo3" id="8jn-pb-fLm"/>
@@ -312,9 +244,6 @@
         <image name="folder" catalog="system" width="128" height="96"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
