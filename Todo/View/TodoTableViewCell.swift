@@ -82,10 +82,8 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         checkBoxButton.backgroundColor = .clear
         isCompleted = !isCompleted
         guard let todo else { return }
-        if todo.isCompleted != isCompleted {
-            self.todo?.isCompleted = isCompleted
-        }
-        delegate?.update(todo: todo)
+        self.todo?.isCompleted = isCompleted
+        delegate?.update(todo: self.todo)
         checkBoxButton.isCompleted = isCompleted
         let radius = checkBoxButton.frame.size.width
         let position = CGPoint(x: checkBoxButton.frame.size.width/2, y: checkBoxButton.frame.size.width/2)

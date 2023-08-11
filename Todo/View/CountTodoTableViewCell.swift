@@ -98,9 +98,7 @@ class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         countButton.animationLayer.removeFromSuperlayer()
         let count = todo.count > todo.goal ? todo.goal : todo.count
         countButton.noAnimation(height: 31, count: CGFloat(count), goal: CGFloat(todo.goal))
-        if isCompleted {
-            contentView.backgroundColor = .mainColor.withAlphaComponent(0.5)
-        }
+        contentView.backgroundColor = isCompleted ? .mainColor.withAlphaComponent(0.5) : .clear
     }
     
     func animation(animationRadius: CGFloat, center: CGPoint) {
