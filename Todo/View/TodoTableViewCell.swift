@@ -63,6 +63,8 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
     }
     
     func uiUpdate(todo: CheckTodo) {
+        contentView.backgroundColor = .clear
+        checkBoxButton.backgroundColor = .clear
         self.todo = todo
         todoLabel.text = todo.title
         isCompleted = todo.isCompleted

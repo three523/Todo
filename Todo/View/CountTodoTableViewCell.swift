@@ -115,6 +115,7 @@ class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
             fromValue = 30
             toValue = 1
             forkey = "notCompleteAnimation"
+            contentView.backgroundColor = .white
         } else {
             countButton.countAnimation(count: CGFloat(todo.count), goal: CGFloat(todo.goal), isIncrease: false)
             return

@@ -36,7 +36,7 @@ extension DoneListViewController: UITableViewDelegate, UITableViewDataSource, Up
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let todoManager,
               let cell = tableView.dequeueReusableCell(withIdentifier: DoneTableViewCell.resuableIdentifier, for: indexPath) as? DoneTableViewCell else { return UITableViewCell() }
-        let todo = todoManager.todo(at: indexPath.row)
+        let todo = todoManager.completeTodo(at: indexPath.row)
         cell.uiUpdate(todo: todo)
         cell.selectionStyle = .none
         return cell

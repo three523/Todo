@@ -36,6 +36,7 @@ struct CheckTodo: Task {
         guard let cell: TodoTableViewCell = tableView.dequeueReusableCell(for: indexPath) else {
             return nil
         }
+        cell.contentView.backgroundColor = .clear
         cell.uiUpdate(todo: self)
         cell.delegate = viewContoller
         return cell
