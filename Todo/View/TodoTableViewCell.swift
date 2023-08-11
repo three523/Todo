@@ -8,18 +8,17 @@
 import UIKit
 
 class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
-    
-    static let identifier: String = "\(TodoTableViewCell.self)"
-    var todo: Todo?
-    var delegate: UpdateTodoDelegate?
-    let todoLabel: UILabel = {
+    var animationLayer: CALayer = CALayer()
+    var todo: CheckTodo?
+    weak var delegate: UpdateTodoDelegate?
+    private let todoLabel: UILabel = {
         let lb = UILabel()
         lb.font = .systemFont(ofSize: 18, weight: .regular)
         lb.text = "투두"
         return lb
     }()
-    let checkBoxButton: CheckBoxButton = {
-        let btn = CheckBoxButton()
+    private let checkBoxButton: CompleteButton = {
+        let btn = CompleteButton()
         btn.setImage(UIImage(systemName: "checkmark"), for: .normal)
         btn.layer.borderWidth = 1
         btn.layer.borderColor = UIColor(red: 106/255, green: 209/255, blue: 213/255, alpha: 1.0).cgColor
@@ -27,9 +26,8 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         btn.layer.cornerRadius = 5
         return btn
     }()
-    var animationLayer: CAShapeLayer = CAShapeLayer()
-    var previewAnimationLayer: CAShapeLayer = CAShapeLayer()
-    var isCompleted: Bool = false
+    private var previewAnimationLayer: CALayer = CALayer()
+    private var isCompleted: Bool = false
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -64,7 +62,7 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         checkBoxButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
-    func uiUpdate(todo: Todo) {
+    func uiUpdate(todo: CheckTodo) {
         self.todo = todo
         todoLabel.text = todo.title
         isCompleted = todo.isCompleted
@@ -82,6 +80,7 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         checkBoxButton.backgroundColor = .clear
         isCompleted = !isCompleted
         todo?.isCompleted = isCompleted
+        todo?.doneTime = isCompleted ? Date() : nil
         delegate?.update(todo: todo)
         checkBoxButton.isCompleted = isCompleted
         let radius = checkBoxButton.frame.size.width
