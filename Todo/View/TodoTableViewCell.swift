@@ -74,6 +74,9 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         if isCompleted {
             checkBoxButton.backgroundColor = .mainColor
             contentView.backgroundColor = .mainColor.withAlphaComponent(0.5)
+        } else {
+            checkBoxButton.backgroundColor = .clear
+            contentView.backgroundColor = .clear
         }
     }
     
