@@ -19,11 +19,16 @@
 		18BE8BE32A778F65000A1407 /* DoneListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BE22A778F65000A1407 /* DoneListViewController.swift */; };
 		18BE8BF32A77A3B9000A1407 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF22A77A3B9000A1407 /* TodoTableViewCell.swift */; };
 		18BE8BF62A77B076000A1407 /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF52A77B076000A1407 /* TodoManager.swift */; };
-		18BE8BF82A77B091000A1407 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF72A77B091000A1407 /* Todo.swift */; };
-		18BE8BFA2A77C150000A1407 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF92A77C150000A1407 /* Extension.swift */; };
+		18BE8BF82A77B091000A1407 /* CheckTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF72A77B091000A1407 /* CheckTodo.swift */; };
 		18C034682A79CEAB002B6368 /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C034672A79CEAB002B6368 /* CompleteButton.swift */; };
 		18C7DD2D2A821C330029A942 /* CreateTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C7DD2C2A821C330029A942 /* CreateTodoViewController.swift */; };
 		18D15F612A85CA9300EE32D4 /* DoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D15F602A85CA9300EE32D4 /* DoneTableViewCell.swift */; };
+		18E1E37E2A973998003FB86D /* CountTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1E37D2A973998003FB86D /* CountTodo.swift */; };
+		18E1E3802A9739D9003FB86D /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1E37F2A9739D9003FB86D /* Task.swift */; };
+		18E1E3852A973BAB003FB86D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1E3842A973BAB003FB86D /* Date.swift */; };
+		18E1E3872A973BE6003FB86D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1E3862A973BE6003FB86D /* UIColor.swift */; };
+		18E1E3892A973C25003FB86D /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1E3882A973C25003FB86D /* UITableView.swift */; };
+		18E1E38B2A973C70003FB86D /* UITableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1E38A2A973C70003FB86D /* UITableVIewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,11 +46,16 @@
 		18BE8BE22A778F65000A1407 /* DoneListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneListViewController.swift; sourceTree = "<group>"; };
 		18BE8BF22A77A3B9000A1407 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		18BE8BF52A77B076000A1407 /* TodoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
-		18BE8BF72A77B091000A1407 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
-		18BE8BF92A77C150000A1407 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		18BE8BF72A77B091000A1407 /* CheckTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTodo.swift; sourceTree = "<group>"; };
 		18C034672A79CEAB002B6368 /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
 		18C7DD2C2A821C330029A942 /* CreateTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoViewController.swift; sourceTree = "<group>"; };
 		18D15F602A85CA9300EE32D4 /* DoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneTableViewCell.swift; sourceTree = "<group>"; };
+		18E1E37D2A973998003FB86D /* CountTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountTodo.swift; sourceTree = "<group>"; };
+		18E1E37F2A9739D9003FB86D /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		18E1E3842A973BAB003FB86D /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		18E1E3862A973BE6003FB86D /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		18E1E3882A973C25003FB86D /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		18E1E38A2A973C70003FB86D /* UITableVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableVIewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,31 +88,19 @@
 		18BE8BCB2A777B84000A1407 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				18E1E38C2A973F4E003FB86D /* Util */,
+				18E1E3832A973B42003FB86D /* ViewController */,
+				18E1E3822A973B13003FB86D /* Model */,
+				18E1E3812A973AB1003FB86D /* Extension */,
 				18BE8BE52A779202000A1407 /* View */,
-				18BE8BE42A7791E5000A1407 /* ViewController */,
 				18BE8BCC2A777B84000A1407 /* AppDelegate.swift */,
 				18BE8BCE2A777B84000A1407 /* SceneDelegate.swift */,
 				18BE8BD22A777B84000A1407 /* Main.storyboard */,
 				18BE8BD52A777B86000A1407 /* Assets.xcassets */,
 				18BE8BD72A777B86000A1407 /* LaunchScreen.storyboard */,
 				18BE8BDA2A777B86000A1407 /* Info.plist */,
-				18BE8BF52A77B076000A1407 /* TodoManager.swift */,
-				18BE8BF72A77B091000A1407 /* Todo.swift */,
-				18BE8BF92A77C150000A1407 /* Extension.swift */,
-				18B30BFC2A7B971A008F86AD /* Animation.swift */,
 			);
 			path = Todo;
-			sourceTree = "<group>";
-		};
-		18BE8BE42A7791E5000A1407 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				18BE8BE02A778F5C000A1407 /* TodoListViewController.swift */,
-				18BE8BE22A778F65000A1407 /* DoneListViewController.swift */,
-				18BE8BD02A777B84000A1407 /* ViewController.swift */,
-				18C7DD2C2A821C330029A942 /* CreateTodoViewController.swift */,
-			);
-			name = ViewController;
 			sourceTree = "<group>";
 		};
 		18BE8BE52A779202000A1407 /* View */ = {
@@ -114,6 +112,47 @@
 				18D15F602A85CA9300EE32D4 /* DoneTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		18E1E3812A973AB1003FB86D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				18E1E3842A973BAB003FB86D /* Date.swift */,
+				18E1E3862A973BE6003FB86D /* UIColor.swift */,
+				18E1E3882A973C25003FB86D /* UITableView.swift */,
+				18E1E38A2A973C70003FB86D /* UITableVIewCell.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		18E1E3822A973B13003FB86D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18BE8BF52A77B076000A1407 /* TodoManager.swift */,
+				18BE8BF72A77B091000A1407 /* CheckTodo.swift */,
+				18E1E37D2A973998003FB86D /* CountTodo.swift */,
+				18E1E37F2A9739D9003FB86D /* Task.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		18E1E3832A973B42003FB86D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18BE8BD02A777B84000A1407 /* ViewController.swift */,
+				18BE8BE02A778F5C000A1407 /* TodoListViewController.swift */,
+				18BE8BE22A778F65000A1407 /* DoneListViewController.swift */,
+				18C7DD2C2A821C330029A942 /* CreateTodoViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		18E1E38C2A973F4E003FB86D /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				18B30BFC2A7B971A008F86AD /* Animation.swift */,
+			);
+			name = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,20 +226,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E1E37E2A973998003FB86D /* CountTodo.swift in Sources */,
 				18B30BF92A7B5944008F86AD /* CountTodoTableViewCell.swift in Sources */,
+				18E1E3872A973BE6003FB86D /* UIColor.swift in Sources */,
 				18BE8BE32A778F65000A1407 /* DoneListViewController.swift in Sources */,
 				18BE8BE12A778F5C000A1407 /* TodoListViewController.swift in Sources */,
 				18BE8BD12A777B84000A1407 /* ViewController.swift in Sources */,
 				18C7DD2D2A821C330029A942 /* CreateTodoViewController.swift in Sources */,
-				18BE8BF82A77B091000A1407 /* Todo.swift in Sources */,
+				18BE8BF82A77B091000A1407 /* CheckTodo.swift in Sources */,
 				18BE8BF32A77A3B9000A1407 /* TodoTableViewCell.swift in Sources */,
+				18E1E3802A9739D9003FB86D /* Task.swift in Sources */,
 				18D15F612A85CA9300EE32D4 /* DoneTableViewCell.swift in Sources */,
 				18BE8BCD2A777B84000A1407 /* AppDelegate.swift in Sources */,
+				18E1E3852A973BAB003FB86D /* Date.swift in Sources */,
+				18E1E38B2A973C70003FB86D /* UITableVIewCell.swift in Sources */,
 				18C034682A79CEAB002B6368 /* CompleteButton.swift in Sources */,
-				18BE8BFA2A77C150000A1407 /* Extension.swift in Sources */,
 				18BE8BCF2A777B84000A1407 /* SceneDelegate.swift in Sources */,
 				18B30BFD2A7B971A008F86AD /* Animation.swift in Sources */,
 				18BE8BF62A77B076000A1407 /* TodoManager.swift in Sources */,
+				18E1E3892A973C25003FB86D /* UITableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
