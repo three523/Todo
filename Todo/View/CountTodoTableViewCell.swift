@@ -136,7 +136,7 @@ class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
             countButton.countAnimation(count: CGFloat(count), goal: CGFloat(todo.goal), isIncrease: true)
         }
         countButton.setTitle("\(todo.count)", for: .normal)
-        delegate?.update(todo: self.todo)
+        delegate?.update(todoType: todo.self, todo: self.todo)
     }
     
     @objc func countDecrease() {
@@ -152,7 +152,7 @@ class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         
         if !isCompleted { animation(animationRadius: self.countButton.frame.height, center: self.countButton.center) }
         countButton.setTitle("\(todoCount)", for: .normal)
-        delegate?.update(todo: self.todo)
+        delegate?.update(todoType: todo.self, todo: self.todo)
     }
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {

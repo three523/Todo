@@ -88,9 +88,9 @@
 		18BE8BCB2A777B84000A1407 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
-				18E1E38C2A973F4E003FB86D /* Util */,
-				18E1E3832A973B42003FB86D /* ViewController */,
-				18E1E3822A973B13003FB86D /* Model */,
+				18E1E3902A974109003FB86D /* Model */,
+				18E1E38F2A9740D8003FB86D /* ViewController */,
+				18E1E38E2A9740B3003FB86D /* Util */,
 				18E1E3812A973AB1003FB86D /* Extension */,
 				18BE8BE52A779202000A1407 /* View */,
 				18BE8BCC2A777B84000A1407 /* AppDelegate.swift */,
@@ -125,18 +125,15 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		18E1E3822A973B13003FB86D /* Model */ = {
+		18E1E38E2A9740B3003FB86D /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				18BE8BF52A77B076000A1407 /* TodoManager.swift */,
-				18BE8BF72A77B091000A1407 /* CheckTodo.swift */,
-				18E1E37D2A973998003FB86D /* CountTodo.swift */,
-				18E1E37F2A9739D9003FB86D /* Task.swift */,
+				18B30BFC2A7B971A008F86AD /* Animation.swift */,
 			);
-			name = Model;
+			path = Util;
 			sourceTree = "<group>";
 		};
-		18E1E3832A973B42003FB86D /* ViewController */ = {
+		18E1E38F2A9740D8003FB86D /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				18BE8BD02A777B84000A1407 /* ViewController.swift */,
@@ -144,15 +141,18 @@
 				18BE8BE22A778F65000A1407 /* DoneListViewController.swift */,
 				18C7DD2C2A821C330029A942 /* CreateTodoViewController.swift */,
 			);
-			name = ViewController;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
-		18E1E38C2A973F4E003FB86D /* Util */ = {
+		18E1E3902A974109003FB86D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				18B30BFC2A7B971A008F86AD /* Animation.swift */,
+				18BE8BF52A77B076000A1407 /* TodoManager.swift */,
+				18BE8BF72A77B091000A1407 /* CheckTodo.swift */,
+				18E1E37D2A973998003FB86D /* CountTodo.swift */,
+				18E1E37F2A9739D9003FB86D /* Task.swift */,
 			);
-			name = Util;
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

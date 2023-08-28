@@ -14,7 +14,12 @@ protocol Task {
     var isCompleted: Bool { get set }
     var createTime: Date { get }
     var doneTime: Date? { get set }
-    var type: TodoType { get set }
     
     func todoCell(tableView: UITableView, indexPath: IndexPath, viewContoller: UpdateTodoDelegate) -> UITableViewCell?
+}
+
+extension Task {
+    static var userDefaultsId: String {
+        return "\(self)"
+    }
 }

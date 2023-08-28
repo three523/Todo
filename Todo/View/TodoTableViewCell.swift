@@ -86,7 +86,7 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         isCompleted = !isCompleted
         guard let todo else { return }
         self.todo?.isCompleted = isCompleted
-        delegate?.update(todo: self.todo)
+        delegate?.update(todoType: todo.self, todo: self.todo)
         checkBoxButton.isCompleted = isCompleted
         let radius = checkBoxButton.frame.size.width
         let position = CGPoint(x: checkBoxButton.frame.size.width/2, y: checkBoxButton.frame.size.width/2)
@@ -125,5 +125,10 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         }
         animationLayer.removeFromSuperlayer()
         checkBoxButton.animation(animationRadius: checkBoxButton.frame.width/10, center: CGPoint(x: checkBoxButton.frame.width/2, y: checkBoxButton.frame.width/2))
+    }
+    
+    func removeTodo() {
+        guard let todo else { return }
+        delegate?.remove(todoType: todo.self, todo: todo)
     }
 }

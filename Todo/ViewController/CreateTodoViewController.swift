@@ -15,11 +15,9 @@ enum TodoType {
 class CreateTodoViewController: UIViewController, CAAnimationDelegate {
     
     @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var alramSwitch: UISwitch!
     @IBOutlet weak var goalStackView: UIStackView!
     @IBOutlet weak var goalTextField: UITextField!
-    var todo: Task? = nil
+    var todo: (Task & Codable)? = nil
     
     private var titleEmptyLabel: UILabel = {
         let lb = UILabel()
@@ -38,7 +36,7 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
         return lb
     }()
     var type: TodoType = .check
-    var todoManager: TodoManager = TodoManager()
+    var todoManager: TodoManager = TodoManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +65,10 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
             goalStackView.alpha = 1
             goalTextField.text = String(countTodo.goal)
         }
+        let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeTodo))
+        deleteButton.tintColor = .systemRed
         navigationItem.rightBarButtonItem?.title = "수정"
+        navigationItem.rightBarButtonItems?.append(deleteButton)
     }
 
     @IBAction func createTodo(_ sender: Any) {
@@ -79,12 +80,12 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
         
         switch type {
         case .check:
-            if let todo {
-                self.todo?.title = titleText
-                todoManager.update(todo: self.todo!)
+            if var todo = todo as? CheckTodo {
+                todo.title = titleText
+                todoManager.update(todoType: CheckTodo.self, category: .life, todo: todo)
             } else {
                 let todo = CheckTodo(title: titleText, isCompleted: false)
-                todoManager.add(todo: todo)
+                todoManager.add(category: .life, todo: todo)
             }
         case .count:
             guard let countText = goalTextField.text,
@@ -97,11 +98,22 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
             if var countTodo = todo as? CountTodo {
                 countTodo.title = titleText
                 countTodo.goal = goal
-                todoManager.update(todo: countTodo)
+                todoManager.update(todoType: CountTodo.self, category: .life, todo: countTodo)
             } else {
                 let todo = CountTodo(title: titleText, goal: goal)
-                todoManager.add(todo: todo)
+                todoManager.add(category: .life, todo: todo)
             }
+        }
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func removeTodo() {
+        guard let todo else { return }
+        switch type {
+        case .check:
+            todoManager.remove(todoType: CheckTodo.self, category: .life, id: todo.id)
+        case .count:
+            todoManager.remove(todoType: CountTodo.self, category: .life, id: todo.id)
         }
         navigationController?.popViewController(animated: true)
     }
@@ -127,13 +139,5 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
         emptyLabel.isHidden = false
         textField.layer.add(animation, forKey: "shake")
         CATransaction.commit()
-    }
-    
-    @IBAction func datePickerDisable(_ sender: Any) {
-        if alramSwitch.isOn {
-            datePicker.alpha = 1
-        } else {
-            datePicker.alpha = 0
-        }
     }
 }

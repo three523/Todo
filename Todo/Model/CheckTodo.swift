@@ -8,17 +8,16 @@
 import Foundation
 import UIKit
 
-struct CheckTodo: Task {
+struct CheckTodo: Codable, Task {
     var id: UUID = UUID()
     var createTime: Date = Date()
     var doneTime: Date? = nil
     var title: String
-    var isCompleted: Bool {
+    var isCompleted: Bool = false {
         didSet {
             if isCompleted { doneTime = Date() }
         }
     }
-    var type: TodoType = .check
     
     init(title: String, isCompleted: Bool) {
         self.title = title
