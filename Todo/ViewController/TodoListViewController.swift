@@ -8,13 +8,14 @@
 import UIKit
 
 protocol UpdateTodoDelegate: AnyObject {
-    func update(todo: Task?)
+    func update<T: Task & Codable>(todoType: T, todo: T?)
+    func remove<T: Task & Codable>(todoType: T, todo: T?)
 }
 
 class TodoListViewController: UIViewController, CAAnimationDelegate {
     @IBOutlet weak var todoListTableView: UITableView!
     private var isSelected: Bool = false
-    private var todoManager: TodoManager?
+    private var todoManager: TodoManager = TodoManager.shared
     private var listButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -53,7 +54,6 @@ class TodoListViewController: UIViewController, CAAnimationDelegate {
         todoListTableView.dataSource = self
         todoListTableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.resuableIdentifier)
         todoListTableView.register(CountTodoTableViewCell.self, forCellReuseIdentifier: CountTodoTableViewCell.resuableIdentifier)
-        todoManager = TodoManager()
         
         view.addSubview(listButton)
         view.addSubview(checkAddButton)
@@ -92,22 +92,6 @@ class TodoListViewController: UIViewController, CAAnimationDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         todoListTableView.reloadData()
-    }
-    
-    @IBAction func addTodo(_ sender: Any) {
-        let alert = UIAlertController(title: "투두 추가", message: nil, preferredStyle: .alert)
-        alert.addTextField { textfield in
-            textfield.placeholder = "할일을 입력해주세요!"
-        }
-        let okButton = UIAlertAction(title: "확인", style: .default) { _ in
-            guard let title = alert.textFields?.first?.text else { return }
-            let todo = CheckTodo(title: title, isCompleted: false)
-            self.todoManager?.add(todo: todo)
-        }
-        let cancelButton = UIAlertAction(title: "취소", style: .cancel)
-        alert.addAction(okButton)
-        alert.addAction(cancelButton)
-        present(alert, animated: true)
     }
     
     var value: CGFloat = 0.0
@@ -205,42 +189,46 @@ class TodoListViewController: UIViewController, CAAnimationDelegate {
 }
 
 extension TodoListViewController: UITableViewDelegate, UITableViewDataSource, UpdateTodoDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let todoManager else { return 0 }
-        return todoManager.todoAllCount()
+        return todoManager.todoCount(category: .life)
 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let todoManager else { return UITableViewCell() }
-        let todo = todoManager.todo(at: indexPath.row)
+        guard let todo = todoManager.todo(category: .life, at: indexPath.row) else { return UITableViewCell() }
+        
         guard let cell = todo.todoCell(tableView: tableView, indexPath: indexPath, viewContoller: self) else { return UITableViewCell() }
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let todoManager = todoManager else { return }
-        let todo = todoManager.todo(at: indexPath.row)
+        guard let todo = todoManager.todo(category: .life, at: indexPath.row) else { return }
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "CreateTodo") as? CreateTodoViewController else { return }
-        vc.todo = todo
+        vc.todo = todo as? (Task & Codable)
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard let todoManager else { return nil }
-        let action = UIContextualAction(style: .destructive, title: "삭제") { _, _, _  in
-            todoManager.remove(at: indexPath.row)
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
-        }
-        return UISwipeActionsConfiguration(actions: [action])
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        guard let todoManager else { return nil }
+//        let action = UIContextualAction(style: .destructive, title: "삭제") { _, _, _  in
+//            todoManager.remove(todoType: <#T##Decodable & Encodable & Task#>, category: <#T##TodoManager.Category#>, at: <#T##Int#>)
+//            tableView.beginUpdates()
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+//            tableView.endUpdates()
+//        }
+//        return UISwipeActionsConfiguration(actions: [action])
+//    }
+    
+    func update<T: Task & Codable>(todoType: T, todo: T?) {
+        guard let todo else { return }
+        todoManager.update(todoType: T.self, category: .life, todo: todo)
     }
     
-    func update(todo: Task?) {
+    func remove<T: Task & Codable>(todoType: T, todo: T?) {
         guard let todo else { return }
-        todoManager?.update(todo: todo)
+        todoManager.remove(todoType: T.self, category: .life, id: todo.id)
     }
 }

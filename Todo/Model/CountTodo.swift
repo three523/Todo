@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct CountTodo: Task {
+struct CountTodo: Codable, Task {
     var id: UUID = UUID()
     var createTime: Date = Date()
     var doneTime: Date? = nil
@@ -20,7 +20,6 @@ struct CountTodo: Task {
             if isCompleted { doneTime = Date() }
         }
     }
-    var type: TodoType = .count
     
     init(title: String, goal: Int, count: Int = 0) {
         self.title = title
