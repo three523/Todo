@@ -33,8 +33,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="MainImageView" image="checkmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="aPx-a5-AaX">
-                                <rect key="frame" x="105" y="184" width="220" height="138.66666666666669"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="MainImageView" translatesAutoresizingMaskIntoConstraints="NO" id="aPx-a5-AaX">
+                                <rect key="frame" x="105" y="183" width="220" height="140"/>
                                 <color key="tintColor" red="0.4823529412" green="0.7725490196" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="140" id="23S-H1-tMA"/>
@@ -76,6 +76,7 @@
                     <navigationItem key="navigationItem" id="r6F-HV-SrZ"/>
                     <connections>
                         <outlet property="doneListButton" destination="uBj-Ml-Pqi" id="Bha-Kq-qvt"/>
+                        <outlet property="mainImageView" destination="aPx-a5-AaX" id="baA-4N-drP"/>
                         <outlet property="todoListButton" destination="h4P-vU-ypK" id="M95-87-lMt"/>
                     </connections>
                 </viewController>
@@ -246,7 +247,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkmark.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

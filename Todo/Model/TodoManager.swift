@@ -42,7 +42,6 @@ class TodoManager {
     private var standard = UserDefaults.standard
     
     typealias Todo = Task & Codable
-    typealias IsComplete = Bool
     
     private var todoList: [String : [Task]] = [:]
     
