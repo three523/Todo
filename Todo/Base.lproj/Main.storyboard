@@ -61,15 +61,25 @@
                                     <segue destination="X2F-Qe-t7e" kind="show" id="VFS-Zz-FS5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yq6-Ry-hIg">
+                                <rect key="frame" x="132.33333333333331" y="593" width="165.33333333333331" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="고양이 사진 보러가기"/>
+                                <connections>
+                                    <segue destination="mHV-OM-8Gm" kind="show" id="7rv-WT-UT2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="yq6-Ry-hIg" firstAttribute="top" secondItem="uBj-Ml-Pqi" secondAttribute="bottom" constant="60" id="2Ts-WJ-RaL"/>
                             <constraint firstItem="uBj-Ml-Pqi" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="CMH-aA-hdJ"/>
                             <constraint firstItem="aPx-a5-AaX" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="DMB-Zh-INO"/>
                             <constraint firstItem="h4P-vU-ypK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="GRs-Vw-4N7"/>
                             <constraint firstItem="h4P-vU-ypK" firstAttribute="top" secondItem="aPx-a5-AaX" secondAttribute="bottom" constant="80" id="GrJ-LZ-iaD"/>
                             <constraint firstItem="uBj-Ml-Pqi" firstAttribute="top" secondItem="h4P-vU-ypK" secondAttribute="bottom" constant="60" id="SEc-nf-C1v"/>
+                            <constraint firstItem="yq6-Ry-hIg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="UTm-eG-vgr"/>
                             <constraint firstItem="aPx-a5-AaX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="gGT-bC-B9q"/>
                         </constraints>
                     </view>
@@ -203,6 +213,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uH4-yN-1aV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1695.3488372093022" y="1.9313304721030045"/>
+        </scene>
+        <!--Cat Image View Controller-->
+        <scene sceneID="Egi-Sr-bWv">
+            <objects>
+                <viewController id="mHV-OM-8Gm" customClass="CatImageViewController" customModule="Todo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1FF-u5-2Qf">
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mEz-Vn-nUy">
+                                <rect key="frame" x="95" y="386" width="240" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="1ov-QS-Nm9"/>
+                                    <constraint firstAttribute="height" constant="160" id="G1s-AJ-oOb"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QY1-PI-fdB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mEz-Vn-nUy" firstAttribute="centerY" secondItem="1FF-u5-2Qf" secondAttribute="centerY" id="E6T-AX-RfN"/>
+                            <constraint firstItem="mEz-Vn-nUy" firstAttribute="centerX" secondItem="QY1-PI-fdB" secondAttribute="centerX" id="F5l-z7-9wz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="IiF-81-Nkx">
+                        <barButtonItem key="rightBarButtonItem" title="랜덤" id="q8h-2H-Kcq"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p2R-Sm-S2P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="22" y="705"/>
         </scene>
         <!--완료한일-->
         <scene sceneID="haH-4K-TMh">
