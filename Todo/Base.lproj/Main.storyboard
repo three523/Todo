@@ -222,12 +222,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mEz-Vn-nUy">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mEz-Vn-nUy">
                                 <rect key="frame" x="95" y="386" width="240" height="160"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="1ov-QS-Nm9"/>
-                                    <constraint firstAttribute="height" constant="160" id="G1s-AJ-oOb"/>
-                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QY1-PI-fdB"/>
@@ -238,8 +234,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="IiF-81-Nkx">
-                        <barButtonItem key="rightBarButtonItem" title="랜덤" id="q8h-2H-Kcq"/>
+                        <barButtonItem key="rightBarButtonItem" title="랜덤" id="q8h-2H-Kcq">
+                            <connections>
+                                <action selector="randomButtonClick:" destination="mHV-OM-8Gm" id="JCf-BB-RCh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mainImageView" destination="mEz-Vn-nUy" id="HmI-GW-A28"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p2R-Sm-S2P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
