@@ -7,35 +7,35 @@
 
 import Foundation
 
+enum Category: CaseIterable, Codable {
+    case work
+    case life
+    
+    var title: String {
+        switch self {
+        case .life:
+            return "life"
+        case .work:
+            return "work"
+        }
+    }
+}
+
+enum TodoType: CaseIterable {
+    case check
+    case count
+    
+    func type() -> (Task & Codable).Type {
+        switch self {
+        case .check:
+            return CheckTodo.self
+        case .count:
+            return CountTodo.self
+        }
+    }
+}
+
 class TodoManager {
-    
-    enum Category: CaseIterable {
-        case work
-        case life
-        
-        var title: String {
-            switch self {
-            case .life:
-                return "life"
-            case .work:
-                return "work"
-            }
-        }
-    }
-    
-    enum TodoType: CaseIterable {
-        case check
-        case count
-        
-        func type() -> Todo.Type {
-            switch self {
-            case .check:
-                return CheckTodo.self
-            case .count:
-                return CountTodo.self
-            }
-        }
-    }
     
     static let shared: TodoManager = TodoManager()
     
