@@ -190,13 +190,27 @@ class TodoListViewController: UIViewController, CAAnimationDelegate {
 
 extension TodoListViewController: UITableViewDelegate, UITableViewDataSource, UpdateTodoDelegate {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return Category.allCases.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todoManager.todoCount(category: .life)
-
+        let category = Category.allCases[section]
+        return todoManager.todoCount(category: category)
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let category = Category.allCases[section]
+        return category.title
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 16
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let todo = todoManager.todo(category: .life, at: indexPath.row) else { return UITableViewCell() }
+        let category = Category.allCases[indexPath.section]
+        guard let todo = todoManager.todo(category: category, at: indexPath.row) else { return UITableViewCell() }
         
         guard let cell = todo.todoCell(tableView: tableView, indexPath: indexPath, viewContoller: self) else { return UITableViewCell() }
         cell.selectionStyle = .none
@@ -204,31 +218,22 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource, Up
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let todo = todoManager.todo(category: .life, at: indexPath.row) else { return }
+        let category = Category.allCases[indexPath.section]
+        guard let todo = todoManager.todo(category: category, at: indexPath.row) else { return }
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "CreateTodo") as? CreateTodoViewController else { return }
         vc.todo = todo as? (Task & Codable)
+        vc.category = todo.category
         navigationController?.pushViewController(vc, animated: true)
     }
     
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        guard let todoManager else { return nil }
-//        let action = UIContextualAction(style: .destructive, title: "삭제") { _, _, _  in
-//            todoManager.remove(todoType: <#T##Decodable & Encodable & Task#>, category: <#T##TodoManager.Category#>, at: <#T##Int#>)
-//            tableView.beginUpdates()
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//            tableView.endUpdates()
-//        }
-//        return UISwipeActionsConfiguration(actions: [action])
-//    }
-    
     func update<T: Task & Codable>(todoType: T, todo: T?) {
         guard let todo else { return }
-        todoManager.update(todoType: T.self, category: .life, todo: todo)
+        todoManager.update(todoType: T.self, category: todo.category, todo: todo)
     }
     
     func remove<T: Task & Codable>(todoType: T, todo: T?) {
         guard let todo else { return }
-        todoManager.remove(todoType: T.self, category: .life, id: todo.id)
+        todoManager.remove(todoType: T.self, category: todo.category, id: todo.id)
     }
 }

@@ -13,15 +13,18 @@ struct CheckTodo: Codable, Task {
     var createTime: Date = Date()
     var doneTime: Date? = nil
     var title: String
+    var category: Category
+
     var isCompleted: Bool = false {
         didSet {
             if isCompleted { doneTime = Date() }
         }
     }
     
-    init(title: String, isCompleted: Bool) {
+    init(title: String, isCompleted: Bool, category: Category) {
         self.title = title
         self.isCompleted = isCompleted
+        self.category = category
     }
     
     func todoCell(tableView: UITableView, indexPath: IndexPath, viewContoller: UpdateTodoDelegate) -> UITableViewCell? {
