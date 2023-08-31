@@ -7,16 +7,13 @@
 
 import UIKit
 
-enum TodoType {
-    case check
-    case count
-}
-
 class CreateTodoViewController: UIViewController, CAAnimationDelegate {
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var goalStackView: UIStackView!
     @IBOutlet weak var goalTextField: UITextField!
+    @IBOutlet weak var workCategoryButton: UIButton!
+    @IBOutlet weak var lifeCategoryButton: UIButton!
     var todo: (Task & Codable)? = nil
     
     private var titleEmptyLabel: UILabel = {
@@ -35,7 +32,9 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
         lb.isHidden = true
         return lb
     }()
+    var goalStackViewHeight: NSLayoutConstraint?
     var type: TodoType = .check
+    var category: Category = .work
     var todoManager: TodoManager = TodoManager.shared
     
     override func viewDidLoad() {
@@ -43,9 +42,11 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
         view.addSubview(titleEmptyLabel)
         view.addSubview(goalEmptyLabel)
         
-        if type == .check { goalStackView.alpha = 0 }
-        
         updateTodoUi()
+        
+        if type == .check {
+            goalStackView.isHidden = true
+        }
         
         titleEmptyLabel.translatesAutoresizingMaskIntoConstraints = false
         titleEmptyLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 8).isActive = true
@@ -59,6 +60,11 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
     
     func updateTodoUi() {
         guard let todo = todo else { return }
+        if todo.category == .life {
+            lifeCategoryButton.backgroundColor = .mainColor
+        } else {
+            workCategoryButton.backgroundColor = .mainColor
+        }
         titleTextField.text = todo.title
         if let countTodo = todo as? CountTodo {
             type = .count
@@ -82,10 +88,10 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
         case .check:
             if var todo = todo as? CheckTodo {
                 todo.title = titleText
-                todoManager.update(todoType: CheckTodo.self, category: .life, todo: todo)
+                todoManager.update(todoType: CheckTodo.self, category: category, todo: todo)
             } else {
-                let todo = CheckTodo(title: titleText, isCompleted: false)
-                todoManager.add(category: .life, todo: todo)
+                let todo = CheckTodo(title: titleText, isCompleted: false, category: category)
+                todoManager.add(category: category, todo: todo)
             }
         case .count:
             guard let countText = goalTextField.text,
@@ -98,22 +104,31 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
             if var countTodo = todo as? CountTodo {
                 countTodo.title = titleText
                 countTodo.goal = goal
-                todoManager.update(todoType: CountTodo.self, category: .life, todo: countTodo)
+                todoManager.update(todoType: CountTodo.self, category: category, todo: countTodo)
             } else {
-                let todo = CountTodo(title: titleText, goal: goal)
-                todoManager.add(category: .life, todo: todo)
+                let todo = CountTodo(title: titleText, goal: goal, category: category)
+                todoManager.add(category: category, todo: todo)
             }
         }
         navigationController?.popViewController(animated: true)
+    }
+    @IBAction func workButtonClick(_ sender: Any) {
+        category = .work
+        workCategoryButton.backgroundColor = .mainColor
+        lifeCategoryButton.backgroundColor = .systemGray5
+    }
+    @IBAction func lifeButtonClick(_ sender: Any) {
+        category = .life
+        lifeCategoryButton.backgroundColor = .systemGray5
     }
     
     @objc private func removeTodo() {
         guard let todo else { return }
         switch type {
         case .check:
-            todoManager.remove(todoType: CheckTodo.self, category: .life, id: todo.id)
+            todoManager.remove(todoType: CheckTodo.self, category: category, id: todo.id)
         case .count:
-            todoManager.remove(todoType: CountTodo.self, category: .life, id: todo.id)
+            todoManager.remove(todoType: CountTodo.self, category: category, id: todo.id)
         }
         navigationController?.popViewController(animated: true)
     }

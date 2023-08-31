@@ -14,6 +14,7 @@ protocol Task {
     var isCompleted: Bool { get set }
     var createTime: Date { get }
     var doneTime: Date? { get set }
+    var category: Category { get set }
     
     func todoCell(tableView: UITableView, indexPath: IndexPath, viewContoller: UpdateTodoDelegate) -> UITableViewCell?
 }
