@@ -1,9 +1,16 @@
 # Todo
 투두리스트 앱 구현
 
+# 앱 구조
+- todoList 구조
+<center><img width="831" alt="스크린샷 2023-09-01 오후 12 18 46" src="https://github.com/three523/Todo/assets/71269216/fd183bed-025b-4975-bcf8-fa15ac4877cb"></center>   
+
+- 고양이 이미지 보여주기 화면 구조
+<center><img width="828" alt="스크린샷 2023-09-01 오후 12 20 48" src="https://github.com/three523/Todo/assets/71269216/b5c8d2aa-94ba-47b2-9bf5-71b614ee5840"></center>
+
+
 # 화면 구성
 - main 화면
-
     
 <center><img src="https://github.com/three523/Todo/assets/71269216/cd1bccda-78a9-4ab3-be2f-d9c961ef975e" width="200" height="300"></center>
 
