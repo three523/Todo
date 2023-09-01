@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18A8B3FC2AA0947D005B96DB /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8B3FB2AA0947D005B96DB /* APIHandler.swift */; };
+		18A8B3FE2AA0A539005B96DB /* CatImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8B3FD2AA0A539005B96DB /* CatImageView.swift */; };
+		18A8B4002AA0A7D7005B96DB /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8B3FF2AA0A7D7005B96DB /* ErrorView.swift */; };
+		18A8B4022AA0BF1F005B96DB /* CatImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8B4012AA0BF1F005B96DB /* CatImage.swift */; };
 		18B30BF92A7B5944008F86AD /* CountTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B30BF82A7B5944008F86AD /* CountTodoTableViewCell.swift */; };
 		18B30BFD2A7B971A008F86AD /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B30BFC2A7B971A008F86AD /* Animation.swift */; };
 		18BE8BCD2A777B84000A1407 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BCC2A777B84000A1407 /* AppDelegate.swift */; };
@@ -33,6 +37,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18A8B3FB2AA0947D005B96DB /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
+		18A8B3FD2AA0A539005B96DB /* CatImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImageView.swift; sourceTree = "<group>"; };
+		18A8B3FF2AA0A7D7005B96DB /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		18A8B4012AA0BF1F005B96DB /* CatImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImage.swift; sourceTree = "<group>"; };
 		18B30BF82A7B5944008F86AD /* CountTodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountTodoTableViewCell.swift; sourceTree = "<group>"; };
 		18B30BFC2A7B971A008F86AD /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		18BE8BC92A777B84000A1407 /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +120,8 @@
 				18C034672A79CEAB002B6368 /* CompleteButton.swift */,
 				18B30BF82A7B5944008F86AD /* CountTodoTableViewCell.swift */,
 				18D15F602A85CA9300EE32D4 /* DoneTableViewCell.swift */,
+				18A8B3FD2AA0A539005B96DB /* CatImageView.swift */,
+				18A8B3FF2AA0A7D7005B96DB /* ErrorView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -131,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				18B30BFC2A7B971A008F86AD /* Animation.swift */,
+				18A8B3FB2AA0947D005B96DB /* APIHandler.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -154,6 +165,7 @@
 				18BE8BF72A77B091000A1407 /* CheckTodo.swift */,
 				18E1E37D2A973998003FB86D /* CountTodo.swift */,
 				18E1E37F2A9739D9003FB86D /* Task.swift */,
+				18A8B4012AA0BF1F005B96DB /* CatImage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -229,12 +241,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18A8B3FC2AA0947D005B96DB /* APIHandler.swift in Sources */,
 				18E1E37E2A973998003FB86D /* CountTodo.swift in Sources */,
 				18B30BF92A7B5944008F86AD /* CountTodoTableViewCell.swift in Sources */,
+				18A8B3FE2AA0A539005B96DB /* CatImageView.swift in Sources */,
+				18A8B4022AA0BF1F005B96DB /* CatImage.swift in Sources */,
 				18E1E3872A973BE6003FB86D /* UIColor.swift in Sources */,
 				18BE8BE32A778F65000A1407 /* DoneListViewController.swift in Sources */,
 				18BE8BE12A778F5C000A1407 /* TodoListViewController.swift in Sources */,
 				18BE8BD12A777B84000A1407 /* ViewController.swift in Sources */,
+				18A8B4002AA0A7D7005B96DB /* ErrorView.swift in Sources */,
 				18C7DD2D2A821C330029A942 /* CreateTodoViewController.swift in Sources */,
 				18BE8BF82A77B091000A1407 /* CheckTodo.swift in Sources */,
 				18BE8BF32A77A3B9000A1407 /* TodoTableViewCell.swift in Sources */,

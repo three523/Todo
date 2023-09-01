@@ -222,7 +222,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource, Up
         guard let todo = todoManager.todo(category: category, at: indexPath.row) else { return }
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "CreateTodo") as? CreateTodoViewController else { return }
-        vc.todo = todo as? (Task & Codable)
+        vc.todo = todo
         vc.category = todo.category
         navigationController?.pushViewController(vc, animated: true)
     }

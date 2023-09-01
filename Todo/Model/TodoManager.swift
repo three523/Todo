@@ -120,9 +120,9 @@ class TodoManager {
         return completeTodo?.count ?? 0
     }
     
-    func todo(category: Category, at index: Int) -> Task? {
+    func todo(category: Category, at index: Int) -> Todo? {
         guard let categoryTodo = todoList[category.title] else { return nil }
-        return categoryTodo[index]
+        return categoryTodo[index] as? Todo
     }
     
     func completeTodo(category: Category, at index: Int) -> Task? {
