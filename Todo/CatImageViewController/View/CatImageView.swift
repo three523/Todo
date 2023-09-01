@@ -44,7 +44,7 @@ enum ViewState {
     case error(isConnectedToInternet)
 }
 
-class CatImageView: UIImageView, DataLoding {
+final class CatImageView: UIImageView, DataLoding {
     var errorView: ErrorView = ErrorView()
     var lodingView: UIActivityIndicatorView = UIActivityIndicatorView(style: .medium)
     var viewState: ViewState {
@@ -81,15 +81,14 @@ class CatImageView: UIImageView, DataLoding {
         errorView.translatesAutoresizingMaskIntoConstraints = false
         lodingView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            errorView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            errorView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            
-            lodingView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            lodingView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            lodingView.widthAnchor.constraint(equalToConstant: 40),
-            lodingView.heightAnchor.constraint(equalToConstant: 40),
-        ])
+        
+        errorView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        errorView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
+        lodingView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        lodingView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        lodingView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        lodingView.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreateTodoViewController: UIViewController, CAAnimationDelegate {
+final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var goalStackView: UIStackView!
@@ -32,10 +32,10 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
         lb.isHidden = true
         return lb
     }()
-    var goalStackViewHeight: NSLayoutConstraint?
+    private var goalStackViewHeight: NSLayoutConstraint?
     var type: TodoType = .check
     var category: Category = .work
-    var todoManager: TodoManager = TodoManager.shared
+    private var todoManager: TodoManager = TodoManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +60,7 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
             .leadingAnchor).isActive = true
     }
     
-    func updateTodoUi() {
+    private func updateTodoUi() {
         guard let todo = todo else { return }
         if todo.category == .life {
             lifeCategoryButton.backgroundColor = .mainColor

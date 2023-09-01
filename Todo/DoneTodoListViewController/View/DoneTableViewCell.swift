@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DoneTableViewCell: UITableViewCell {
+final class DoneTableViewCell: UITableViewCell {
     var todo: Task? = nil
     private var titleLabel: UILabel = {
         let lb = UILabel()
@@ -28,6 +28,14 @@ class DoneTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(doneTimeLabel)
         
+        configAutoLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configAutoLayout() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12).isActive = true
@@ -38,21 +46,11 @@ class DoneTableViewCell: UITableViewCell {
         doneTimeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     func uiUpdate(todo: Task) {
         self.todo = todo
         guard let doneTime = todo.doneTime else { return }
         titleLabel.text = todo.title
         doneTimeLabel.text = doneTime.dateTimeString()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }
