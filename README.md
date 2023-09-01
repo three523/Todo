@@ -45,6 +45,6 @@
 
 # 애니메이션 구현
 
-![Simulator Screen Recording - iPhone 14 Pro - 2023-08-11 at 13 29 35](https://github.com/three523/Todo/assets/71269216/401f5517-e851-4dad-9b8c-7ba472cbcd44)   
+![Simulator Screen Recording - iPhone 14 Pro - 2023-09-01 at 12 47 23](https://github.com/three523/Todo/assets/71269216/e574a43a-9c2d-48c5-8d1c-46d85fa5c876)
 
-![Simulator Screen Recording - iPhone 14 Pro - 2023-08-11 at 13 30 40](https://github.com/three523/Todo/assets/71269216/391f5330-0ad4-4937-a367-25ebd46f6bda)
+![Simulator Screen Recording - iPhone 14 Pro - 2023-09-01 at 12 47 36](https://github.com/three523/Todo/assets/71269216/987b2b59-3503-4f8f-8691-8f5635e258ff)
