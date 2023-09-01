@@ -263,8 +263,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mEz-Vn-nUy">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mEz-Vn-nUy" customClass="CatImageView" customModule="Todo" customModuleProvider="target">
                                 <rect key="frame" x="95" y="386" width="240" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="dpO-i7-cZZ"/>
+                                    <constraint firstAttribute="height" constant="160" id="rmt-CC-JBe"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QY1-PI-fdB"/>
@@ -282,7 +286,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="mainImageView" destination="mEz-Vn-nUy" id="HmI-GW-A28"/>
+                        <outlet property="mainImageView" destination="mEz-Vn-nUy" id="KtI-U5-Xoq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p2R-Sm-S2P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
