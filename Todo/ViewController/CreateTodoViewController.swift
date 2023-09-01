@@ -42,6 +42,8 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
         view.addSubview(titleEmptyLabel)
         view.addSubview(goalEmptyLabel)
         
+        workCategoryButton.backgroundColor = .mainColor
+        
         updateTodoUi()
         
         if type == .check {
