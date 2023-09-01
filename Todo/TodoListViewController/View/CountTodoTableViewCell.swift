@@ -7,11 +7,11 @@
 
 import UIKit
 
-class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {    
+final class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
     var isCompleted: Bool = false
     var todo: CountTodo?
     weak var delegate: UpdateTodoDelegate?
-    let todoLabel: UILabel = {
+    private let todoLabel: UILabel = {
         let lb = UILabel()
         lb.font = .systemFont(ofSize: 18, weight: .regular)
         lb.text = "투두"
@@ -46,22 +46,16 @@ class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         contentView.addSubview(upButton)
         contentView.addSubview(downButton)
         contentView.layer.masksToBounds = true
-        upButton.addTarget(self, action: #selector(countIncrease), for: .touchUpInside)
-        downButton.addTarget(self, action: #selector(countDecrease), for: .touchUpInside)
         
-        countButton.animationCompleted = {
-            if self.isCompleted {
-                self.animation(animationRadius: self.countButton.frame.height, center: self.countButton.center)
-            }
-        }
-        autoLayoutSetting()
+        configAutoLayout()
+        configButton()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func autoLayoutSetting() {
+    private func configAutoLayout() {
         todoLabel.translatesAutoresizingMaskIntoConstraints = false
         todoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18).isActive = true
         todoLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
@@ -87,6 +81,17 @@ class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         downButton.heightAnchor.constraint(equalTo: countButton.heightAnchor).isActive = true
         downButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         downButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18).isActive = true
+    }
+    
+    private func configButton() {
+        upButton.addTarget(self, action: #selector(countIncrease), for: .touchUpInside)
+        downButton.addTarget(self, action: #selector(countDecrease), for: .touchUpInside)
+        
+        countButton.animationCompleted = {
+            if self.isCompleted {
+                self.animation(animationRadius: self.countButton.frame.height, center: self.countButton.center)
+            }
+        }
     }
     
     func uiUpdate(todo: CountTodo) {

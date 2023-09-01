@@ -8,10 +8,10 @@
 import UIKit
 
 
-class CatImageViewController: UIViewController {
+final class CatImageViewController: UIViewController {
     
     @IBOutlet weak var mainImageView: CatImageView!
-    let apiHandler: APIHandler = APIHandler()
+    private let apiHandler: APIHandler = APIHandler()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class CatImageViewController: UIViewController {
         imageLoader()
     }
     
-    func imageLoader() {
+    private func imageLoader() {
         apiHandler.getJson(type: [CatImage].self, stringUrl: "https://api.thecatapi.com/v1/images/search?") { result in
             switch result {
             case .success(let catImages):

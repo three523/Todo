@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
+final class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
     var animationLayer: CALayer = CALayer()
     var todo: CheckTodo?
     weak var delegate: UpdateTodoDelegate?
@@ -35,7 +35,7 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         contentView.addSubview(checkBoxButton)
         contentView.layer.masksToBounds = true
         checkBoxButton.addTarget(self, action: #selector(checkButtonClick), for: .touchUpInside)
-        autoLayoutSetting()
+        configAutolayout()
         layoutIfNeeded()
         checkBoxButton.animationCompleted = {
             self.animation(animationRadius: self.checkBoxButton.frame.height, center: self.checkBoxButton.center)
@@ -46,7 +46,7 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func autoLayoutSetting() {
+    private func configAutolayout() {
         todoLabel.translatesAutoresizingMaskIntoConstraints = false
         todoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 18).isActive = true
         todoLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
@@ -127,7 +127,7 @@ class TodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
         checkBoxButton.animation(animationRadius: checkBoxButton.frame.width/10, center: CGPoint(x: checkBoxButton.frame.width/2, y: checkBoxButton.frame.width/2))
     }
     
-    func removeTodo() {
+    private func removeTodo() {
         guard let todo else { return }
         delegate?.remove(todoType: todo.self, todo: todo)
     }

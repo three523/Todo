@@ -12,7 +12,7 @@ protocol UpdateTodoDelegate: AnyObject {
     func remove<T: Task & Codable>(todoType: T, todo: T?)
 }
 
-class TodoListViewController: UIViewController, CAAnimationDelegate {
+final class TodoListViewController: UIViewController, CAAnimationDelegate {
     @IBOutlet weak var todoListTableView: UITableView!
     private var isSelected: Bool = false
     private var todoManager: TodoManager = TodoManager.shared
@@ -50,19 +50,29 @@ class TodoListViewController: UIViewController, CAAnimationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        todoListTableView.delegate = self
-        todoListTableView.dataSource = self
-        todoListTableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.resuableIdentifier)
-        todoListTableView.register(CountTodoTableViewCell.self, forCellReuseIdentifier: CountTodoTableViewCell.resuableIdentifier)
         
         view.addSubview(listButton)
         view.addSubview(checkAddButton)
         view.addSubview(countAddButton)
-        listButton.addTarget(self, action: #selector(addList), for: .touchUpInside)
-        checkAddButton.addTarget(self, action: #selector(createCheckTodo), for: .touchUpInside)
-        countAddButton.addTarget(self, action: #selector(createCountTodo), for: .touchUpInside)
-
         
+        configTableView()
+        configAutoLayout()
+        configButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        todoListTableView.reloadData()
+    }
+    
+    private func configTableView() {
+        todoListTableView.delegate = self
+        todoListTableView.dataSource = self
+        todoListTableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.resuableIdentifier)
+        todoListTableView.register(CountTodoTableViewCell.self, forCellReuseIdentifier: CountTodoTableViewCell.resuableIdentifier)
+    }
+    
+    private func configAutoLayout() {
         listButton.translatesAutoresizingMaskIntoConstraints = false
         listButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24).isActive = true
         listButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24).isActive = true
@@ -80,6 +90,12 @@ class TodoListViewController: UIViewController, CAAnimationDelegate {
         countAddButton.bottomAnchor.constraint(equalTo: checkAddButton.topAnchor, constant: -24).isActive = true
         countAddButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         countAddButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    private func configButton() {
+        listButton.addTarget(self, action: #selector(addList), for: .touchUpInside)
+        checkAddButton.addTarget(self, action: #selector(createCheckTodo), for: .touchUpInside)
+        countAddButton.addTarget(self, action: #selector(createCountTodo), for: .touchUpInside)
         
         listButton.layoutIfNeeded()
         checkAddButton.layoutIfNeeded()
@@ -88,14 +104,7 @@ class TodoListViewController: UIViewController, CAAnimationDelegate {
         checkAddButton.layer.cornerRadius =  checkAddButton.frame.width/2
         countAddButton.layer.cornerRadius =  countAddButton.frame.width/2
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        todoListTableView.reloadData()
-    }
-    
-    var value: CGFloat = 0.0
-    
+        
     @objc func addList() {
         isSelected = !isSelected
         isSelected ? buttonListAnimation() : addListVisibleAnimation(button: countAddButton, forkey: "CountAddButton", positionY: checkAddButton.frame.minY)
@@ -115,7 +124,7 @@ class TodoListViewController: UIViewController, CAAnimationDelegate {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func buttonListAnimation() {
+    private func buttonListAnimation() {
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotationAnimation.fromValue = isSelected ? 0 : Double.pi * 0.25
         rotationAnimation.toValue = isSelected ? Double.pi * 0.25 : 0
@@ -127,7 +136,7 @@ class TodoListViewController: UIViewController, CAAnimationDelegate {
         listButton.layer.add(rotationAnimation, forKey: "rotation")
     }
     
-    func addListVisibleAnimation(button: UIButton, forkey: String, positionY: CGFloat) {
+    private func addListVisibleAnimation(button: UIButton, forkey: String, positionY: CGFloat) {
         CATransaction.begin()
         CATransaction.setCompletionBlock {
             button.layer.opacity = self.isSelected ? 1 : 0

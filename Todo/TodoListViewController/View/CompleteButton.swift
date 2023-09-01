@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompleteButton: UIButton, CAAnimationDelegate, Animation {
+final class CompleteButton: UIButton, CAAnimationDelegate, Animation {
     var animationLayer: CALayer = CALayer()
     var isCompleted: Bool = false
     var animationCompleted: ()->Void = {}

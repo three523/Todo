@@ -7,13 +7,17 @@
 
 import UIKit
 
-class DoneListViewController: UIViewController {
+final class DoneListViewController: UIViewController {
     
     private var todoManager: TodoManager = TodoManager.shared
     @IBOutlet weak var doneTodoTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configTableView()
+    }
+    
+    private func configTableView() {
         doneTodoTableView.delegate = self
         doneTodoTableView.dataSource = self
         doneTodoTableView.estimatedRowHeight = UITableView.automaticDimension
