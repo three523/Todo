@@ -11,27 +11,37 @@
 
 # 화면 구성
 - main 화면
-    
-<center><img src="https://github.com/three523/Todo/assets/71269216/cd1bccda-78a9-4ab3-be2f-d9c961ef975e" width="200" height="300"></center>
+
+<center><img width="408" alt="스크린샷 2023-09-01 오후 12 26 45" src="https://github.com/three523/Todo/assets/71269216/e20fc49b-2f65-4a35-a06c-929dc55fdde0"></center>
 
 ## 할일 확인하기 화면
-<img src="https://github.com/three523/Todo/assets/71269216/166a09b9-4a62-45e1-af80-0d1998d48a75" width="200" height="300">
+<img width="411" alt="스크린샷 2023-09-01 오후 12 26 18" src="https://github.com/three523/Todo/assets/71269216/588811f9-a8f0-481f-a30a-c4cf376c7046">
 
 ## +버튼 클릭시   
-<img src="https://github.com/three523/Todo/assets/71269216/819ea3ff-822c-419b-b62c-16797a0f3d50" width="200" height="300">
+<img width="406" alt="스크린샷 2023-09-01 오후 12 26 37" src="https://github.com/three523/Todo/assets/71269216/15dfa126-41d9-495b-9e5f-d16796a8deb6">
 
 ## cell이 있는 경우
-<img src="https://github.com/three523/Todo/assets/71269216/bcf34128-fd1f-4695-afea-9937b2b470c9" width="200" height="300">
+<img width="406" alt="스크린샷 2023-09-01 오후 12 41 02" src="https://github.com/three523/Todo/assets/71269216/ca7b3113-a087-4c9e-823c-3dffb2b36655">
 
 ## 생성및 수정 화면
 
-<img src="https://github.com/three523/Todo/assets/71269216/c8949b14-8695-4ec7-ab14-5ca84448ea5c" width="200" height="300"> 체크 투두 생성화면   
+<img width="410" alt="스크린샷 2023-09-01 오후 12 41 51" src="https://github.com/three523/Todo/assets/71269216/dea642a2-4275-4536-a895-9fdf98569cc7">  체크 투두 생성화면   
 
-<img src="https://github.com/three523/Todo/assets/71269216/567aa847-aeb9-40de-9910-bc49953f3a58" width="200" height="300"> 카운트 투두 생성화면
+<img width="409" alt="스크린샷 2023-09-01 오후 12 30 23" src="https://github.com/three523/Todo/assets/71269216/38a209c4-3ee0-4765-b410-594b51fe724d"> 카운트 투두 생성화면
 
 ## 완료한일 보기 화면
 
-<img src="https://github.com/three523/Todo/assets/71269216/2f75ae48-c688-4c34-8ca9-823d8ef7ffae" width="200" height="300">
+<img width="410" alt="스크린샷 2023-09-01 오후 12 38 08" src="https://github.com/three523/Todo/assets/71269216/7be649f3-41ed-46a9-b5c3-910c911a8100">
+
+## 고양이 사진 보여주는 화면 (정상 작동)
+![Simulator Screen Recording - iPhone 14 Pro - 2023-09-01 at 05 14 43](https://github.com/three523/Todo/assets/71269216/c75d04a7-98f3-4159-88d4-872589808165)
+
+## 고양이 사진 보여주는 화면 (에러 발생시)
+![Simulator Screen Recording - iPhone 14 Pro - 2023-09-01 at 05 24 44](https://github.com/three523/Todo/assets/71269216/4ec7a7b4-e54a-46f8-a2fb-d53f4027f211)
+
+## 고양이 사진 보여주는 화면 (네트워크 연결이 불안정 한 경우, 시간 초과)
+![Simulator Screen Recording - iPhone 14 Pro - 2023-09-01 at 05 34 41](https://github.com/three523/Todo/assets/71269216/f3ed86d1-9915-4bcf-870c-54980e9d9350)
+
 
 # 애니메이션 구현
 
