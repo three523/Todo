@@ -119,7 +119,8 @@ class CreateTodoViewController: UIViewController, CAAnimationDelegate {
     }
     @IBAction func lifeButtonClick(_ sender: Any) {
         category = .life
-        lifeCategoryButton.backgroundColor = .systemGray5
+        workCategoryButton.backgroundColor = .systemGray5
+        lifeCategoryButton.backgroundColor = .mainColor
     }
     
     @objc private func removeTodo() {
