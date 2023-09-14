@@ -58,6 +58,7 @@ final class TodoListViewController: UIViewController, CAAnimationDelegate {
         configTableView()
         configAutoLayout()
         configButton()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -238,7 +239,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource, Up
     
     func update<T: Task & Codable>(todoType: T, todo: T?) {
         guard let todo else { return }
-        todoManager.update(todoType: T.self, category: todo.category, todo: todo)
+        todoManager.update(category: todo.category, todo: todo)
     }
     
     func remove<T: Task & Codable>(todoType: T, todo: T?) {

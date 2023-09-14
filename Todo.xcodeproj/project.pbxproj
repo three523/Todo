@@ -26,6 +26,15 @@
 		18BE8BF82A77B091000A1407 /* CheckTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF72A77B091000A1407 /* CheckTodo.swift */; };
 		18C034682A79CEAB002B6368 /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C034672A79CEAB002B6368 /* CompleteButton.swift */; };
 		18C0B4BD2A9D747E00EF1EA1 /* CatImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0B4BC2A9D747E00EF1EA1 /* CatImageViewController.swift */; };
+		18C1E5212AB185EE00871306 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5202AB185EE00871306 /* ViewState.swift */; };
+		18C1E5232AB1890E00871306 /* TodoEntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5222AB1890E00871306 /* TodoEntityManager.swift */; };
+		18C1E5262AB189F900871306 /* Todo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5242AB189F900871306 /* Todo.xcdatamodeld */; };
+		18C1E5512AB2245F00871306 /* CheckTodoEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E54F2AB2245F00871306 /* CheckTodoEntity+CoreDataClass.swift */; };
+		18C1E5522AB2245F00871306 /* CheckTodoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5502AB2245F00871306 /* CheckTodoEntity+CoreDataProperties.swift */; };
+		18C1E5552AB2249200871306 /* CountTodoEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5532AB2249200871306 /* CountTodoEntity+CoreDataClass.swift */; };
+		18C1E5562AB2249200871306 /* CountTodoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5542AB2249200871306 /* CountTodoEntity+CoreDataProperties.swift */; };
+		18C1E5592AB2333400871306 /* TodoEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5572AB2333400871306 /* TodoEntity+CoreDataClass.swift */; };
+		18C1E55A2AB2333400871306 /* TodoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5582AB2333400871306 /* TodoEntity+CoreDataProperties.swift */; };
 		18C7DD2D2A821C330029A942 /* CreateTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C7DD2C2A821C330029A942 /* CreateTodoViewController.swift */; };
 		18D15F612A85CA9300EE32D4 /* DoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D15F602A85CA9300EE32D4 /* DoneTableViewCell.swift */; };
 		18D5D9602AA1992C00E92DC8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5D95F2AA1992C00E92DC8 /* NetworkError.swift */; };
@@ -61,6 +70,15 @@
 		18BE8BF72A77B091000A1407 /* CheckTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTodo.swift; sourceTree = "<group>"; };
 		18C034672A79CEAB002B6368 /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
 		18C0B4BC2A9D747E00EF1EA1 /* CatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImageViewController.swift; sourceTree = "<group>"; };
+		18C1E5202AB185EE00871306 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
+		18C1E5222AB1890E00871306 /* TodoEntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntityManager.swift; sourceTree = "<group>"; };
+		18C1E5252AB189F900871306 /* Todo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Todo.xcdatamodel; sourceTree = "<group>"; };
+		18C1E54F2AB2245F00871306 /* CheckTodoEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckTodoEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		18C1E5502AB2245F00871306 /* CheckTodoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckTodoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		18C1E5532AB2249200871306 /* CountTodoEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CountTodoEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		18C1E5542AB2249200871306 /* CountTodoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CountTodoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		18C1E5572AB2333400871306 /* TodoEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		18C1E5582AB2333400871306 /* TodoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		18C7DD2C2A821C330029A942 /* CreateTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoViewController.swift; sourceTree = "<group>"; };
 		18D15F602A85CA9300EE32D4 /* DoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneTableViewCell.swift; sourceTree = "<group>"; };
 		18D5D95F2AA1992C00E92DC8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -88,6 +106,12 @@
 		18BE8BC02A777B84000A1407 = {
 			isa = PBXGroup;
 			children = (
+				18C1E5572AB2333400871306 /* TodoEntity+CoreDataClass.swift */,
+				18C1E5582AB2333400871306 /* TodoEntity+CoreDataProperties.swift */,
+				18C1E5532AB2249200871306 /* CountTodoEntity+CoreDataClass.swift */,
+				18C1E5542AB2249200871306 /* CountTodoEntity+CoreDataProperties.swift */,
+				18C1E54F2AB2245F00871306 /* CheckTodoEntity+CoreDataClass.swift */,
+				18C1E5502AB2245F00871306 /* CheckTodoEntity+CoreDataProperties.swift */,
 				18BE8BCB2A777B84000A1407 /* Todo */,
 				18BE8BCA2A777B84000A1407 /* Products */,
 			);
@@ -104,6 +128,7 @@
 		18BE8BCB2A777B84000A1407 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				18C1E51F2AB185DB00871306 /* Enums */,
 				18D5D96B2AA19DD600E92DC8 /* CatImageViewController */,
 				18D5D96A2AA19DB600E92DC8 /* CreateTodoViewController */,
 				18D5D9692AA19D6700E92DC8 /* MainViewController */,
@@ -120,6 +145,17 @@
 				18BE8BDA2A777B86000A1407 /* Info.plist */,
 			);
 			path = Todo;
+			sourceTree = "<group>";
+		};
+		18C1E51F2AB185DB00871306 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				18C1E5202AB185EE00871306 /* ViewState.swift */,
+				18D5D9612AA1996000E92DC8 /* Category.swift */,
+				18D5D9632AA1997300E92DC8 /* TodoType.swift */,
+				18D5D95F2AA1992C00E92DC8 /* NetworkError.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		18D5D9652AA19CB500E92DC8 /* TodoListViewController */ = {
@@ -225,9 +261,6 @@
 			isa = PBXGroup;
 			children = (
 				18A8B3FB2AA0947D005B96DB /* APIHandler.swift */,
-				18D5D95F2AA1992C00E92DC8 /* NetworkError.swift */,
-				18D5D9612AA1996000E92DC8 /* Category.swift */,
-				18D5D9632AA1997300E92DC8 /* TodoType.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -239,6 +272,8 @@
 				18BE8BF72A77B091000A1407 /* CheckTodo.swift */,
 				18E1E37D2A973998003FB86D /* CountTodo.swift */,
 				18E1E37F2A9739D9003FB86D /* Task.swift */,
+				18C1E5222AB1890E00871306 /* TodoEntityManager.swift */,
+				18C1E5242AB189F900871306 /* Todo.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -315,9 +350,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				18A8B3FC2AA0947D005B96DB /* APIHandler.swift in Sources */,
+				18C1E5262AB189F900871306 /* Todo.xcdatamodeld in Sources */,
 				18E1E37E2A973998003FB86D /* CountTodo.swift in Sources */,
 				18B30BF92A7B5944008F86AD /* CountTodoTableViewCell.swift in Sources */,
 				18A8B3FE2AA0A539005B96DB /* CatImageView.swift in Sources */,
+				18C1E5512AB2245F00871306 /* CheckTodoEntity+CoreDataClass.swift in Sources */,
+				18C1E5592AB2333400871306 /* TodoEntity+CoreDataClass.swift in Sources */,
 				18A8B4022AA0BF1F005B96DB /* CatImage.swift in Sources */,
 				18E1E3872A973BE6003FB86D /* UIColor.swift in Sources */,
 				18BE8BE32A778F65000A1407 /* DoneListViewController.swift in Sources */,
@@ -327,6 +365,10 @@
 				18A8B4002AA0A7D7005B96DB /* ErrorView.swift in Sources */,
 				18C7DD2D2A821C330029A942 /* CreateTodoViewController.swift in Sources */,
 				18BE8BF82A77B091000A1407 /* CheckTodo.swift in Sources */,
+				18C1E55A2AB2333400871306 /* TodoEntity+CoreDataProperties.swift in Sources */,
+				18C1E5552AB2249200871306 /* CountTodoEntity+CoreDataClass.swift in Sources */,
+				18C1E5562AB2249200871306 /* CountTodoEntity+CoreDataProperties.swift in Sources */,
+				18C1E5522AB2245F00871306 /* CheckTodoEntity+CoreDataProperties.swift in Sources */,
 				18BE8BF32A77A3B9000A1407 /* TodoTableViewCell.swift in Sources */,
 				18E1E3802A9739D9003FB86D /* Task.swift in Sources */,
 				18D15F612A85CA9300EE32D4 /* DoneTableViewCell.swift in Sources */,
@@ -334,8 +376,10 @@
 				18E1E3852A973BAB003FB86D /* Date.swift in Sources */,
 				18C0B4BD2A9D747E00EF1EA1 /* CatImageViewController.swift in Sources */,
 				18E1E38B2A973C70003FB86D /* UITableVIewCell.swift in Sources */,
+				18C1E5232AB1890E00871306 /* TodoEntityManager.swift in Sources */,
 				18D5D9602AA1992C00E92DC8 /* NetworkError.swift in Sources */,
 				18C034682A79CEAB002B6368 /* CompleteButton.swift in Sources */,
+				18C1E5212AB185EE00871306 /* ViewState.swift in Sources */,
 				18D5D9642AA1997300E92DC8 /* TodoType.swift in Sources */,
 				18BE8BCF2A777B84000A1407 /* SceneDelegate.swift in Sources */,
 				18B30BFD2A7B971A008F86AD /* Animation.swift in Sources */,
@@ -560,6 +604,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		18C1E5242AB189F900871306 /* Todo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				18C1E5252AB189F900871306 /* Todo.xcdatamodel */,
+			);
+			currentVersion = 18C1E5252AB189F900871306 /* Todo.xcdatamodel */;
+			path = Todo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 18BE8BC12A777B84000A1407 /* Project object */;
 }

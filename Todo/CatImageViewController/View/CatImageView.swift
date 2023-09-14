@@ -37,13 +37,6 @@ extension DataLoding where Self: UIView {
     }
 }
 
-enum ViewState {
-    typealias isConnectedToInternet = Bool
-    case loading
-    case loaded
-    case error(isConnectedToInternet)
-}
-
 final class CatImageView: UIImageView, DataLoding {
     var errorView: ErrorView = ErrorView()
     var lodingView: UIActivityIndicatorView = UIActivityIndicatorView(style: .medium)
