@@ -9,16 +9,17 @@ import Foundation
 import UIKit
 
 struct CountTodo: Codable, Task {
+    var coreDataEntityID: String = "countTodoData"
     var id: UUID = UUID()
-    var createTime: Date = Date()
-    var doneTime: Date? = nil
+    var createDate: Date = Date()
+    var doneDate: Date? = nil
     var title: String
     var count: Int
     var goal: Int
     var category: Category
     var isCompleted: Bool = false {
         didSet {
-            if isCompleted { doneTime = Date() }
+            if isCompleted { doneDate = Date() }
         }
     }
     

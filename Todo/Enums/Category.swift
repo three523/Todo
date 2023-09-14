@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum Category: CaseIterable, Codable {
-    case work
+enum Category:Int16, CaseIterable, Codable {
+    case work = 1
     case life
     
     var title: String {

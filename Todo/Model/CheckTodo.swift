@@ -9,21 +9,26 @@ import Foundation
 import UIKit
 
 struct CheckTodo: Codable, Task {
-    var id: UUID = UUID()
-    var createTime: Date = Date()
-    var doneTime: Date? = nil
+    var coreDataEntityID: String = "checkTodoData"
+    var id: UUID
+    var createDate: Date
+    var doneDate: Date? = nil
     var title: String
     var category: Category
 
     var isCompleted: Bool = false {
         didSet {
-            if isCompleted { doneTime = Date() }
+            if isCompleted { doneDate = Date() }
+            else { doneDate = nil }
         }
     }
     
-    init(title: String, isCompleted: Bool, category: Category) {
+    init(id: UUID = UUID(), title: String, createDate: Date = Date(), doneDate: Date? = nil, isCompleted: Bool, category: Category) {
+        self.id = id
         self.title = title
+        self.createDate = createDate
         self.isCompleted = isCompleted
+        self.doneDate = doneDate
         self.category = category
     }
     

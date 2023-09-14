@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
     
@@ -90,7 +91,7 @@ final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
         case .check:
             if var todo = todo as? CheckTodo {
                 todo.title = titleText
-                todoManager.update(todoType: CheckTodo.self, category: category, todo: todo)
+                todoManager.update(category: category, todo: todo)
             } else {
                 let todo = CheckTodo(title: titleText, isCompleted: false, category: category)
                 todoManager.add(category: category, todo: todo)
@@ -106,7 +107,7 @@ final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
             if var countTodo = todo as? CountTodo {
                 countTodo.title = titleText
                 countTodo.goal = goal
-                todoManager.update(todoType: CountTodo.self, category: category, todo: countTodo)
+                todoManager.update(category: category, todo: countTodo)
             } else {
                 let todo = CountTodo(title: titleText, goal: goal, category: category)
                 todoManager.add(category: category, todo: todo)

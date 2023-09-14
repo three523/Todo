@@ -48,7 +48,7 @@ final class DoneTableViewCell: UITableViewCell {
     
     func uiUpdate(todo: Task) {
         self.todo = todo
-        guard let doneTime = todo.doneTime else { return }
+        guard let doneTime = todo.doneDate else { return }
         titleLabel.text = todo.title
         doneTimeLabel.text = doneTime.dateTimeString()
     }
