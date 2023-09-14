@@ -63,7 +63,7 @@ final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
     
     private func updateTodoUi() {
         guard let todo = todo else { return }
-        if todo.category == .life {
+        if category == .life {
             lifeCategoryButton.backgroundColor = .mainColor
         } else {
             workCategoryButton.backgroundColor = .mainColor
@@ -89,12 +89,12 @@ final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
         
         switch type {
         case .check:
-            if var todo = todo as? CheckTodo {
-                todo.title = titleText
-                todoManager.update(category: category, todo: todo)
+            if var checkTodo = todo {
+                checkTodo.title = titleText
+                todoManager.todoUpdate(todo: checkTodo, category: category, state: .update)
             } else {
-                let todo = CheckTodo(title: titleText, isCompleted: false, category: category)
-                todoManager.add(category: category, todo: todo)
+                let newTodo = CheckTodo(title: titleText, isCompleted: false)
+                todoManager.todoUpdate(todo: newTodo, category: category, state: .create)
             }
         case .count:
             guard let countText = goalTextField.text,
@@ -103,14 +103,13 @@ final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
                 textfieldAnimation(textField: goalTextField, emptyLabel: goalEmptyLabel)
                 return
             }
-            
             if var countTodo = todo as? CountTodo {
                 countTodo.title = titleText
                 countTodo.goal = goal
-                todoManager.update(category: category, todo: countTodo)
+                todoManager.todoUpdate(todo: countTodo, category: category, state: .update)
             } else {
-                let todo = CountTodo(title: titleText, goal: goal, category: category)
-                todoManager.add(category: category, todo: todo)
+                let countTodo = CountTodo(title: titleText, goal: goal)
+                todoManager.todoUpdate(todo: countTodo, category: category, state: .create)
             }
         }
         navigationController?.popViewController(animated: true)
@@ -128,12 +127,7 @@ final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
     
     @objc private func removeTodo() {
         guard let todo else { return }
-        switch type {
-        case .check:
-            todoManager.remove(todoType: CheckTodo.self, category: category, id: todo.id)
-        case .count:
-            todoManager.remove(todoType: CountTodo.self, category: category, id: todo.id)
-        }
+        todoManager.todoUpdate(todo: todo, category: category, state: .remove)
         navigationController?.popViewController(animated: true)
     }
     

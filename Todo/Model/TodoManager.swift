@@ -7,9 +7,15 @@
 
 import Foundation
 import CoreData
-import UIKit
 
 final class TodoManager {
+    
+    //TODO: 이름 고민해보기 todoList의 값을 바꾸는 세가지의 경우를 가지는 enum
+    enum UpdateState {
+        case create
+        case update
+        case remove
+    }
     
     static let shared: TodoManager = TodoManager()
         
@@ -24,14 +30,14 @@ final class TodoManager {
     }
 
     private func initTodoList() {
-        guard let todo = todoEntityManager.todoEntity.first else { return }
-        if let checkTodoData = todo.checkTodoData {
+        guard let todoEntity = todoEntityManager.todoEntity else { return }
+        if let checkTodoData = todoEntity.checkTodoData {
             let checkTodo = decodeData(todoType: CheckTodo.self, data: checkTodoData)
             checkTodo.forEach { category, checkTodoList in
                 todoList[category, default: []].append(contentsOf: checkTodoList)
             }
         }
-        if let countTodoData = todo.counTodoData {
+        if let countTodoData = todoEntity.counTodoData {
             let countTodo = decodeData(todoType: CountTodo.self, data: countTodoData)
             countTodo.forEach { category, countTodoList in
                 todoList[category, default: []].append(contentsOf: countTodoList)
@@ -43,7 +49,7 @@ final class TodoManager {
     private func fetchCategoryTodo<T: Todo>(todoType: T.Type) -> [String : [T]] {
         var tempTodoList = [String : [T]]()
         let decoder = JSONDecoder()
-        guard let entity = todoEntityManager.todoEntity.first,
+        guard let entity = todoEntityManager.todoEntity,
               let data = entity.checkTodoData else { return tempTodoList }
         do {
             tempTodoList = try decoder.decode([String : [T]].self, from: data)
@@ -53,6 +59,8 @@ final class TodoManager {
         return tempTodoList
     }
     
+    
+    //TODO: 투두리스트중에 카운트나 체크 투두리스트만 가져오는데 CoreData에서 가져오는게 빠를까? todoList 프로퍼티에서 필터를 돌며 가져오는게 빠를까?
     private func fetchCategoryTodo<T: Todo>(todoType: T.Type, category: Category) ->[String : [T]] {
         guard let filterTodoList = todoList[category.title, default: []].filter({ $0 is T }) as? [T] else {
             return [:]
@@ -88,48 +96,48 @@ final class TodoManager {
         return completeTodo[index]
     }
     
-    func add<T: Todo>(category: Category, todo: T) {
+    private func add<T: Todo>(category: Category, todo: T) -> [String : [T]] {
         var genericTodo = fetchCategoryTodo(todoType: T.self, category: category)
         
-        let encoder = JSONEncoder()
         todoList[category.title, default: []].append(todo)
         genericTodo[category.title, default: []].append(todo)
         
-        guard let data = encodeTodo(todoList: genericTodo, category: category) else {
-            todoList[category.title, default: []].popLast()
-            return
-        }
-        let isSaveComplete = todoEntityManager.addEntity(todoData: data, category: category)
-        if !isSaveComplete { todoList[category.title, default: []].popLast() }
+        return genericTodo
     }
     
-    func update<T: Todo>(category: Category, todo: T) {
-        guard todoList[category.title] != nil else { return }
-        let tempTodoList = todoList
+    private func update<T: Todo>(category: Category, todo: T) -> [String : [T]] {
+        guard todoList[category.title] != nil else { return [:]}
         var categoryTodoList = fetchCategoryTodo(todoType: T.self, category: category)
         
-        guard let updateTodoIndex = todoList[category.title, default: []].firstIndex(where: { $0.id == todo.id }) else { return }
-        guard let userdefaultUpdateTodoIndex = categoryTodoList[category.title, default: []].firstIndex(where: { $0.id == todo.id }) else { return }
+        guard let updateTodoIndex = todoList[category.title, default: []].firstIndex(where: { $0.id == todo.id }) else { return [:] }
+        guard let userdefaultUpdateTodoIndex = categoryTodoList[category.title, default: []].firstIndex(where: { $0.id == todo.id }) else { return [:] }
         todoList[category.title]![updateTodoIndex] = todo
         categoryTodoList[category.title]![userdefaultUpdateTodoIndex] = todo
         
-        guard let data = encodeTodo(todoList: categoryTodoList, category: category) else {
-            todoList = tempTodoList
-            return
-        }
-        let isComplete = todoEntityManager.addEntity(todoData: data, category: category)
-        if !isComplete { todoList = tempTodoList }
+        return categoryTodoList
     }
     
-    func remove<T: Todo>(todoType: T.Type, category: Category, id: UUID) {
-        guard todoList[category.title] != nil else { return }
-        let tempTodoList = todoList
+    private func remove<T: Todo>(category: Category, todo: T) -> [String : [T]] {
         var categoryTodoList = fetchCategoryTodo(todoType: T.self, category: category)
+        todoList[category.title, default: []].removeAll { $0.id == todo.id }
+        categoryTodoList[category.title, default: []].removeAll { $0.id == todo.id }
+        return categoryTodoList
+    }
+    
+    func todoUpdate<T: Todo>(todo: T, category: Category, state: UpdateState) {
+        let tempTodoList = todoList
+        var categoryTodoList = [String : [T]]()
         
-        todoList[category.title, default: []].removeAll { $0.id == id }
-        categoryTodoList[category.title, default: []].removeAll { $0.id == id }
+        switch state {
+        case .create:
+            categoryTodoList = add(category: category, todo: todo)
+        case .update:
+            categoryTodoList = update(category: category, todo: todo)
+        case .remove:
+            categoryTodoList = remove(category: category, todo: todo)
+        }
         
-        guard let data = encodeTodo(todoList: categoryTodoList, category: category) else {
+        guard let data = encodeTodo(todoList: categoryTodoList) else {
             todoList = tempTodoList
             return
         }
@@ -137,10 +145,11 @@ final class TodoManager {
         if !isComplete { todoList = tempTodoList }
     }
     
-    private func encodeTodo<T: Encodable>(todoList: [String : [T]], category: Category) -> Data? {
+    private func encodeTodo<T: Encodable>(todoList: [String : [T]]) -> Data? {
         let encoder = JSONEncoder()
         do {
             let data = try encoder.encode(todoList)
+            print(data.base64EncodedString())
             return data
         } catch let e {
             print(e.localizedDescription)
@@ -149,13 +158,22 @@ final class TodoManager {
     }
     
     private func decodeData<T: Todo>(todoType: T.Type, data: Data) -> [String : [T]] {
+        print(data.base64EncodedString())
         var tempTodoList = [String : [T]]()
         let decoder = JSONDecoder()
         do {
             let todo = try decoder.decode([String : [T]].self, from: data)
             tempTodoList = todo
-        } catch let e {
-            print(e.localizedDescription)
+        } catch let DecodingError.dataCorrupted(context) {
+            print(DecodingError.dataCorrupted(context))
+        } catch let DecodingError.valueNotFound(value, context) {
+            print(DecodingError.valueNotFound(value, context))
+        } catch let DecodingError.keyNotFound(key, context) {
+            print(DecodingError.keyNotFound(key, context))
+        } catch let DecodingError.typeMismatch(type, context)  {
+            print(DecodingError.typeMismatch(type, context))
+        } catch let error {
+            print(error)
         }
         return tempTodoList
     }

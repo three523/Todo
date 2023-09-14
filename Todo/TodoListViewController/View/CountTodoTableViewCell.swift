@@ -8,9 +8,6 @@
 import UIKit
 
 final class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animation {
-    var isCompleted: Bool = false
-    var todo: CountTodo?
-    weak var delegate: UpdateTodoDelegate?
     private let todoLabel: UILabel = {
         let lb = UILabel()
         lb.font = .systemFont(ofSize: 18, weight: .regular)
@@ -37,6 +34,10 @@ final class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animat
         btn.layer.cornerRadius = 5
         return btn
     }()
+    var isCompleted: Bool = false
+    var todo: CountTodo?
+    var category: Category = .life
+    weak var delegate: UpdateTodoDelegate?
     var animationLayer: CALayer = CALayer()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -94,8 +95,9 @@ final class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animat
         }
     }
     
-    func uiUpdate(todo: CountTodo) {
+    func uiUpdate(todo: CountTodo, category: Category) {
         self.todo = todo
+        self.category = category
         isCompleted = todo.isCompleted
         todoLabel.text = todo.title
         countButton.setTitle("\(todo.count)", for: .normal)
@@ -141,7 +143,7 @@ final class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animat
             countButton.countAnimation(count: CGFloat(count), goal: CGFloat(todo.goal), isIncrease: true)
         }
         countButton.setTitle("\(todo.count)", for: .normal)
-        delegate?.update(todoType: todo.self, todo: self.todo)
+        delegate?.update(todo: self.todo, category: category)
     }
     
     @objc func countDecrease() {
@@ -157,7 +159,7 @@ final class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animat
         
         if !isCompleted { animation(animationRadius: self.countButton.frame.height, center: self.countButton.center) }
         countButton.setTitle("\(todoCount)", for: .normal)
-        delegate?.update(todoType: todo.self, todo: self.todo)
+        delegate?.update(todo: self.todo, category: category)
     }
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {

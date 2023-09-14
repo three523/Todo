@@ -9,12 +9,11 @@ import Foundation
 import UIKit
 
 struct CheckTodo: Codable, Task {
-    var coreDataEntityID: String = "checkTodoData"
     var id: UUID
     var createDate: Date
+    var modifyDate: Date? = nil
     var doneDate: Date? = nil
     var title: String
-    var category: Category
 
     var isCompleted: Bool = false {
         didSet {
@@ -23,20 +22,20 @@ struct CheckTodo: Codable, Task {
         }
     }
     
-    init(id: UUID = UUID(), title: String, createDate: Date = Date(), doneDate: Date? = nil, isCompleted: Bool, category: Category) {
+    init(id: UUID = UUID(), title: String, createDate: Date = Date(), doneDate: Date? = nil, isCompleted: Bool) {
         self.id = id
         self.title = title
         self.createDate = createDate
         self.isCompleted = isCompleted
         self.doneDate = doneDate
-        self.category = category
     }
     
     func todoCell(tableView: UITableView, indexPath: IndexPath, viewContoller: UpdateTodoDelegate) -> UITableViewCell? {
-        guard let cell: TodoTableViewCell = tableView.dequeueReusableCell(for: indexPath) else {
+        guard let cell: CheckTodoTableViewCell = tableView.dequeueReusableCell(for: indexPath) else {
             return nil
         }
-        cell.uiUpdate(todo: self)
+        let category = Category.allCases[indexPath.section]
+        cell.uiUpdate(todo: self, category: category)
         cell.delegate = viewContoller
         return cell
     }

@@ -8,8 +8,8 @@
 import UIKit
 
 protocol UpdateTodoDelegate: AnyObject {
-    func update<T: Task & Codable>(todoType: T, todo: T?)
-    func remove<T: Task & Codable>(todoType: T, todo: T?)
+    func update<T: Task & Codable>(todo: T?, category: Category)
+    func remove<T: Task & Codable>(todo: T?, category: Category)
 }
 
 final class TodoListViewController: UIViewController, CAAnimationDelegate {
@@ -69,7 +69,7 @@ final class TodoListViewController: UIViewController, CAAnimationDelegate {
     private func configTableView() {
         todoListTableView.delegate = self
         todoListTableView.dataSource = self
-        todoListTableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.resuableIdentifier)
+        todoListTableView.register(CheckTodoTableViewCell.self, forCellReuseIdentifier: CheckTodoTableViewCell.resuableIdentifier)
         todoListTableView.register(CountTodoTableViewCell.self, forCellReuseIdentifier: CountTodoTableViewCell.resuableIdentifier)
     }
     
@@ -198,7 +198,7 @@ final class TodoListViewController: UIViewController, CAAnimationDelegate {
     }
 }
 
-extension TodoListViewController: UITableViewDelegate, UITableViewDataSource, UpdateTodoDelegate {
+extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return Category.allCases.count
@@ -233,17 +233,20 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource, Up
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "CreateTodo") as? CreateTodoViewController else { return }
         vc.todo = todo
-        vc.category = todo.category
+        vc.category = category
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    func update<T: Task & Codable>(todoType: T, todo: T?) {
+}
+
+extension TodoListViewController: UpdateTodoDelegate {
+    func update<T>(todo: T?, category: Category) where T : Decodable, T : Encodable, T : Task {
         guard let todo else { return }
-        todoManager.update(category: todo.category, todo: todo)
+        todoManager.todoUpdate(todo: todo, category: category, state: .update)
     }
     
-    func remove<T: Task & Codable>(todoType: T, todo: T?) {
+    func remove<T>(todo: T?, category: Category) where T : Decodable, T : Encodable, T : Task {
         guard let todo else { return }
-        todoManager.remove(todoType: T.self, category: todo.category, id: todo.id)
+        todoManager.todoUpdate(todo: todo, category: category, state: .remove)
     }
 }
+

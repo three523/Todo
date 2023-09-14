@@ -10,7 +10,7 @@ import CoreData
 class TodoEntityManager {
     
     static let shared: TodoEntityManager = TodoEntityManager()
-    var todoEntity: [TodoEntity] = []
+    var todoEntity: TodoEntity? = nil
     private let context: NSManagedObjectContext
     
     private init() {
@@ -21,7 +21,8 @@ class TodoEntityManager {
             }
         }
         self.context = container.viewContext
-        todoEntity = fetchAll()
+        guard let entity = fetchAll().first else { return }
+        todoEntity = entity
     }
             
     func fetchAll() -> [TodoEntity] {
@@ -32,12 +33,11 @@ class TodoEntityManager {
     
     func addEntity(todoData: Data, category: Category) -> Bool {
         if let entity = NSEntityDescription.entity(forEntityName: "TodoEntity", in: context) {
-            let todoEntity = TodoEntity(entity: entity, insertInto: context)
             switch category {
             case .work:
-                todoEntity.checkTodoData = todoData
+                todoEntity?.checkTodoData = todoData
             case .life:
-                todoEntity.counTodoData = todoData
+                todoEntity?.counTodoData = todoData
             }
             return saveContext()
         }

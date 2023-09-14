@@ -9,13 +9,12 @@ import Foundation
 import UIKit
 
 protocol Task {
-    var coreDataEntityID: String { get }
     var id: UUID { get }
     var title: String { get set }
     var isCompleted: Bool { get set }
     var createDate: Date { get }
+    var modifyDate: Date? { get set }
     var doneDate: Date? { get set }
-    var category: Category { get set }
     
     func todoCell(tableView: UITableView, indexPath: IndexPath, viewContoller: UpdateTodoDelegate) -> UITableViewCell?
 }

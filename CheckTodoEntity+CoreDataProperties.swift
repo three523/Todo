@@ -20,7 +20,7 @@ extension CheckTodoEntity {
     @NSManaged public var title: String
     @NSManaged public var isCompleted: Bool
     @NSManaged public var createDate: Date
-    @NSManaged public var updateDate: Date?
+    @NSManaged public var modifyDate: Date?
     @NSManaged public var doneDate: Date?
     @NSManaged public var category: Int16
 
@@ -28,8 +28,7 @@ extension CheckTodoEntity {
 
 extension CheckTodoEntity {
     func convertToCheckTodo() -> CheckTodo? {
-        guard let category = Category(rawValue: category) else { return nil }
-        let checkTask = CheckTodo(id: id, title: title, createDate: createDate, isCompleted: isCompleted, category: category)
+        let checkTask = CheckTodo(id: id, title: title, createDate: createDate, isCompleted: isCompleted)
         return checkTask
     }
 }
