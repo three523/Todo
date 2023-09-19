@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
     @IBOutlet weak var todoListButton: UIButton!
     @IBOutlet weak var doneListButton: UIButton!
@@ -34,5 +34,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+}
+
+extension ViewController {
+    
 }
 

@@ -26,6 +26,7 @@ final class CheckTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animat
     }()
     var animationLayer: CALayer = CALayer()
     var todo: CheckTodo?
+    var todoEntity: CheckTodoEntity?
     var category: Category = .life
     weak var delegate: UpdateTodoDelegate?
     private var previewAnimationLayer: CALayer = CALayer()
@@ -68,6 +69,25 @@ final class CheckTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animat
         contentView.backgroundColor = .clear
         checkBoxButton.backgroundColor = .clear
         self.todo = todo
+        self.category = category
+        todoLabel.text = todo.title
+        isCompleted = todo.isCompleted
+        checkBoxButton.isSelected = isSelected
+        animationLayer.removeFromSuperlayer()
+        checkBoxButton.animationLayer.removeFromSuperlayer()
+        if isCompleted {
+            checkBoxButton.backgroundColor = .mainColor
+            contentView.backgroundColor = .mainColor.withAlphaComponent(0.5)
+        } else {
+            checkBoxButton.backgroundColor = .clear
+            contentView.backgroundColor = .clear
+        }
+    }
+    
+    func testUiUpdate(todo: CheckTodoEntity, category: Category) {
+        contentView.backgroundColor = .clear
+        checkBoxButton.backgroundColor = .clear
+        self.todoEntity = todo
         self.category = category
         todoLabel.text = todo.title
         isCompleted = todo.isCompleted

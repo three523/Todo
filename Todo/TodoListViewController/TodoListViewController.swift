@@ -16,6 +16,7 @@ final class TodoListViewController: UIViewController, CAAnimationDelegate {
     @IBOutlet weak var todoListTableView: UITableView!
     private var isSelected: Bool = false
     private var todoManager: TodoManager = TodoManager.shared
+    private var entityManager: TodoEntityManager = TodoEntityManager.shared
     private var listButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -63,6 +64,7 @@ final class TodoListViewController: UIViewController, CAAnimationDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("test")
         todoListTableView.reloadData()
     }
     
@@ -201,17 +203,19 @@ final class TodoListViewController: UIViewController, CAAnimationDelegate {
 extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Category.allCases.count
+//        return Category.allCases.count
+        return todoManager.categoryCount()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let category = Category.allCases[section]
+//        let category = Category.allCases[section]
+//        return todoManager.testCategoryCount()
+        guard let category = todoManager.category(at: section) else { return 0 }
         return todoManager.todoCount(category: category)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let category = Category.allCases[section]
-        return category.title
+        return todoManager.categoryTitle(index: section)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -219,9 +223,12 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let category = Category.allCases[indexPath.section]
-        guard let todo = todoManager.todo(category: category, at: indexPath.row) else { return UITableViewCell() }
+//        let category = Category.allCases[indexPath.section]
+//        guard let todo = todoManager.todo(category: category, at: indexPath.row) else { return UITableViewCell() }
         
+//        guard let cell = todo.todoCell(tableView: tableView, indexPath: indexPath, viewContoller: self) else { return UITableViewCell() }
+        guard let category = todoManager.category(at: indexPath.section) else { return UITableViewCell() }
+        let todo = todoManager.todo(category: category, at: indexPath.row)
         guard let cell = todo.todoCell(tableView: tableView, indexPath: indexPath, viewContoller: self) else { return UITableViewCell() }
         cell.selectionStyle = .none
         return cell
@@ -229,10 +236,11 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let category = Category.allCases[indexPath.section]
-        guard let todo = todoManager.todo(category: category, at: indexPath.row) else { return }
+        let todo = todoManager.todo(category: category, at: indexPath.row)
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "CreateTodo") as? CreateTodoViewController else { return }
-        vc.todo = todo
+        vc.testTodo = todo
+        vc.testTodo = todoManager.todo(category: category, at: indexPath.row)
         vc.category = category
         navigationController?.pushViewController(vc, animated: true)
     }
