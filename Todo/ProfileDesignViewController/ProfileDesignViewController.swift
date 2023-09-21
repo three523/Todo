@@ -22,6 +22,7 @@ final class ProfileDesignViewController: UIViewController {
     }()
     private let margin: CGFloat = 14
     private let spacing: CGFloat = 10
+    private let naviBarHeight: CGFloat = 44
     private let navGalleryHeight: CGFloat = 44
     private let itemSize = (UIScreen.main.bounds.size.width/3) - 2
     private let imageList: [UIImage?] = [UIImage(named: "nabaecamp1"), UIImage(named: "nabaecamp2"), UIImage(named: "nabaecamp3"), UIImage(named: "nabaecamp4"), UIImage(named: "nabaecamp5"), UIImage(named: "nabaecamp6"), UIImage(named: "nabaecamp7")]
