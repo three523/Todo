@@ -10,13 +10,4 @@ import Foundation
 enum TodoType: CaseIterable {
     case check
     case count
-    
-    func type() -> (Task & Codable).Type {
-        switch self {
-        case .check:
-            return CheckTodo.self
-        case .count:
-            return CountTodo.self
-        }
-    }
 }

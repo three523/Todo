@@ -6,18 +6,35 @@
 //
 
 import UIKit
+import SnapKit
 
 final class DoneListViewController: UIViewController {
     
     private var todoManager: TodoManager = TodoManager.shared
-    @IBOutlet weak var doneTodoTableView: UITableView!
+    private let doneTodoTableView: UITableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configTableView()
+        setup()
     }
-    
-    private func configTableView() {
+}
+
+private extension DoneListViewController {
+    func setup() {
+        addViews()
+        configTableView()
+        configAutoLayout()
+    }
+    func addViews() {
+        view.addSubview(doneTodoTableView)
+    }
+    func configAutoLayout() {
+        let safeArea = view.safeAreaLayoutGuide
+        doneTodoTableView.snp.makeConstraints { make in
+            make.edges.equalTo(safeArea)
+        }
+    }
+    func configTableView() {
         doneTodoTableView.delegate = self
         doneTodoTableView.dataSource = self
         doneTodoTableView.estimatedRowHeight = UITableView.automaticDimension
@@ -33,11 +50,11 @@ extension DoneListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let category = Category.allCases[section]
-        return todoManager.todoCompleteCount(category: category)
+        return todoManager.todoCount(category: category)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Category.allCases[section].title
+        return todoManager.categoryTitle(index: section)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -47,7 +64,7 @@ extension DoneListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DoneTableViewCell.resuableIdentifier, for: indexPath) as? DoneTableViewCell else { return UITableViewCell() }
         let category = Category.allCases[indexPath.section]
-        guard let todo = todoManager.completeTodo(category: category, at: indexPath.row) else { return UITableViewCell() }
+        let todo = todoManager.completeTodo(category: category, at: indexPath.row)
         cell.uiUpdate(todo: todo)
         cell.selectionStyle = .none
         return cell

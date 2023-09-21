@@ -87,8 +87,15 @@ extension TodoManager {
     func todoCount(category: Category) -> Int {
         return testTodoList[category.title, default: []].count
     }
+    func completeTodoCount(category: Category) -> Int {
+        return testTodoList[category.title, default: []].filter{ $0.isCompleted }.count
+    }
     func todo(category: Category, at index: Int) -> TestEntity & NSManagedObject {
         let categoryTodoList = testTodoList[category.title, default: []]
+        return categoryTodoList[index]
+    }
+    func completeTodo(category: Category, at index: Int) -> TestEntity & NSManagedObject {
+        let categoryTodoList = testTodoList[category.title, default: []].filter{ $0.isCompleted }
         return categoryTodoList[index]
     }
 }

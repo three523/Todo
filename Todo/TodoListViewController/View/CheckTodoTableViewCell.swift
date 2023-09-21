@@ -25,7 +25,7 @@ final class CheckTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animat
         return btn
     }()
     var animationLayer: CALayer = CALayer()
-    var todo: CheckTodo?
+    var todo: CheckTodoEntity?
     var todoEntity: CheckTodoEntity?
     var category: Category = .life
     weak var delegate: UpdateTodoDelegate?
@@ -65,7 +65,7 @@ final class CheckTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animat
         checkBoxButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
-    func uiUpdate(todo: CheckTodo, category: Category) {
+    func uiUpdate(todo: CheckTodoEntity, category: Category) {
         contentView.backgroundColor = .clear
         checkBoxButton.backgroundColor = .clear
         self.todo = todo

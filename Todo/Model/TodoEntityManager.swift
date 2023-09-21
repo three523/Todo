@@ -68,34 +68,13 @@ class TodoEntityManager {
         
     func updateTodoEntity<T: NSManagedObject & TestEntity>(category: Category, todoEntity: T) -> Bool {
         todoEntity.updateIntoCategoryEntity()
-        
         return saveContext()
     }
     
     func removeTodoEntity<T: NSManagedObject & TestEntity>(category: Category, todoEntity: T) -> Bool {
-//        todoEntity.removeIntoCategoryEntity()
         context.delete(todoEntity)
         return saveContext()
     }
-//    func addEntity(todoData: Data, category: Category) -> Bool {
-//        if let entity = NSEntityDescription.entity(forEntityName: "TodoEntity", in: context) {
-//            switch category {
-//            case .work:
-//                categoryEntity?.checkTodoEntity = todoData
-//            case .life:
-//                categoryEntity?.countTodoEntity = todoData
-//            }
-//            return saveContext()
-//        }
-//        print("Not Found TodoEntity")
-//        return false
-//    }
-    
-//    func testAddEntity<T: TestEntity>(test: T) -> Bool {
-//        if let entity = NSEntityDescription.entity(forEntityName: "\(T.self)", in: context) {
-//
-//        }
-//    }
     
     private func saveContext() -> Bool {
         do {

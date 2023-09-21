@@ -12,6 +12,12 @@ protocol ReusableCell {
     static var resuableIdentifier: String { get }
 }
 
+extension ReusableCell {
+    static var resuableIdentifier: String {
+        return "\(self)"
+    }
+}
+
 extension UITableViewCell: ReusableCell {
     static var resuableIdentifier: String {
         return "\(self)"

@@ -8,13 +8,95 @@
 import UIKit
 import CoreData
 
-final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
+final class CreateTodoViewController: UIViewController {
     
-    @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var goalStackView: UIStackView!
-    @IBOutlet weak var goalTextField: UITextField!
-    @IBOutlet weak var workCategoryButton: UIButton!
-    @IBOutlet weak var lifeCategoryButton: UIButton!
+    private let mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.distribution = .equalCentering
+        stackView.spacing = 36
+        return stackView
+    }()
+    private let titleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 12
+        return stackView
+    }()
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "제목"
+        label.font = .systemFont(ofSize: 24)
+        label.textColor = .black
+        label.numberOfLines = 0
+        return label
+    }()
+    private let titleTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "투두리스트 제목을 입력해주세요"
+        textField.font = .systemFont(ofSize: 20)
+        textField.textColor = .black
+        textField.borderStyle = .roundedRect
+        return textField
+    }()
+    private let goalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 12
+        return stackView
+    }()
+    private let goalLabel: UILabel = {
+        let label = UILabel()
+        label.text = "목표 횟수"
+        label.font = .systemFont(ofSize: 24)
+        label.textColor = .black
+        label.numberOfLines = 1
+        label.setContentCompressionResistancePriority(UILayoutPriority(749), for: .horizontal)
+        return label
+    }()
+    private let goalTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "목표 갯수를 입력해주세요"
+        textField.font = .systemFont(ofSize: 20)
+        textField.textColor = .black
+        textField.borderStyle = .roundedRect
+        return textField
+    }()
+    private let categoryStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fillEqually
+        stackView.spacing = 12
+        return stackView
+    }()
+    private let categoryLabel: UILabel = {
+        let label = UILabel()
+        label.text = "카테고리"
+        label.font = .systemFont(ofSize: 24)
+        label.textColor = .black
+        label.numberOfLines = 1
+        return label
+    }()
+    private let workCategoryButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Work", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .mainColor
+        return button
+    }()
+    private let lifeCategoryButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Life", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .systemGray5
+        return button
+    }()
     var todo: (Task & Codable)? = nil
     var testTodo: (NSManagedObject & TestEntity)? = nil
     
@@ -34,32 +116,96 @@ final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
         lb.isHidden = true
         return lb
     }()
-    private var goalStackViewHeight: NSLayoutConstraint?
+    private let margin: CGFloat = 24
+    private let topMargin: CGFloat = 12
     var type: TodoType = .check
     var category: Category = .work
     private var todoManager: TodoManager = TodoManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+}
+
+//MARK: View Setup
+extension CreateTodoViewController {
+    private func setup() {
+        navigationSetup()
+        addViews()
+        autoLayoutSetup()
+        hiddenViewSetup()
+        buttonSetup()
+        updateTodoUi()
+    }
+    
+    private func navigationSetup() {
+        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(createTodo))
+        let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeTodo))
+        deleteButton.tintColor = .systemRed
+        navigationItem.rightBarButtonItems?.append(doneButton)
+        navigationItem.rightBarButtonItem?.title = "수정"
+        navigationItem.rightBarButtonItems?.append(deleteButton)
+    }
+    
+    private func mainViewSetup() {
+        view.backgroundColor = .white
+    }
+    
+    private func addViews() {
+        view.addSubview(mainStackView)
+        mainStackView.addArrangedSubview(titleStackView)
+        mainStackView.addArrangedSubview(goalStackView)
+        mainStackView.addArrangedSubview(categoryStackView)
+        titleStackView.addArrangedSubview(titleLabel)
+        titleStackView.addArrangedSubview(titleTextField)
+        goalStackView.addArrangedSubview(goalLabel)
+        goalStackView.addArrangedSubview(goalTextField)
+        categoryStackView.addArrangedSubview(categoryLabel)
+        categoryStackView.addArrangedSubview(workCategoryButton)
+        categoryStackView.addArrangedSubview(lifeCategoryButton)
         view.addSubview(titleEmptyLabel)
         view.addSubview(goalEmptyLabel)
+    }
+    
+    private func viewSetup() {
+        view.backgroundColor = .white
+    }
+    
+    private func autoLayoutSetup() {
+        let safeArea = view.safeAreaLayoutGuide
+        mainStackView.snp.makeConstraints { make in
+            make.top.equalTo(safeArea).inset(topMargin)
+            make.leading.trailing.equalTo(safeArea).inset(margin)
+        }
         
-        workCategoryButton.backgroundColor = .mainColor
+        titleStackView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+        }
         
-        updateTodoUi()
+        goalStackView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+        }
         
+        categoryStackView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        titleEmptyLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleTextField.snp.bottom).inset(8)
+            make.leading.equalTo(titleTextField.snp.leading)
+        }
+        
+        goalEmptyLabel.snp.makeConstraints { make in
+            make.top.equalTo(goalTextField.snp.bottom).inset(8)
+            make.leading.equalTo(goalTextField.snp.leading)
+        }
+    }
+    
+    private func hiddenViewSetup() {
         if type == .check {
             goalStackView.isHidden = true
         }
-        
-        titleEmptyLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleEmptyLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 8).isActive = true
-        titleEmptyLabel.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor).isActive = true
-        
-        goalEmptyLabel.translatesAutoresizingMaskIntoConstraints = false
-        goalEmptyLabel.topAnchor.constraint(equalTo: goalTextField.bottomAnchor, constant: 8).isActive = true
-        goalEmptyLabel.leadingAnchor.constraint(equalTo: goalTextField
-            .leadingAnchor).isActive = true
     }
     
     private func updateTodoUi() {
@@ -75,13 +221,34 @@ final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
             goalStackView.alpha = 1
             goalTextField.text = String(countTodo.goal)
         }
-        let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeTodo))
-        deleteButton.tintColor = .systemRed
-        navigationItem.rightBarButtonItem?.title = "수정"
-        navigationItem.rightBarButtonItems?.append(deleteButton)
     }
-
-    @IBAction func createTodo(_ sender: Any) {
+    
+    private func buttonSetup() {
+        workCategoryButton.addTarget(self, action: #selector(workButtonClick), for: .touchUpInside)
+        lifeCategoryButton.addTarget(self, action: #selector(lifeButtonClick), for: .touchUpInside)
+    }
+    @objc
+    private func workButtonClick(_ sender: Any) {
+        category = .work
+        workCategoryButton.backgroundColor = .mainColor
+        lifeCategoryButton.backgroundColor = .systemGray5
+    }
+    @objc
+    private func lifeButtonClick(_ sender: Any) {
+        category = .life
+        workCategoryButton.backgroundColor = .systemGray5
+        lifeCategoryButton.backgroundColor = .mainColor
+    }
+    
+    @objc
+    private func removeTodo() {
+        guard let testTodo else { return }
+        todoManager.removeTodo(category: category, todo: testTodo)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    private func createTodo(_ sender: Any) {
         guard let titleText = titleTextField.text,
               !titleText.isEmpty  else {
             textfieldAnimation(textField: titleTextField, emptyLabel: titleEmptyLabel)
@@ -91,12 +258,9 @@ final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
         switch type {
         case .check:
             if var testTodo {
-//                checkTodo.title = titleText
-//                todoManager.todoUpdate(todo: checkTodo, category: category, state: .update)
                 testTodo.title = titleText
                 todoManager.updateTodo(category: category, todo: testTodo)
             } else {
-                let newTodo = CheckTodo(title: titleText, isCompleted: false)
                 let context = TodoEntityManager.shared.context
                 if let entity = NSEntityDescription.entity(forEntityName: "CheckTodoEntity", in: context) {
                     let newTestTodo = CheckTodoEntity(entity: entity, insertInto: context)
@@ -105,7 +269,6 @@ final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
                     newTestTodo.title = titleText
                     todoManager.addTodo(category: category, todo: newTestTodo)
                 }
-//                todoManager.todoUpdate(todo: newTodo, category: category, state: .create)
             }
         case .count:
             guard let countText = goalTextField.text,
@@ -118,9 +281,7 @@ final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
                 testTodo.title = titleText
                 testTodo.goal = Int16(goal)
                 todoManager.updateTodo(category: category, todo: testTodo)
-//                todoManager.todoUpdate(todo: countTodo, category: category, state: .update)
             } else {
-                let countTodo = CountTodo(title: titleText, goal: goal)
                 let context = TodoEntityManager.shared.context
                 if let entity = NSEntityDescription.entity(forEntityName: "CountTodoEntity", in: context) {
                     let newTestTodo = CountTodoEntity(entity: entity, insertInto: context)
@@ -130,30 +291,15 @@ final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
                     newTestTodo.goal = Int16(goal)
                     todoManager.addTodo(category: category, todo: newTestTodo)
                 }
-//                todoManager.todoUpdate(todo: countTodo, category: category, state: .create)
             }
         }
         navigationController?.popViewController(animated: true)
     }
-    @IBAction func workButtonClick(_ sender: Any) {
-        category = .work
-        workCategoryButton.backgroundColor = .mainColor
-        lifeCategoryButton.backgroundColor = .systemGray5
-    }
-    @IBAction func lifeButtonClick(_ sender: Any) {
-        category = .life
-        workCategoryButton.backgroundColor = .systemGray5
-        lifeCategoryButton.backgroundColor = .mainColor
-    }
-    
-    @objc private func removeTodo() {
-        guard let testTodo else { return }
-//        todoManager.todoUpdate(todo: todo, category: category, state: .remove)
-        todoManager.removeTodo(category: category, todo: testTodo)
-                
-        navigationController?.popViewController(animated: true)
-    }
-    
+}
+
+
+//MARK: Animation
+extension CreateTodoViewController: CAAnimationDelegate {
     func textfieldAnimation(textField: UITextField, emptyLabel: UILabel) {
         CATransaction.begin()
         CATransaction.setCompletionBlock {
@@ -176,4 +322,5 @@ final class CreateTodoViewController: UIViewController, CAAnimationDelegate {
         textField.layer.add(animation, forKey: "shake")
         CATransaction.commit()
     }
+
 }

@@ -35,8 +35,7 @@ final class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animat
         return btn
     }()
     var isCompleted: Bool = false
-    var todo: CountTodo?
-    var testTodo: CountTodoEntity?
+    var todo: CountTodoEntity?
     var category: Category = .life
     weak var delegate: UpdateTodoDelegate?
     var animationLayer: CALayer = CALayer()
@@ -96,7 +95,7 @@ final class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animat
         }
     }
     
-    func uiUpdate(todo: CountTodo, category: Category) {
+    func uiUpdate(todo: CountTodoEntity, category: Category) {
         self.todo = todo
         self.category = category
         isCompleted = todo.isCompleted
@@ -110,7 +109,7 @@ final class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animat
     }
     
     func testUiUpdate(todo: CountTodoEntity, category: Category) {
-        self.testTodo = todo
+        self.todo = todo
         self.category = category
         isCompleted = todo.isCompleted
         todoLabel.text = todo.title
