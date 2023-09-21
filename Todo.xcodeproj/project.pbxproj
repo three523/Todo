@@ -13,6 +13,18 @@
 		18A8B4022AA0BF1F005B96DB /* CatImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8B4012AA0BF1F005B96DB /* CatImage.swift */; };
 		18B30BF92A7B5944008F86AD /* CountTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B30BF82A7B5944008F86AD /* CountTodoTableViewCell.swift */; };
 		18B30BFD2A7B971A008F86AD /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B30BFC2A7B971A008F86AD /* Animation.swift */; };
+		18B48BAC2ABABB5C00312F8D /* ProfileVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B48BAB2ABABB5C00312F8D /* ProfileVIew.swift */; };
+		18B48BAE2ABABCF800312F8D /* UserFollowInfoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B48BAD2ABABCF800312F8D /* UserFollowInfoStackView.swift */; };
+		18B48BB22ABAF3AE00312F8D /* NavGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B48BB12ABAF3AE00312F8D /* NavGalleryView.swift */; };
+		18B48BB42ABAFB5200312F8D /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B48BB32ABAFB5200312F8D /* PostCollectionViewCell.swift */; };
+		18B48BBA2ABB076C00312F8D /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B48BB92ABB076C00312F8D /* NavigationBar.swift */; };
+		18B68F4D2AB9986800D64059 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18B68F4C2AB9986800D64059 /* SnapKit */; };
+		18BA60912AB42BF0006F326F /* CategoryEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA608F2AB42BF0006F326F /* CategoryEntity+CoreDataClass.swift */; };
+		18BA60922AB42BF0006F326F /* CategoryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA60902AB42BF0006F326F /* CategoryEntity+CoreDataProperties.swift */; };
+		18BA60952AB42CE3006F326F /* CheckTodoEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA60932AB42CE3006F326F /* CheckTodoEntity+CoreDataClass.swift */; };
+		18BA60962AB42CE3006F326F /* CheckTodoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA60942AB42CE3006F326F /* CheckTodoEntity+CoreDataProperties.swift */; };
+		18BA60992AB42CED006F326F /* CountTodoEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA60972AB42CED006F326F /* CountTodoEntity+CoreDataClass.swift */; };
+		18BA609A2AB42CED006F326F /* CountTodoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA60982AB42CED006F326F /* CountTodoEntity+CoreDataProperties.swift */; };
 		18BE8BCD2A777B84000A1407 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BCC2A777B84000A1407 /* AppDelegate.swift */; };
 		18BE8BCF2A777B84000A1407 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BCE2A777B84000A1407 /* SceneDelegate.swift */; };
 		18BE8BD12A777B84000A1407 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BD02A777B84000A1407 /* ViewController.swift */; };
@@ -21,7 +33,7 @@
 		18BE8BD92A777B86000A1407 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18BE8BD72A777B86000A1407 /* LaunchScreen.storyboard */; };
 		18BE8BE12A778F5C000A1407 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BE02A778F5C000A1407 /* TodoListViewController.swift */; };
 		18BE8BE32A778F65000A1407 /* DoneListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BE22A778F65000A1407 /* DoneListViewController.swift */; };
-		18BE8BF32A77A3B9000A1407 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF22A77A3B9000A1407 /* TodoTableViewCell.swift */; };
+		18BE8BF32A77A3B9000A1407 /* CheckTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF22A77A3B9000A1407 /* CheckTodoTableViewCell.swift */; };
 		18BE8BF62A77B076000A1407 /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF52A77B076000A1407 /* TodoManager.swift */; };
 		18BE8BF82A77B091000A1407 /* CheckTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF72A77B091000A1407 /* CheckTodo.swift */; };
 		18C034682A79CEAB002B6368 /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C034672A79CEAB002B6368 /* CompleteButton.swift */; };
@@ -29,12 +41,8 @@
 		18C1E5212AB185EE00871306 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5202AB185EE00871306 /* ViewState.swift */; };
 		18C1E5232AB1890E00871306 /* TodoEntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5222AB1890E00871306 /* TodoEntityManager.swift */; };
 		18C1E5262AB189F900871306 /* Todo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5242AB189F900871306 /* Todo.xcdatamodeld */; };
-		18C1E5512AB2245F00871306 /* CheckTodoEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E54F2AB2245F00871306 /* CheckTodoEntity+CoreDataClass.swift */; };
-		18C1E5522AB2245F00871306 /* CheckTodoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5502AB2245F00871306 /* CheckTodoEntity+CoreDataProperties.swift */; };
-		18C1E5552AB2249200871306 /* CountTodoEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5532AB2249200871306 /* CountTodoEntity+CoreDataClass.swift */; };
-		18C1E5562AB2249200871306 /* CountTodoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5542AB2249200871306 /* CountTodoEntity+CoreDataProperties.swift */; };
-		18C1E5592AB2333400871306 /* TodoEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5572AB2333400871306 /* TodoEntity+CoreDataClass.swift */; };
-		18C1E55A2AB2333400871306 /* TodoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5582AB2333400871306 /* TodoEntity+CoreDataProperties.swift */; };
+		18C7656F2AB9A0CE00F3D656 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C7656E2AB9A0CE00F3D656 /* ImageLoader.swift */; };
+		18C765722ABA0B1100F3D656 /* ProfileDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C765712ABA0B1100F3D656 /* ProfileDesignViewController.swift */; };
 		18C7DD2D2A821C330029A942 /* CreateTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C7DD2C2A821C330029A942 /* CreateTodoViewController.swift */; };
 		18D15F612A85CA9300EE32D4 /* DoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D15F602A85CA9300EE32D4 /* DoneTableViewCell.swift */; };
 		18D5D9602AA1992C00E92DC8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5D95F2AA1992C00E92DC8 /* NetworkError.swift */; };
@@ -55,6 +63,17 @@
 		18A8B4012AA0BF1F005B96DB /* CatImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImage.swift; sourceTree = "<group>"; };
 		18B30BF82A7B5944008F86AD /* CountTodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountTodoTableViewCell.swift; sourceTree = "<group>"; };
 		18B30BFC2A7B971A008F86AD /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
+		18B48BAB2ABABB5C00312F8D /* ProfileVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVIew.swift; sourceTree = "<group>"; };
+		18B48BAD2ABABCF800312F8D /* UserFollowInfoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFollowInfoStackView.swift; sourceTree = "<group>"; };
+		18B48BB12ABAF3AE00312F8D /* NavGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavGalleryView.swift; sourceTree = "<group>"; };
+		18B48BB32ABAFB5200312F8D /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
+		18B48BB92ABB076C00312F8D /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		18BA608F2AB42BF0006F326F /* CategoryEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		18BA60902AB42BF0006F326F /* CategoryEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		18BA60932AB42CE3006F326F /* CheckTodoEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckTodoEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		18BA60942AB42CE3006F326F /* CheckTodoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckTodoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		18BA60972AB42CED006F326F /* CountTodoEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CountTodoEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		18BA60982AB42CED006F326F /* CountTodoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CountTodoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		18BE8BC92A777B84000A1407 /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18BE8BCC2A777B84000A1407 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18BE8BCE2A777B84000A1407 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +84,7 @@
 		18BE8BDA2A777B86000A1407 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18BE8BE02A778F5C000A1407 /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		18BE8BE22A778F65000A1407 /* DoneListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneListViewController.swift; sourceTree = "<group>"; };
-		18BE8BF22A77A3B9000A1407 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
+		18BE8BF22A77A3B9000A1407 /* CheckTodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTodoTableViewCell.swift; sourceTree = "<group>"; };
 		18BE8BF52A77B076000A1407 /* TodoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
 		18BE8BF72A77B091000A1407 /* CheckTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTodo.swift; sourceTree = "<group>"; };
 		18C034672A79CEAB002B6368 /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
@@ -73,12 +92,8 @@
 		18C1E5202AB185EE00871306 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		18C1E5222AB1890E00871306 /* TodoEntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntityManager.swift; sourceTree = "<group>"; };
 		18C1E5252AB189F900871306 /* Todo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Todo.xcdatamodel; sourceTree = "<group>"; };
-		18C1E54F2AB2245F00871306 /* CheckTodoEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckTodoEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		18C1E5502AB2245F00871306 /* CheckTodoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CheckTodoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		18C1E5532AB2249200871306 /* CountTodoEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CountTodoEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		18C1E5542AB2249200871306 /* CountTodoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CountTodoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		18C1E5572AB2333400871306 /* TodoEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		18C1E5582AB2333400871306 /* TodoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		18C7656E2AB9A0CE00F3D656 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		18C765712ABA0B1100F3D656 /* ProfileDesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDesignViewController.swift; sourceTree = "<group>"; };
 		18C7DD2C2A821C330029A942 /* CreateTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoViewController.swift; sourceTree = "<group>"; };
 		18D15F602A85CA9300EE32D4 /* DoneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneTableViewCell.swift; sourceTree = "<group>"; };
 		18D5D95F2AA1992C00E92DC8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -97,21 +112,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18B68F4D2AB9986800D64059 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18B48BAA2ABABB3C00312F8D /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				18B48BAB2ABABB5C00312F8D /* ProfileVIew.swift */,
+				18B48BAD2ABABCF800312F8D /* UserFollowInfoStackView.swift */,
+				18B48BB12ABAF3AE00312F8D /* NavGalleryView.swift */,
+				18B48BB32ABAFB5200312F8D /* PostCollectionViewCell.swift */,
+				18B48BB92ABB076C00312F8D /* NavigationBar.swift */,
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
 		18BE8BC02A777B84000A1407 = {
 			isa = PBXGroup;
 			children = (
-				18C1E5572AB2333400871306 /* TodoEntity+CoreDataClass.swift */,
-				18C1E5582AB2333400871306 /* TodoEntity+CoreDataProperties.swift */,
-				18C1E5532AB2249200871306 /* CountTodoEntity+CoreDataClass.swift */,
-				18C1E5542AB2249200871306 /* CountTodoEntity+CoreDataProperties.swift */,
-				18C1E54F2AB2245F00871306 /* CheckTodoEntity+CoreDataClass.swift */,
-				18C1E5502AB2245F00871306 /* CheckTodoEntity+CoreDataProperties.swift */,
+				18BA60972AB42CED006F326F /* CountTodoEntity+CoreDataClass.swift */,
+				18BA60982AB42CED006F326F /* CountTodoEntity+CoreDataProperties.swift */,
+				18BA60932AB42CE3006F326F /* CheckTodoEntity+CoreDataClass.swift */,
+				18BA60942AB42CE3006F326F /* CheckTodoEntity+CoreDataProperties.swift */,
+				18BA608F2AB42BF0006F326F /* CategoryEntity+CoreDataClass.swift */,
+				18BA60902AB42BF0006F326F /* CategoryEntity+CoreDataProperties.swift */,
 				18BE8BCB2A777B84000A1407 /* Todo */,
 				18BE8BCA2A777B84000A1407 /* Products */,
 			);
@@ -128,6 +156,7 @@
 		18BE8BCB2A777B84000A1407 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				18C765702ABA0AB800F3D656 /* ProfileDesignViewController */,
 				18C1E51F2AB185DB00871306 /* Enums */,
 				18D5D96B2AA19DD600E92DC8 /* CatImageViewController */,
 				18D5D96A2AA19DB600E92DC8 /* CreateTodoViewController */,
@@ -158,6 +187,15 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		18C765702ABA0AB800F3D656 /* ProfileDesignViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18B48BAA2ABABB3C00312F8D /* VIew */,
+				18C765712ABA0B1100F3D656 /* ProfileDesignViewController.swift */,
+			);
+			path = ProfileDesignViewController;
+			sourceTree = "<group>";
+		};
 		18D5D9652AA19CB500E92DC8 /* TodoListViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,7 +211,7 @@
 			children = (
 				18C034672A79CEAB002B6368 /* CompleteButton.swift */,
 				18B30BF82A7B5944008F86AD /* CountTodoTableViewCell.swift */,
-				18BE8BF22A77A3B9000A1407 /* TodoTableViewCell.swift */,
+				18BE8BF22A77A3B9000A1407 /* CheckTodoTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -261,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				18A8B3FB2AA0947D005B96DB /* APIHandler.swift */,
+				18C7656E2AB9A0CE00F3D656 /* ImageLoader.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -294,6 +333,9 @@
 			dependencies = (
 			);
 			name = Todo;
+			packageProductDependencies = (
+				18B68F4C2AB9986800D64059 /* SnapKit */,
+			);
 			productName = Todo;
 			productReference = 18BE8BC92A777B84000A1407 /* Todo.app */;
 			productType = "com.apple.product-type.application";
@@ -322,6 +364,9 @@
 				Base,
 			);
 			mainGroup = 18BE8BC02A777B84000A1407;
+			packageReferences = (
+				18B68F4B2AB9986800D64059 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 18BE8BCA2A777B84000A1407 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -349,14 +394,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18B48BAC2ABABB5C00312F8D /* ProfileVIew.swift in Sources */,
 				18A8B3FC2AA0947D005B96DB /* APIHandler.swift in Sources */,
 				18C1E5262AB189F900871306 /* Todo.xcdatamodeld in Sources */,
 				18E1E37E2A973998003FB86D /* CountTodo.swift in Sources */,
 				18B30BF92A7B5944008F86AD /* CountTodoTableViewCell.swift in Sources */,
 				18A8B3FE2AA0A539005B96DB /* CatImageView.swift in Sources */,
-				18C1E5512AB2245F00871306 /* CheckTodoEntity+CoreDataClass.swift in Sources */,
-				18C1E5592AB2333400871306 /* TodoEntity+CoreDataClass.swift in Sources */,
 				18A8B4022AA0BF1F005B96DB /* CatImage.swift in Sources */,
+				18B48BB22ABAF3AE00312F8D /* NavGalleryView.swift in Sources */,
 				18E1E3872A973BE6003FB86D /* UIColor.swift in Sources */,
 				18BE8BE32A778F65000A1407 /* DoneListViewController.swift in Sources */,
 				18BE8BE12A778F5C000A1407 /* TodoListViewController.swift in Sources */,
@@ -365,21 +410,28 @@
 				18A8B4002AA0A7D7005B96DB /* ErrorView.swift in Sources */,
 				18C7DD2D2A821C330029A942 /* CreateTodoViewController.swift in Sources */,
 				18BE8BF82A77B091000A1407 /* CheckTodo.swift in Sources */,
-				18C1E55A2AB2333400871306 /* TodoEntity+CoreDataProperties.swift in Sources */,
-				18C1E5552AB2249200871306 /* CountTodoEntity+CoreDataClass.swift in Sources */,
-				18C1E5562AB2249200871306 /* CountTodoEntity+CoreDataProperties.swift in Sources */,
-				18C1E5522AB2245F00871306 /* CheckTodoEntity+CoreDataProperties.swift in Sources */,
-				18BE8BF32A77A3B9000A1407 /* TodoTableViewCell.swift in Sources */,
+				18C765722ABA0B1100F3D656 /* ProfileDesignViewController.swift in Sources */,
+				18BE8BF32A77A3B9000A1407 /* CheckTodoTableViewCell.swift in Sources */,
+				18BA60962AB42CE3006F326F /* CheckTodoEntity+CoreDataProperties.swift in Sources */,
+				18B48BAE2ABABCF800312F8D /* UserFollowInfoStackView.swift in Sources */,
 				18E1E3802A9739D9003FB86D /* Task.swift in Sources */,
+				18BA60992AB42CED006F326F /* CountTodoEntity+CoreDataClass.swift in Sources */,
+				18BA60952AB42CE3006F326F /* CheckTodoEntity+CoreDataClass.swift in Sources */,
+				18BA60912AB42BF0006F326F /* CategoryEntity+CoreDataClass.swift in Sources */,
 				18D15F612A85CA9300EE32D4 /* DoneTableViewCell.swift in Sources */,
+				18B48BBA2ABB076C00312F8D /* NavigationBar.swift in Sources */,
 				18BE8BCD2A777B84000A1407 /* AppDelegate.swift in Sources */,
+				18B48BB42ABAFB5200312F8D /* PostCollectionViewCell.swift in Sources */,
 				18E1E3852A973BAB003FB86D /* Date.swift in Sources */,
 				18C0B4BD2A9D747E00EF1EA1 /* CatImageViewController.swift in Sources */,
 				18E1E38B2A973C70003FB86D /* UITableVIewCell.swift in Sources */,
 				18C1E5232AB1890E00871306 /* TodoEntityManager.swift in Sources */,
 				18D5D9602AA1992C00E92DC8 /* NetworkError.swift in Sources */,
+				18BA60922AB42BF0006F326F /* CategoryEntity+CoreDataProperties.swift in Sources */,
+				18C7656F2AB9A0CE00F3D656 /* ImageLoader.swift in Sources */,
 				18C034682A79CEAB002B6368 /* CompleteButton.swift in Sources */,
 				18C1E5212AB185EE00871306 /* ViewState.swift in Sources */,
+				18BA609A2AB42CED006F326F /* CountTodoEntity+CoreDataProperties.swift in Sources */,
 				18D5D9642AA1997300E92DC8 /* TodoType.swift in Sources */,
 				18BE8BCF2A777B84000A1407 /* SceneDelegate.swift in Sources */,
 				18B30BFD2A7B971A008F86AD /* Animation.swift in Sources */,
@@ -536,7 +588,6 @@
 				INFOPLIST_FILE = Todo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
@@ -565,7 +616,6 @@
 				INFOPLIST_FILE = Todo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
@@ -604,6 +654,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		18B68F4B2AB9986800D64059 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		18B68F4C2AB9986800D64059 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18B68F4B2AB9986800D64059 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		18C1E5242AB189F900871306 /* Todo.xcdatamodeld */ = {

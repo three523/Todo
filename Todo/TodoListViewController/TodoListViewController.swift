@@ -6,16 +6,19 @@
 //
 
 import UIKit
+import CoreData
+import SnapKit
 
 protocol UpdateTodoDelegate: AnyObject {
-    func update<T: Task & Codable>(todoType: T, todo: T?)
-    func remove<T: Task & Codable>(todoType: T, todo: T?)
+    func update<T: TestEntity & NSManagedObject>(todo: T?, category: Category)
+    func remove<T: TestEntity & NSManagedObject>(todo: T?, category: Category)
 }
 
 final class TodoListViewController: UIViewController, CAAnimationDelegate {
-    @IBOutlet weak var todoListTableView: UITableView!
+    private var todoListTableView: UITableView = UITableView()
     private var isSelected: Bool = false
     private var todoManager: TodoManager = TodoManager.shared
+    private var entityManager: TodoEntityManager = TodoEntityManager.shared
     private var listButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -47,50 +50,62 @@ final class TodoListViewController: UIViewController, CAAnimationDelegate {
         btn.layer.borderColor = UIColor.mainColor.cgColor
         return btn
     }()
+    private let margin: CGFloat = 24
+    private let buttonSize: CGFloat = 50
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.addSubview(listButton)
-        view.addSubview(checkAddButton)
-        view.addSubview(countAddButton)
-        
-        configTableView()
-        configAutoLayout()
-        configButton()
-        
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         todoListTableView.reloadData()
     }
+}
+
+//MARK: UI Setup
+extension TodoListViewController {
+    private func setup() {
+        addViews()
+        configAutoLayout()
+        configTableView()
+        configButton()
+    }
+    
+    private func addViews() {
+        view.addSubview(todoListTableView)
+        view.addSubview(listButton)
+        view.addSubview(checkAddButton)
+        view.addSubview(countAddButton)
+    }
     
     private func configTableView() {
         todoListTableView.delegate = self
         todoListTableView.dataSource = self
-        todoListTableView.register(TodoTableViewCell.self, forCellReuseIdentifier: TodoTableViewCell.resuableIdentifier)
+        todoListTableView.register(CheckTodoTableViewCell.self, forCellReuseIdentifier: CheckTodoTableViewCell.resuableIdentifier)
         todoListTableView.register(CountTodoTableViewCell.self, forCellReuseIdentifier: CountTodoTableViewCell.resuableIdentifier)
     }
     
     private func configAutoLayout() {
-        listButton.translatesAutoresizingMaskIntoConstraints = false
-        listButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24).isActive = true
-        listButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24).isActive = true
-        listButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        listButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        checkAddButton.translatesAutoresizingMaskIntoConstraints = false
-        checkAddButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24).isActive = true
-        checkAddButton.bottomAnchor.constraint(equalTo: listButton.topAnchor, constant: -24).isActive = true
-        checkAddButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        checkAddButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        countAddButton.translatesAutoresizingMaskIntoConstraints = false
-        countAddButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24).isActive = true
-        countAddButton.bottomAnchor.constraint(equalTo: checkAddButton.topAnchor, constant: -24).isActive = true
-        countAddButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        countAddButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        let safeArea = view.safeAreaLayoutGuide
+        todoListTableView.snp.makeConstraints { make in
+            make.edges.equalTo(safeArea)
+        }
+        listButton.snp.makeConstraints { make in
+            make.bottom.trailing.equalTo(safeArea).inset(margin)
+            make.width.height.equalTo(buttonSize)
+        }
+        checkAddButton.snp.makeConstraints { make in
+            make.trailing.equalTo(safeArea).inset(margin)
+            make.bottom.equalTo(listButton.snp.top).offset(-margin)
+            make.width.height.equalTo(buttonSize)
+        }
+        countAddButton.snp.makeConstraints { make in
+            make.trailing.equalTo(safeArea).inset(margin)
+            make.bottom.equalTo(checkAddButton.snp.top).offset(-margin)
+            make.width.height.equalTo(buttonSize)
+        }
     }
     
     private func configButton() {
@@ -105,26 +120,26 @@ final class TodoListViewController: UIViewController, CAAnimationDelegate {
         checkAddButton.layer.cornerRadius =  checkAddButton.frame.width/2
         countAddButton.layer.cornerRadius =  countAddButton.frame.width/2
     }
-        
+    
     @objc func addList() {
         isSelected = !isSelected
         isSelected ? buttonListAnimation() : addListVisibleAnimation(button: countAddButton, forkey: "CountAddButton", positionY: checkAddButton.frame.minY)
     }
     
     @objc func createCheckTodo() {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: "CreateTodo") as? CreateTodoViewController else { return }
+        let vc = CreateTodoViewController()
         vc.type = .check
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func createCountTodo() {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: "CreateTodo") as? CreateTodoViewController else { return }
+        let vc = CreateTodoViewController()
         vc.type = .count
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+}
+//MARK: Animation
+extension TodoListViewController {
     private func buttonListAnimation() {
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotationAnimation.fromValue = isSelected ? 0 : Double.pi * 0.25
@@ -198,20 +213,22 @@ final class TodoListViewController: UIViewController, CAAnimationDelegate {
     }
 }
 
-extension TodoListViewController: UITableViewDelegate, UITableViewDataSource, UpdateTodoDelegate {
+extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Category.allCases.count
+//        return Category.allCases.count
+        return todoManager.categoryCount()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let category = Category.allCases[section]
+//        let category = Category.allCases[section]
+//        return todoManager.testCategoryCount()
+        guard let category = todoManager.category(at: section) else { return 0 }
         return todoManager.todoCount(category: category)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let category = Category.allCases[section]
-        return category.title
+        return todoManager.categoryTitle(index: section)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -219,9 +236,8 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource, Up
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let category = Category.allCases[indexPath.section]
-        guard let todo = todoManager.todo(category: category, at: indexPath.row) else { return UITableViewCell() }
-        
+        guard let category = todoManager.category(at: indexPath.section) else { return UITableViewCell() }
+        let todo = todoManager.todo(category: category, at: indexPath.row)
         guard let cell = todo.todoCell(tableView: tableView, indexPath: indexPath, viewContoller: self) else { return UITableViewCell() }
         cell.selectionStyle = .none
         return cell
@@ -229,21 +245,25 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource, Up
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let category = Category.allCases[indexPath.section]
-        guard let todo = todoManager.todo(category: category, at: indexPath.row) else { return }
+        let todo = todoManager.todo(category: category, at: indexPath.row)
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "CreateTodo") as? CreateTodoViewController else { return }
-        vc.todo = todo
-        vc.category = todo.category
+        vc.testTodo = todo
+        vc.testTodo = todoManager.todo(category: category, at: indexPath.row)
+        vc.category = category
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    func update<T: Task & Codable>(todoType: T, todo: T?) {
+}
+
+extension TodoListViewController: UpdateTodoDelegate {
+    func update<T: TestEntity & NSManagedObject>(todo: T?, category: Category) {
         guard let todo else { return }
-        todoManager.update(category: todo.category, todo: todo)
+        todoManager.updateTodo(category: category, todo: todo)
     }
     
-    func remove<T: Task & Codable>(todoType: T, todo: T?) {
+    func remove<T: TestEntity & NSManagedObject>(todo: T?, category: Category) {
         guard let todo else { return }
-        todoManager.remove(todoType: T.self, category: todo.category, id: todo.id)
+        todoManager.updateTodo(category: category, todo: todo)
     }
 }
+

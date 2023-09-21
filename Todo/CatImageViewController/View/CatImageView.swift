@@ -56,15 +56,6 @@ final class CatImageView: UIImageView, DataLoding {
         configAutoLayout()
     }
     
-    override func awakeFromNib() {
-        self.addSubview(errorView)
-        self.addSubview(lodingView)
-        
-        viewState = .loading
-        
-        configAutoLayout()
-    }
-    
     required init?(coder: NSCoder) {
         viewState = .loading
         super.init(coder: coder)

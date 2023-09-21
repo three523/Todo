@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum Category:Int16, CaseIterable, Codable {
-    case work = 1
-    case life
+enum Category: String, CaseIterable, Codable {
+    case work = "work"
+    case life = "life"
     
     var title: String {
         switch self {
