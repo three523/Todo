@@ -1,5 +1,5 @@
 //
-//  CheckTodoEntity+CoreDataProperties.swift
+//  CountTodoEntity+CoreDataProperties.swift
 //  Todo
 //
 //  Created by 김도현 on 2023/09/15.
@@ -11,14 +11,17 @@ import CoreData
 import UIKit
 
 
-extension CheckTodoEntity {
+extension CountTodoEntity {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CheckTodoEntity> {
-        return NSFetchRequest<CheckTodoEntity>(entityName: "CheckTodoEntity")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CountTodoEntity> {
+        return NSFetchRequest<CountTodoEntity>(entityName: "CountTodoEntity")
     }
 
+    @NSManaged public var id: UUID
+    @NSManaged public var count: Int16
     @NSManaged public var createDate: Date
     @NSManaged public var doneDate: Date?
+    @NSManaged public var goal: Int16
     @NSManaged public var isCompleted: Bool
     @NSManaged public var modifyDate: Date?
     @NSManaged public var title: String
@@ -26,21 +29,21 @@ extension CheckTodoEntity {
 
 }
 
-extension CheckTodoEntity: TestEntity {
+extension CountTodoEntity: TaskEntity {
     func addIntoCategoryEntity(categoryEntity: CategoryEntity) {
-        categoryEntity.addToCheckTodoEntity(self)
+        categoryEntity.addToCountTodoEntity(self)
     }
     func removeIntoCategoryEntity() {
         guard let categoryEntity else { return }
-        categoryEntity.removeFromCheckTodoEntity(self)
+        categoryEntity.removeFromCountTodoEntity(self)
     }
     func updateIntoCategoryEntity() {
-        guard var checkTodoEntityList = (categoryEntity?.checkTodoEntity?.array as? [CheckTodoEntity]),
-              let checkTodoEntityIndex = checkTodoEntityList.firstIndex(where: { $0.id == self.id }) else { return }
-        checkTodoEntityList[checkTodoEntityIndex] = self
+        guard var countTodoEntityList = (categoryEntity?.countTodoEntity?.array as? [CountTodoEntity]),
+              let countTodoEntityIndex = countTodoEntityList.firstIndex(where: { $0.id == self.id }) else { return }
+        countTodoEntityList[countTodoEntityIndex] = self
     }
     func todoCell(tableView: UITableView, indexPath: IndexPath, viewContoller: UpdateTodoDelegate) -> UITableViewCell? {
-        guard let cell: CheckTodoTableViewCell = tableView.dequeueReusableCell(for: indexPath),
+        guard let cell: CountTodoTableViewCell = tableView.dequeueReusableCell(for: indexPath),
               let categoryTitle = categoryEntity?.title,
               let category = Category(rawValue: categoryTitle) else { return nil }
         cell.testUiUpdate(todo: self, category: category)
@@ -52,6 +55,6 @@ extension CheckTodoEntity: TestEntity {
     }
 }
 
-extension CheckTodoEntity : Identifiable {
+extension CountTodoEntity : Identifiable {
 
 }

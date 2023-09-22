@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 final class DoneTableViewCell: UITableViewCell {
-    var todo: (TestEntity & NSManagedObject)? = nil
+    var todo: (TaskEntity & NSManagedObject)? = nil
     private var titleLabel: UILabel = {
         let lb = UILabel()
         lb.font = .systemFont(ofSize: 20, weight: .regular)
@@ -47,7 +47,7 @@ final class DoneTableViewCell: UITableViewCell {
         doneTimeLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
     }
     
-    func uiUpdate(todo: TestEntity & NSManagedObject) {
+    func uiUpdate(todo: TaskEntity & NSManagedObject) {
         self.todo = todo
         guard let doneTime = todo.doneDate else { return }
         titleLabel.text = todo.title

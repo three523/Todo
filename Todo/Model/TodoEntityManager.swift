@@ -9,11 +9,10 @@ import CoreData
 
 class TodoEntityManager {
     
-    static let shared: TodoEntityManager = TodoEntityManager()
     var categoryEntityList: [CategoryEntity] = []
     let context: NSManagedObjectContext
     
-    private init() {
+    init() {
         let container = NSPersistentContainer(name: "Todo")
         container.loadPersistentStores { description, error in
             if let error = error {
@@ -58,7 +57,36 @@ class TodoEntityManager {
         return initCategoryEntityList
     }
     
-    func addTodoEntity<T: NSManagedObject & TestEntity>(category: Category, todoEntity: T) -> Bool {
+    func createCheckTodoEntity(category: Category, checkTodo: CheckTodo) -> CheckTodoEntity? {
+        if let entity = NSEntityDescription.entity(forEntityName: "CheckTodoEntity", in: context) {
+            let checkTodoEntity = CheckTodoEntity(entity: entity, insertInto: context)
+            checkTodoEntity.createDate = Date()
+            checkTodoEntity.isCompleted = false
+            checkTodoEntity.title = checkTodo.title
+            guard let categoryEntity = categoryEntityList.first(where: { $0.title == category.title }) else { return nil }
+            checkTodoEntity.addIntoCategoryEntity(categoryEntity: categoryEntity)
+            saveContext()
+            return checkTodoEntity
+        }
+        return nil
+    }
+    
+    func createCountTodoEntity(category: Category, countTodo: CountTodo) -> CountTodoEntity? {
+        if let entity = NSEntityDescription.entity(forEntityName: "CountTodoEntity", in: context) {
+            let countTodoEntity = CountTodoEntity(entity: entity, insertInto: context)
+            countTodoEntity.createDate = Date()
+            countTodoEntity.isCompleted = false
+            countTodoEntity.title = countTodo.title
+            countTodoEntity.goal = Int16(countTodo.goal)
+            guard let categoryEntity = categoryEntityList.first(where: { $0.title == category.title }) else { return nil }
+            countTodoEntity.addIntoCategoryEntity(categoryEntity: categoryEntity)
+            saveContext()
+            return countTodoEntity
+        }
+        return nil
+    }
+    
+    func addTodoEntity<T: NSManagedObject & TaskEntity>(category: Category, todoEntity: T) -> Bool {
         guard let index = categoryEntityList.firstIndex(where: { $0.title == category.title }) else { return false }
         var categoryEntity = categoryEntityList[index]
 
@@ -66,17 +94,18 @@ class TodoEntityManager {
         return saveContext()
     }
         
-    func updateTodoEntity<T: NSManagedObject & TestEntity>(category: Category, todoEntity: T) -> Bool {
+    func updateTodoEntity<T: TaskEntity>(category: Category, todoEntity: T) -> Bool {
         todoEntity.updateIntoCategoryEntity()
         return saveContext()
     }
     
-    func removeTodoEntity<T: NSManagedObject & TestEntity>(category: Category, todoEntity: T) -> Bool {
+    func removeTodoEntity<T: TaskEntity>(category: Category, todoEntity: T) -> Bool {
+        guard let todoEntity = todoEntity as? NSManagedObject else { return false }
         context.delete(todoEntity)
         return saveContext()
     }
     
-    private func saveContext() -> Bool {
+    func saveContext() -> Bool {
         do {
             try context.save()
             return true

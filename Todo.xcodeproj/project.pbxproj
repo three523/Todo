@@ -35,12 +35,18 @@
 		18BE8BE32A778F65000A1407 /* DoneListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BE22A778F65000A1407 /* DoneListViewController.swift */; };
 		18BE8BF32A77A3B9000A1407 /* CheckTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF22A77A3B9000A1407 /* CheckTodoTableViewCell.swift */; };
 		18BE8BF62A77B076000A1407 /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF52A77B076000A1407 /* TodoManager.swift */; };
-		18BE8BF82A77B091000A1407 /* CheckTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8BF72A77B091000A1407 /* CheckTodo.swift */; };
+		18BF25BA2ABD31D90023487A /* CountTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BF25B92ABD31D90023487A /* CountTodo.swift */; };
+		18BF25BC2ABD45410023487A /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BF25BB2ABD45410023487A /* MainViewModel.swift */; };
+		18BF25BE2ABD45C30023487A /* DoneTodoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BF25BD2ABD45C30023487A /* DoneTodoListViewModel.swift */; };
 		18C034682A79CEAB002B6368 /* CompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C034672A79CEAB002B6368 /* CompleteButton.swift */; };
 		18C0B4BD2A9D747E00EF1EA1 /* CatImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0B4BC2A9D747E00EF1EA1 /* CatImageViewController.swift */; };
 		18C1E5212AB185EE00871306 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5202AB185EE00871306 /* ViewState.swift */; };
 		18C1E5232AB1890E00871306 /* TodoEntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5222AB1890E00871306 /* TodoEntityManager.swift */; };
 		18C1E5262AB189F900871306 /* Todo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18C1E5242AB189F900871306 /* Todo.xcdatamodeld */; };
+		18C5FCC52ABC319500715CB2 /* CatImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C5FCC42ABC319500715CB2 /* CatImageViewModel.swift */; };
+		18C5FCC72ABC343800715CB2 /* CreateTodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C5FCC62ABC343800715CB2 /* CreateTodoViewModel.swift */; };
+		18C5FCC92ABC4D9200715CB2 /* TodoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C5FCC82ABC4D9200715CB2 /* TodoListViewModel.swift */; };
+		18C5FCCB2ABC644900715CB2 /* CheckTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C5FCCA2ABC644900715CB2 /* CheckTodo.swift */; };
 		18C7656F2AB9A0CE00F3D656 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C7656E2AB9A0CE00F3D656 /* ImageLoader.swift */; };
 		18C765722ABA0B1100F3D656 /* ProfileDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C765712ABA0B1100F3D656 /* ProfileDesignViewController.swift */; };
 		18C7DD2D2A821C330029A942 /* CreateTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C7DD2C2A821C330029A942 /* CreateTodoViewController.swift */; };
@@ -48,7 +54,6 @@
 		18D5D9602AA1992C00E92DC8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5D95F2AA1992C00E92DC8 /* NetworkError.swift */; };
 		18D5D9622AA1996000E92DC8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5D9612AA1996000E92DC8 /* Category.swift */; };
 		18D5D9642AA1997300E92DC8 /* TodoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D5D9632AA1997300E92DC8 /* TodoType.swift */; };
-		18E1E37E2A973998003FB86D /* CountTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1E37D2A973998003FB86D /* CountTodo.swift */; };
 		18E1E3802A9739D9003FB86D /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1E37F2A9739D9003FB86D /* Task.swift */; };
 		18E1E3852A973BAB003FB86D /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1E3842A973BAB003FB86D /* Date.swift */; };
 		18E1E3872A973BE6003FB86D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E1E3862A973BE6003FB86D /* UIColor.swift */; };
@@ -86,12 +91,18 @@
 		18BE8BE22A778F65000A1407 /* DoneListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneListViewController.swift; sourceTree = "<group>"; };
 		18BE8BF22A77A3B9000A1407 /* CheckTodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTodoTableViewCell.swift; sourceTree = "<group>"; };
 		18BE8BF52A77B076000A1407 /* TodoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
-		18BE8BF72A77B091000A1407 /* CheckTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTodo.swift; sourceTree = "<group>"; };
+		18BF25B92ABD31D90023487A /* CountTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountTodo.swift; sourceTree = "<group>"; };
+		18BF25BB2ABD45410023487A /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		18BF25BD2ABD45C30023487A /* DoneTodoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneTodoListViewModel.swift; sourceTree = "<group>"; };
 		18C034672A79CEAB002B6368 /* CompleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButton.swift; sourceTree = "<group>"; };
 		18C0B4BC2A9D747E00EF1EA1 /* CatImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImageViewController.swift; sourceTree = "<group>"; };
 		18C1E5202AB185EE00871306 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		18C1E5222AB1890E00871306 /* TodoEntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntityManager.swift; sourceTree = "<group>"; };
 		18C1E5252AB189F900871306 /* Todo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Todo.xcdatamodel; sourceTree = "<group>"; };
+		18C5FCC42ABC319500715CB2 /* CatImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImageViewModel.swift; sourceTree = "<group>"; };
+		18C5FCC62ABC343800715CB2 /* CreateTodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoViewModel.swift; sourceTree = "<group>"; };
+		18C5FCC82ABC4D9200715CB2 /* TodoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewModel.swift; sourceTree = "<group>"; };
+		18C5FCCA2ABC644900715CB2 /* CheckTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTodo.swift; sourceTree = "<group>"; };
 		18C7656E2AB9A0CE00F3D656 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		18C765712ABA0B1100F3D656 /* ProfileDesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDesignViewController.swift; sourceTree = "<group>"; };
 		18C7DD2C2A821C330029A942 /* CreateTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +110,6 @@
 		18D5D95F2AA1992C00E92DC8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		18D5D9612AA1996000E92DC8 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		18D5D9632AA1997300E92DC8 /* TodoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoType.swift; sourceTree = "<group>"; };
-		18E1E37D2A973998003FB86D /* CountTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountTodo.swift; sourceTree = "<group>"; };
 		18E1E37F2A9739D9003FB86D /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		18E1E3842A973BAB003FB86D /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		18E1E3862A973BE6003FB86D /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -134,12 +144,6 @@
 		18BE8BC02A777B84000A1407 = {
 			isa = PBXGroup;
 			children = (
-				18BA60972AB42CED006F326F /* CountTodoEntity+CoreDataClass.swift */,
-				18BA60982AB42CED006F326F /* CountTodoEntity+CoreDataProperties.swift */,
-				18BA60932AB42CE3006F326F /* CheckTodoEntity+CoreDataClass.swift */,
-				18BA60942AB42CE3006F326F /* CheckTodoEntity+CoreDataProperties.swift */,
-				18BA608F2AB42BF0006F326F /* CategoryEntity+CoreDataClass.swift */,
-				18BA60902AB42BF0006F326F /* CategoryEntity+CoreDataProperties.swift */,
 				18BE8BCB2A777B84000A1407 /* Todo */,
 				18BE8BCA2A777B84000A1407 /* Products */,
 			);
@@ -156,14 +160,11 @@
 		18BE8BCB2A777B84000A1407 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				18E1E3902A974109003FB86D /* Model */,
+				18C5FCC12ABC2A8100715CB2 /* ViewModel */,
+				18C5FCBE2ABC2A3100715CB2 /* ViewController */,
 				18C765702ABA0AB800F3D656 /* ProfileDesignViewController */,
 				18C1E51F2AB185DB00871306 /* Enums */,
-				18D5D96B2AA19DD600E92DC8 /* CatImageViewController */,
-				18D5D96A2AA19DB600E92DC8 /* CreateTodoViewController */,
-				18D5D9692AA19D6700E92DC8 /* MainViewController */,
-				18D5D9672AA19D1E00E92DC8 /* DoneTodoListViewController */,
-				18D5D9652AA19CB500E92DC8 /* TodoListViewController */,
-				18E1E3902A974109003FB86D /* Model */,
 				18E1E38E2A9740B3003FB86D /* Util */,
 				18E1E3812A973AB1003FB86D /* Extension */,
 				18BE8BCC2A777B84000A1407 /* AppDelegate.swift */,
@@ -185,6 +186,30 @@
 				18D5D95F2AA1992C00E92DC8 /* NetworkError.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		18C5FCBE2ABC2A3100715CB2 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18D5D96B2AA19DD600E92DC8 /* CatImageViewController */,
+				18D5D96A2AA19DB600E92DC8 /* CreateTodoViewController */,
+				18D5D9692AA19D6700E92DC8 /* MainViewController */,
+				18D5D9672AA19D1E00E92DC8 /* DoneTodoListViewController */,
+				18D5D9652AA19CB500E92DC8 /* TodoListViewController */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		18C5FCC12ABC2A8100715CB2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				18C5FCC42ABC319500715CB2 /* CatImageViewModel.swift */,
+				18C5FCC62ABC343800715CB2 /* CreateTodoViewModel.swift */,
+				18C5FCC82ABC4D9200715CB2 /* TodoListViewModel.swift */,
+				18BF25BB2ABD45410023487A /* MainViewModel.swift */,
+				18BF25BD2ABD45C30023487A /* DoneTodoListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		18C765702ABA0AB800F3D656 /* ProfileDesignViewController */ = {
@@ -307,12 +332,18 @@
 		18E1E3902A974109003FB86D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18BA60972AB42CED006F326F /* CountTodoEntity+CoreDataClass.swift */,
+				18BA60982AB42CED006F326F /* CountTodoEntity+CoreDataProperties.swift */,
+				18BA60932AB42CE3006F326F /* CheckTodoEntity+CoreDataClass.swift */,
+				18BA60942AB42CE3006F326F /* CheckTodoEntity+CoreDataProperties.swift */,
+				18BA608F2AB42BF0006F326F /* CategoryEntity+CoreDataClass.swift */,
+				18BA60902AB42BF0006F326F /* CategoryEntity+CoreDataProperties.swift */,
 				18BE8BF52A77B076000A1407 /* TodoManager.swift */,
-				18BE8BF72A77B091000A1407 /* CheckTodo.swift */,
-				18E1E37D2A973998003FB86D /* CountTodo.swift */,
 				18E1E37F2A9739D9003FB86D /* Task.swift */,
 				18C1E5222AB1890E00871306 /* TodoEntityManager.swift */,
 				18C1E5242AB189F900871306 /* Todo.xcdatamodeld */,
+				18C5FCCA2ABC644900715CB2 /* CheckTodo.swift */,
+				18BF25B92ABD31D90023487A /* CountTodo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -394,22 +425,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18BF25BC2ABD45410023487A /* MainViewModel.swift in Sources */,
 				18B48BAC2ABABB5C00312F8D /* ProfileVIew.swift in Sources */,
 				18A8B3FC2AA0947D005B96DB /* APIHandler.swift in Sources */,
 				18C1E5262AB189F900871306 /* Todo.xcdatamodeld in Sources */,
-				18E1E37E2A973998003FB86D /* CountTodo.swift in Sources */,
 				18B30BF92A7B5944008F86AD /* CountTodoTableViewCell.swift in Sources */,
 				18A8B3FE2AA0A539005B96DB /* CatImageView.swift in Sources */,
 				18A8B4022AA0BF1F005B96DB /* CatImage.swift in Sources */,
+				18C5FCC72ABC343800715CB2 /* CreateTodoViewModel.swift in Sources */,
 				18B48BB22ABAF3AE00312F8D /* NavGalleryView.swift in Sources */,
 				18E1E3872A973BE6003FB86D /* UIColor.swift in Sources */,
+				18BF25BE2ABD45C30023487A /* DoneTodoListViewModel.swift in Sources */,
 				18BE8BE32A778F65000A1407 /* DoneListViewController.swift in Sources */,
 				18BE8BE12A778F5C000A1407 /* TodoListViewController.swift in Sources */,
 				18BE8BD12A777B84000A1407 /* ViewController.swift in Sources */,
 				18D5D9622AA1996000E92DC8 /* Category.swift in Sources */,
 				18A8B4002AA0A7D7005B96DB /* ErrorView.swift in Sources */,
 				18C7DD2D2A821C330029A942 /* CreateTodoViewController.swift in Sources */,
-				18BE8BF82A77B091000A1407 /* CheckTodo.swift in Sources */,
 				18C765722ABA0B1100F3D656 /* ProfileDesignViewController.swift in Sources */,
 				18BE8BF32A77A3B9000A1407 /* CheckTodoTableViewCell.swift in Sources */,
 				18BA60962AB42CE3006F326F /* CheckTodoEntity+CoreDataProperties.swift in Sources */,
@@ -418,11 +450,13 @@
 				18BA60992AB42CED006F326F /* CountTodoEntity+CoreDataClass.swift in Sources */,
 				18BA60952AB42CE3006F326F /* CheckTodoEntity+CoreDataClass.swift in Sources */,
 				18BA60912AB42BF0006F326F /* CategoryEntity+CoreDataClass.swift in Sources */,
+				18BF25BA2ABD31D90023487A /* CountTodo.swift in Sources */,
 				18D15F612A85CA9300EE32D4 /* DoneTableViewCell.swift in Sources */,
 				18B48BBA2ABB076C00312F8D /* NavigationBar.swift in Sources */,
 				18BE8BCD2A777B84000A1407 /* AppDelegate.swift in Sources */,
 				18B48BB42ABAFB5200312F8D /* PostCollectionViewCell.swift in Sources */,
 				18E1E3852A973BAB003FB86D /* Date.swift in Sources */,
+				18C5FCC92ABC4D9200715CB2 /* TodoListViewModel.swift in Sources */,
 				18C0B4BD2A9D747E00EF1EA1 /* CatImageViewController.swift in Sources */,
 				18E1E38B2A973C70003FB86D /* UITableVIewCell.swift in Sources */,
 				18C1E5232AB1890E00871306 /* TodoEntityManager.swift in Sources */,
@@ -435,7 +469,9 @@
 				18D5D9642AA1997300E92DC8 /* TodoType.swift in Sources */,
 				18BE8BCF2A777B84000A1407 /* SceneDelegate.swift in Sources */,
 				18B30BFD2A7B971A008F86AD /* Animation.swift in Sources */,
+				18C5FCC52ABC319500715CB2 /* CatImageViewModel.swift in Sources */,
 				18BE8BF62A77B076000A1407 /* TodoManager.swift in Sources */,
+				18C5FCCB2ABC644900715CB2 /* CheckTodo.swift in Sources */,
 				18E1E3892A973C25003FB86D /* UITableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,15 +10,13 @@ import CoreData
 import SnapKit
 
 protocol UpdateTodoDelegate: AnyObject {
-    func update<T: TestEntity & NSManagedObject>(todo: T?, category: Category)
-    func remove<T: TestEntity & NSManagedObject>(todo: T?, category: Category)
+    func update<T: TaskEntity & NSManagedObject>(todo: T?, category: Category)
+    func remove<T: TaskEntity & NSManagedObject>(todo: T?, category: Category)
 }
 
 final class TodoListViewController: UIViewController, CAAnimationDelegate {
     private var todoListTableView: UITableView = UITableView()
-    private var isSelected: Bool = false
-    private var todoManager: TodoManager = TodoManager.shared
-    private var entityManager: TodoEntityManager = TodoEntityManager.shared
+    private var isSelectedAddButton: Bool = false
     private var listButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "plus"), for: .normal)
@@ -52,6 +50,16 @@ final class TodoListViewController: UIViewController, CAAnimationDelegate {
     }()
     private let margin: CGFloat = 24
     private let buttonSize: CGFloat = 50
+    private let viewModel: TodoListViewModel
+    
+    init(viewModel: TodoListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,28 +130,28 @@ extension TodoListViewController {
     }
     
     @objc func addList() {
-        isSelected = !isSelected
-        isSelected ? buttonListAnimation() : addListVisibleAnimation(button: countAddButton, forkey: "CountAddButton", positionY: checkAddButton.frame.minY)
+        isSelectedAddButton.toggle()
+        isSelectedAddButton ? buttonListAnimation() : addListVisibleAnimation(button: countAddButton, forkey: "CountAddButton", positionY: checkAddButton.frame.minY)
     }
     
     @objc func createCheckTodo() {
-        let vc = CreateTodoViewController()
-        vc.type = .check
+        let vc = CreateTodoViewController(viewModel: CreateTodoViewModel(type: .check, todoManager: viewModel.todoManager))
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func createCountTodo() {
-        let vc = CreateTodoViewController()
-        vc.type = .count
+        let vc = CreateTodoViewController(viewModel: CreateTodoViewModel(type: .count, todoManager: viewModel.todoManager))
         navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+//TODO: Animation은 다른 클래스로 빼는 방법 생각해보기
 //MARK: Animation
 extension TodoListViewController {
     private func buttonListAnimation() {
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotationAnimation.fromValue = isSelected ? 0 : Double.pi * 0.25
-        rotationAnimation.toValue = isSelected ? Double.pi * 0.25 : 0
+        rotationAnimation.fromValue = isSelectedAddButton ? 0 : Double.pi * 0.25
+        rotationAnimation.toValue = isSelectedAddButton ? Double.pi * 0.25 : 0
         rotationAnimation.duration = 0.25
         rotationAnimation.fillMode = .forwards
         rotationAnimation.isRemovedOnCompletion = false
@@ -155,20 +163,20 @@ extension TodoListViewController {
     private func addListVisibleAnimation(button: UIButton, forkey: String, positionY: CGFloat) {
         CATransaction.begin()
         CATransaction.setCompletionBlock {
-            button.layer.opacity = self.isSelected ? 1 : 0
+            button.layer.opacity = self.isSelectedAddButton ? 1 : 0
         }
         let opacityAnimation = CABasicAnimation(keyPath: "opacity")
-        opacityAnimation.fromValue = isSelected ? 0 : 1
-        opacityAnimation.toValue = isSelected ? 1 : 0
+        opacityAnimation.fromValue = isSelectedAddButton ? 0 : 1
+        opacityAnimation.toValue = isSelectedAddButton ? 1 : 0
 
         let positionAnimation = CABasicAnimation(keyPath: "position.y")
         let position = positionY - button.frame.height/2
-        positionAnimation.fromValue = isSelected ? position  : position - 24
-        positionAnimation.byValue = isSelected ? -24 : 24
+        positionAnimation.fromValue = isSelectedAddButton ? position  : position - 24
+        positionAnimation.byValue = isSelectedAddButton ? -24 : 24
 
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotationAnimation.fromValue = isSelected ? Double.pi * 0.5 : 0
-        rotationAnimation.toValue = isSelected ? 0 : Double.pi * 0.5
+        rotationAnimation.fromValue = isSelectedAddButton ? Double.pi * 0.5 : 0
+        rotationAnimation.toValue = isSelectedAddButton ? 0 : Double.pi * 0.5
 
         let group = CAAnimationGroup()
         group.fillMode = .forwards
@@ -181,7 +189,7 @@ extension TodoListViewController {
     }
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        if isSelected {
+        if isSelectedAddButton {
             if anim == listButton.layer.animation(forKey: "rotation") {
                 listButton.tintColor = .red
                 addListVisibleAnimation(button: checkAddButton, forkey: "CheckAddButton", positionY: listButton.frame.minY)
@@ -200,7 +208,7 @@ extension TodoListViewController {
             }
         }
         if !flag {
-            if isSelected {
+            if isSelectedAddButton {
                 listButton.tintColor = .red
                 checkAddButton.layer.opacity = 1
                 countAddButton.layer.opacity = 1
@@ -216,19 +224,16 @@ extension TodoListViewController {
 extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-//        return Category.allCases.count
-        return todoManager.categoryCount()
+        return viewModel.todoManager.categoryCount()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let category = Category.allCases[section]
-//        return todoManager.testCategoryCount()
-        guard let category = todoManager.category(at: section) else { return 0 }
-        return todoManager.todoCount(category: category)
+        guard let category = viewModel.todoManager.category(at: section) else { return 0 }
+        return viewModel.todoManager.todoCount(category: category)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return todoManager.categoryTitle(index: section)
+        return viewModel.todoManager.categoryTitle(index: section)
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -236,34 +241,35 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let category = todoManager.category(at: indexPath.section) else { return UITableViewCell() }
-        let todo = todoManager.todo(category: category, at: indexPath.row)
+        guard let category = viewModel.todoManager.category(at: indexPath.section) else { return UITableViewCell() }
+        let todo = viewModel.todoManager.todo(category: category, at: indexPath.row)
         guard let cell = todo.todoCell(tableView: tableView, indexPath: indexPath, viewContoller: self) else { return UITableViewCell() }
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let category = Category.allCases[indexPath.section]
-        let todo = todoManager.todo(category: category, at: indexPath.row)
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        guard let vc = storyboard.instantiateViewController(withIdentifier: "CreateTodo") as? CreateTodoViewController else { return }
-        vc.testTodo = todo
-        vc.testTodo = todoManager.todo(category: category, at: indexPath.row)
-        vc.category = category
+        guard let category = viewModel.todoManager.category(at: indexPath.section) else { return }
+        let todo = viewModel.todoManager.todo(category: category, at: indexPath.row)
+        var type: TodoType = .check
+        if todo as? CountTodoEntity != nil {
+            type = .count
+        }
+        let viewModel = CreateTodoViewModel(todo: todo, type: type, todoManager: viewModel.todoManager)
+        let vc = CreateTodoViewController(viewModel: viewModel)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension TodoListViewController: UpdateTodoDelegate {
-    func update<T: TestEntity & NSManagedObject>(todo: T?, category: Category) {
+    func update<T: TaskEntity & NSManagedObject>(todo: T?, category: Category) {
         guard let todo else { return }
-        todoManager.updateTodo(category: category, todo: todo)
+        viewModel.todoManager.updateTodo(category: category, todo: todo)
     }
     
-    func remove<T: TestEntity & NSManagedObject>(todo: T?, category: Category) {
+    func remove<T: TaskEntity & NSManagedObject>(todo: T?, category: Category) {
         guard let todo else { return }
-        todoManager.updateTodo(category: category, todo: todo)
+        viewModel.todoManager.updateTodo(category: category, todo: todo)
     }
 }
 

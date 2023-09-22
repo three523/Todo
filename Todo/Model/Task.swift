@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import CoreData
 
 protocol Task {
     var id: UUID { get }
@@ -17,10 +16,10 @@ protocol Task {
     var modifyDate: Date? { get set }
     var doneDate: Date? { get set }
     
-    func todoCell(tableView: UITableView, indexPath: IndexPath, viewContoller: UpdateTodoDelegate) -> UITableViewCell?
 }
 
-protocol TestEntity {
+protocol TaskEntity {
+    var id: UUID { get }
     var title: String { get set }
     var isCompleted: Bool { get set }
     var createDate: Date { get }
@@ -30,7 +29,6 @@ protocol TestEntity {
     func addIntoCategoryEntity(categoryEntity: CategoryEntity)
     func removeIntoCategoryEntity()
     func updateIntoCategoryEntity()
-    func relationshipEntity() -> NSManagedObject?
     func todoCell(tableView: UITableView, indexPath: IndexPath, viewContoller: UpdateTodoDelegate) -> UITableViewCell?
 }
 
