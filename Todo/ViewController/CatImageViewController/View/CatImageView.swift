@@ -53,12 +53,19 @@ final class CatImageView: UIImageView, DataLoding {
         self.addSubview(errorView)
         self.addSubview(lodingView)
         
+        setUp()
         configAutoLayout()
     }
     
     required init?(coder: NSCoder) {
         viewState = .loading
         super.init(coder: coder)
+    }
+    
+    private func setUp() {
+        errorView.isHidden = true
+        lodingView.isHidden = false
+        lodingView.startAnimating()
     }
     
     private func configAutoLayout() {

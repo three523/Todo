@@ -50,6 +50,7 @@ final class ViewController: UIViewController {
         return button
     }()
     private let imageLoader: ImageLoader = ImageLoader()
+    private let viewModel: MainViewModel = MainViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,11 +105,11 @@ private extension ViewController {
         profileButton.addTarget(self, action: #selector(profileButtonClick), for: .touchUpInside)
     }
     @objc func todoListButtonClick() {
-        let vc = TodoListViewController()
+        let vc = TodoListViewController(viewModel: TodoListViewModel(todoManager: viewModel.todoManager))
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc func doneListButtonClick() {
-        let vc = DoneListViewController()
+        let vc = DoneListViewController(viewModel: DoneTodoListViewModel(todoManager: viewModel.todoManager))
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc func catImageButtonClick() {

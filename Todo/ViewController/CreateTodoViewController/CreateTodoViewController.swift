@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreData
 
 final class CreateTodoViewController: UIViewController {
     
@@ -97,9 +96,6 @@ final class CreateTodoViewController: UIViewController {
         button.backgroundColor = .systemGray5
         return button
     }()
-    var todo: (Task & Codable)? = nil
-    var testTodo: (NSManagedObject & TestEntity)? = nil
-    
     private var titleEmptyLabel: UILabel = {
         let lb = UILabel()
         lb.font = .systemFont(ofSize: 16, weight: .regular)
@@ -118,9 +114,16 @@ final class CreateTodoViewController: UIViewController {
     }()
     private let margin: CGFloat = 24
     private let topMargin: CGFloat = 12
-    var type: TodoType = .check
-    var category: Category = .work
-    private var todoManager: TodoManager = TodoManager.shared
+    private var viewModel: CreateTodoViewModel
+    
+    init(viewModel: CreateTodoViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,11 +144,14 @@ extension CreateTodoViewController {
     
     private func navigationSetup() {
         let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(createTodo))
-        let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeTodo))
-        deleteButton.tintColor = .systemRed
-        navigationItem.rightBarButtonItems?.append(doneButton)
-        navigationItem.rightBarButtonItem?.title = "수정"
-        navigationItem.rightBarButtonItems?.append(deleteButton)
+        if viewModel.isUpdateMode {
+            let deleteButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeTodo))
+            deleteButton.tintColor = .systemRed
+            doneButton.title = "수정"
+            navigationItem.rightBarButtonItems = [doneButton, deleteButton]
+            return
+        }
+        navigationItem.rightBarButtonItem = doneButton
     }
     
     private func mainViewSetup() {
@@ -203,21 +209,19 @@ extension CreateTodoViewController {
     }
     
     private func hiddenViewSetup() {
-        if type == .check {
-            goalStackView.isHidden = true
-        }
+        goalStackView.isHidden = viewModel.isHiddenGoalStackView
     }
     
     private func updateTodoUi() {
-        guard let testTodo else { return }
-        if category == .life {
+        guard let todo = viewModel.todo else { return }
+        if viewModel.category == .life {
             lifeCategoryButton.backgroundColor = .mainColor
         } else {
             workCategoryButton.backgroundColor = .mainColor
         }
-        titleTextField.text = testTodo.title
-        if let countTodo = testTodo as? CountTodoEntity {
-            type = .count
+        titleTextField.text = todo.title
+        if let countTodo = todo as? CountTodoEntity {
+            viewModel.type = .count
             goalStackView.alpha = 1
             goalTextField.text = String(countTodo.goal)
         }
@@ -229,21 +233,20 @@ extension CreateTodoViewController {
     }
     @objc
     private func workButtonClick(_ sender: Any) {
-        category = .work
+        viewModel.category = .work
         workCategoryButton.backgroundColor = .mainColor
         lifeCategoryButton.backgroundColor = .systemGray5
     }
     @objc
     private func lifeButtonClick(_ sender: Any) {
-        category = .life
+        viewModel.category = .life
         workCategoryButton.backgroundColor = .systemGray5
         lifeCategoryButton.backgroundColor = .mainColor
     }
     
     @objc
     private func removeTodo() {
-        guard let testTodo else { return }
-        todoManager.removeTodo(category: category, todo: testTodo)
+        viewModel.removeTodo()
         navigationController?.popViewController(animated: true)
     }
     
@@ -255,20 +258,14 @@ extension CreateTodoViewController {
             return
         }
         
-        switch type {
+        switch viewModel.type {
         case .check:
-            if var testTodo {
-                testTodo.title = titleText
-                todoManager.updateTodo(category: category, todo: testTodo)
+            if viewModel.isUpdateMode {
+                var todo = viewModel.todo!
+                todo.title = titleText
+                viewModel.updateTodo(todo: todo)
             } else {
-                let context = TodoEntityManager.shared.context
-                if let entity = NSEntityDescription.entity(forEntityName: "CheckTodoEntity", in: context) {
-                    let newTestTodo = CheckTodoEntity(entity: entity, insertInto: context)
-                    newTestTodo.createDate = Date()
-                    newTestTodo.isCompleted = false
-                    newTestTodo.title = titleText
-                    todoManager.addTodo(category: category, todo: newTestTodo)
-                }
+                viewModel.addCheckTodo(title: titleText)
             }
         case .count:
             guard let countText = goalTextField.text,
@@ -277,20 +274,13 @@ extension CreateTodoViewController {
                 textfieldAnimation(textField: goalTextField, emptyLabel: goalEmptyLabel)
                 return
             }
-            if let testTodo = testTodo as? CountTodoEntity {
-                testTodo.title = titleText
-                testTodo.goal = Int16(goal)
-                todoManager.updateTodo(category: category, todo: testTodo)
+            if viewModel.isUpdateMode,
+               let todo = viewModel.todo as? CountTodoEntity {
+                todo.title = titleText
+                todo.goal = Int16(goal)
+                viewModel.updateTodo(todo: todo)
             } else {
-                let context = TodoEntityManager.shared.context
-                if let entity = NSEntityDescription.entity(forEntityName: "CountTodoEntity", in: context) {
-                    let newTestTodo = CountTodoEntity(entity: entity, insertInto: context)
-                    newTestTodo.createDate = Date()
-                    newTestTodo.isCompleted = false
-                    newTestTodo.title = titleText
-                    newTestTodo.goal = Int16(goal)
-                    todoManager.addTodo(category: category, todo: newTestTodo)
-                }
+                viewModel.addCountTodo(title: titleText, goal: goal)
             }
         }
         navigationController?.popViewController(animated: true)

@@ -144,7 +144,7 @@ final class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animat
     }
     
     @objc func countIncrease() {
-        self.todo?.count += 1
+        self.todo?.count += Int16(1)
         guard let todo else { return }
         isCompleted = todo.count >= todo.goal
         if todo.isCompleted != isCompleted {
@@ -162,7 +162,7 @@ final class CountTodoTableViewCell: UITableViewCell, CAAnimationDelegate, Animat
     @objc func countDecrease() {
         guard let todo else { return }
         if todo.count == 0 { return }
-        let todoCount = todo.count - 1
+        let todoCount = todo.count - Int16(1)
         self.todo?.count = todoCount
         isCompleted = todoCount >= todo.goal
         if todo.isCompleted != isCompleted {

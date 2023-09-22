@@ -17,17 +17,12 @@ final class TodoManager {
         case remove
     }
     
-    static let shared: TodoManager = TodoManager()
+    private var todoEntityManager: TodoEntityManager = TodoEntityManager()
         
-    private var todoEntityManager: TodoEntityManager = TodoEntityManager.shared
-    
-    typealias Todo = Task & Codable
-    
-    private var todoList: [String : [Task]] = [:]
-    private var testTodoList: [String : [TestEntity & NSManagedObject]] = [:]
+    private var testTodoList: [String : [TaskEntity]] = [:]
     var testTodoEntity: [CategoryEntity] = []
     
-    private init() {
+    init() {
         initTodoList()
     }
 
@@ -36,28 +31,36 @@ final class TodoManager {
         convertToDictionay()
     }
     
-    func addTodo<T: TestEntity & NSManagedObject>(category: Category, todo: T) {
-        testTodoList[category.title, default: []].append(todo)
+    func addTodo(category: Category, checkTodo: CheckTodo) {
+        guard let todoEntity = todoEntityManager.createCheckTodoEntity(category: category, checkTodo: checkTodo) else { return }
+        testTodoList[category.title, default: []].append(todoEntity)
+        addEntity(category: category, todo: todoEntity)
+    }
+    
+    func addTodo(category: Category, countTodo: CountTodo) {
+        guard let todoEntity = todoEntityManager.createCountTodoEntity(category: category, countTodo: countTodo) else { return }
+        addEntity(category: category, todo: todoEntity)
+    }
+    
+    private func addEntity<T: TaskEntity & NSManagedObject>(category: Category, todo: T) {
         let isCompleted = todoEntityManager.addTodoEntity(category: category, todoEntity: todo)
         if isCompleted {
             testTodoList[category.title, default: []].append(todo)
         }
     }
     
-    func updateTodo<T: TestEntity & NSManagedObject>(category: Category, todo: T) {
-        guard let index = testTodoList[category.title, default: []].firstIndex(where: { $0.objectID == todo.objectID }) else { return }
-        testTodoList[category.title, default: []][index] = todo
-        let isCompleted = todoEntityManager.updateTodoEntity(category: category, todoEntity: todo)
-        if isCompleted {
-            testTodoList[category.title, default: []][index] = todo
-        }
+    func updateTodo<T: TaskEntity>(category: Category, todo: T) {
+        todoEntityManager.saveContext()
     }
     
-    func removeTodo<T: TestEntity & NSManagedObject>(category: Category, todo: T) {
+    //TODO: 내가 만든 프로토콜을 사용해서는 인덱스를 확인하면 에러가 남. 다른 방법 찾아보기
+    func removeTodo<T: TaskEntity>(category: Category, todo: T) {
+        guard let managedObjectList = testTodoList[category.title, default: []] as? ([NSManagedObject]),
+            let entityTodo = todo as? NSManagedObject else { return }
+        guard let index = managedObjectList.firstIndex(where: { $0.objectID == entityTodo.objectID }) else { return }
         let isCompleted = todoEntityManager.removeTodoEntity(category: category, todoEntity: todo)
-        if isCompleted {
-            testTodoList[category.title, default: []].removeAll(where: { $0.objectID == todo.objectID })
-        }
+        testTodoList[category.title, default: []].remove(at: index)
+        
     }
     
     private func convertToDictionay() {
@@ -90,11 +93,11 @@ extension TodoManager {
     func completeTodoCount(category: Category) -> Int {
         return testTodoList[category.title, default: []].filter{ $0.isCompleted }.count
     }
-    func todo(category: Category, at index: Int) -> TestEntity & NSManagedObject {
+    func todo(category: Category, at index: Int) -> TaskEntity {
         let categoryTodoList = testTodoList[category.title, default: []]
         return categoryTodoList[index]
     }
-    func completeTodo(category: Category, at index: Int) -> TestEntity & NSManagedObject {
+    func completeTodo(category: Category, at index: Int) -> TaskEntity {
         let categoryTodoList = testTodoList[category.title, default: []].filter{ $0.isCompleted }
         return categoryTodoList[index]
     }
